@@ -37,5 +37,4 @@ module.exports = {
     require("tailwindcss-transitions"),
     require("tailwindcss-border-gradients"),
   ],
-  // corePlugins: ["textAlign", "preflight", "flex", "textDecoration"]
 };
