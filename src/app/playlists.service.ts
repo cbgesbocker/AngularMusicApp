@@ -1,5 +1,4 @@
 import { Injectable, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { HttpService } from "./http.service";
 
 import { environment } from "src/environments/environment";
@@ -7,21 +6,19 @@ import { environment } from "src/environments/environment";
 @Injectable({
   providedIn: "root"
 })
-export class PlaylistsService implements OnInit {
-  playlistData;
+export class PlaylistsService {
   myPlaylistsEndpoint = environment.apiConfig.endpoints.playlists;
-  constructor(private httpClient: HttpService) {}
+  playlistData;
 
-  ngOnInit() {
+  constructor(private httpClient: HttpService) {
     this.httpClient
-      .getApiRequestSet(myPlaylistsEndpoint, {
+      .getApiRequestSet(this.myPlaylistsEndpoint, {
         params: {
           limit: 50
         }
       })
       .subscribe(data => {
-        debugger;
-        this.playlistsData = data;
+        this.playlistData = data;
       });
   }
 }

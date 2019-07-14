@@ -6,10 +6,10 @@ import { AuthService } from "./auth.service";
 @Injectable({ providedIn: "root" })
 export class HttpService {
   config = environment.apiConfig;
-  defaultOptions = {};
+  defaultHeaders = {};
 
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.defaultOptions = {
+    this.defaultHeaders = {
       headers: {
         Authorization: "Bearer " + this.authService.accessToken,
         Accept: "application/json",
@@ -21,7 +21,7 @@ export class HttpService {
   getApiRequestSet(endpoint: string, options: object = {}) {
     const uri = this.config.apiUrl + endpoint;
     options = {
-      ...this.defaultOptions,
+      ...this.defaultHeaders,
       ...options
     };
     return this.http.get(uri, options);
@@ -34,6 +34,6 @@ export class HttpService {
     tracks: Array<any>;
     playlistId: Number;
   }): void {
-    const endpoint = environment.apiConfig.apiUrl + this.http.post();
+    // const endpoint = environment.apiConfig.apiUrl + this.http.post();
   }
 }

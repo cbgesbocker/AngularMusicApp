@@ -6,13 +6,12 @@ import { Tracks } from "./tracks";
 @Injectable({
   providedIn: "root"
 })
-export class TracksService implements OnInit {
+export class TracksService {
   myTracksEndpoint = environment.apiConfig.endpoints.tracks;
   trackData;
+  selectedTracks = [];
 
-  constructor(private httpClient: HttpService) {}
-
-  ngOnInit() {
+  constructor(private httpClient: HttpService) {
     this.httpClient
       .getApiRequestSet(this.myTracksEndpoint, {
         params: {
@@ -20,7 +19,12 @@ export class TracksService implements OnInit {
         }
       })
       .subscribe((data: Tracks) => {
+        debugger;
         this.trackData = data;
       });
+  }
+
+  addTrack(track): void {
+    this.selectedTracks.unshift(track);
   }
 }

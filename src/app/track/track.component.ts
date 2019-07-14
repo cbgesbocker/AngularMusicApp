@@ -1,21 +1,19 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { TrackmanagerService } from "../trackmanager.service";
+import { TracksService } from "../tracks.service";
 
 @Component({
   selector: "app-track",
   templateUrl: "./track.component.html",
   styleUrls: ["./track.component.scss"]
 })
-export class TrackComponent implements OnInit {
+export class TrackComponent {
   @Input() track;
-
   selected = false;
 
-  constructor(private trackManager: TrackmanagerService) {}
+  constructor(private tracksService: TracksService) {}
 
-  selectTrack() {
+  selectTrack(): void {
     this.selected = !this.selected;
+    this.tracksService.addTrack(this.track);
   }
-
-  ngOnInit() {}
 }

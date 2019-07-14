@@ -1,19 +1,21 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpService } from "../http.service";
-import { environment } from "src/environments/environment.prod";
-import { Tracks } from "../tracks";
+
 import { TracksService } from "../tracks.service";
+import { SlideInOutAnimation } from "../animations";
 @Component({
   selector: "app-admin-dashboard",
   templateUrl: "./admin-dashboard.component.html",
-  styleUrls: ["./admin-dashboard.component.scss"]
+  styleUrls: ["./admin-dashboard.component.scss"],
+  animations: [SlideInOutAnimation]
   // providers: [HttpService]
 })
 export class AdminDashboardComponent implements OnInit {
-  trackData: Tracks;
-  playlistsData;
-
   constructor(private tracksService: TracksService) {}
-
   ngOnInit() {}
+
+  animationState = "out";
+
+  toggleShowDiv() {
+    this.animationState = this.animationState === "out" ? "in" : "out";
+  }
 }

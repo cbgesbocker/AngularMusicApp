@@ -2,6 +2,17 @@
   <div class="container w-5/6 mx-auto">
     <h1 class="text-3xl">Admin Dashboard</h1>
   </div>
+  <div class="container w-5/6 mx-auto">
+    <div class=" text-right">
+      <button
+        (click)="toggleShowDiv()"
+        class="relative outline-none bg-blue-600 text-white uppercase py-3 px-5"
+      >
+        Add {{ tracksService.selectedTracks.length }} to Playlist
+      </button>
+    </div>
+    <div [@slideInOut]="animationState" style="height: 100px;"></div>
+  </div>
 
   <div class="container  mx-auto my-8">
     <div class="w-5/6 mx-auto">
@@ -9,19 +20,9 @@
       <div class=" flex flex-wrap flex-col">
         <app-track
           class="w-full"
-          *ngFor="let item of trackData.items"
+          *ngFor="let item of tracksService.trackData.items"
           [track]="item"
         ></app-track>
-        <!-- <div>
-          <h3 class="text-xl mb-4">My Playlists</h3>
-          <div class=" flex flex-wrap flex-col">
-            <app-playlist
-              class="w-full flex-1"
-              *ngFor="let item of playlistsData.items"
-              [playlist]="item"
-            ></app-playlist>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
