@@ -7,7 +7,7 @@ import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.compo
 import { LoggedOutComponent } from "./logged-out/logged-out.component";
 
 const routes: Routes = [
-  { path: "", component: HeroComponent },
+  { path: "", component: LoggedOutComponent },
   {
     path: "admin",
     canActivate: [AuthGuardService],

@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpService } from "../http.service";
 import { environment } from "src/environments/environment.prod";
-
+import { Tracks } from "../tracks";
+import { TracksService } from "../tracks.service";
 @Component({
   selector: "app-admin-dashboard",
   templateUrl: "./admin-dashboard.component.html",
@@ -9,18 +10,10 @@ import { environment } from "src/environments/environment.prod";
   // providers: [HttpService]
 })
 export class AdminDashboardComponent implements OnInit {
-  musicData;
+  trackData: Tracks;
+  playlistsData;
 
-  constructor(private httpClient: HttpService) {}
+  constructor(private tracksService: TracksService) {}
 
-  ngOnInit() {
-    const endpoint = environment.apiConfig.endpoints.tracks;
-    this.httpClient
-      .getApiRequestSet(endpoint, {
-        limit: 50
-      })
-      .subscribe((data: object) => {
-        this.musicData = data;
-      });
-  }
+  ngOnInit() {}
 }

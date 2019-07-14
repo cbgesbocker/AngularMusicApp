@@ -1,0 +1,13 @@
+<div
+  [class.bg-purple-100]="selected"
+  class="shadow border  border-gray-200 py-3 my-2 px-4"
+>
+  <div class="flex flex-col" (click)="selectTrack()">
+    <span class="text-lg text-purple-800">
+      {{ track.track.artists[0].name }}
+    </span>
+    <span>
+      {{ track.track.name }}
+    </span>
+  </div>
+</div>

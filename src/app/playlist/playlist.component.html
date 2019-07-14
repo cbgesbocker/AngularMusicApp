@@ -1,0 +1,9 @@
+<div class="flex flex-1 flex-row border my-3 justify-between">
+  <div class="py-2 px-2 ">
+    {{ playlist.name }}
+  </div>
+  <div
+    class="p-6 flex self-end max-w-2xl h-32 w-32 "
+    [ngStyle]="{ 'background-image': 'url(' + playlist.images[0].url + ')' }"
+  ></div>
+</div>

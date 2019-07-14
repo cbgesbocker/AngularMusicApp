@@ -12,6 +12,8 @@ import { MaterialModule } from "./material/material.module";
 import { HeaderComponent } from "./header/header.component";
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { LoggedOutComponent } from './logged-out/logged-out.component';
+import { TrackComponent } from './track/track.component';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { LoggedOutComponent } from './logged-out/logged-out.component';
     PageNotFoundComponent,
     HeaderComponent,
     AdminDashboardComponent,
-    LoggedOutComponent
+    LoggedOutComponent,
+    TrackComponent,
+    PlaylistComponent
   ],
   imports: [
     MatToolbarModule,

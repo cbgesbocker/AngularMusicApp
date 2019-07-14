@@ -14,9 +14,6 @@ export class HttpService {
         Authorization: "Bearer " + this.authService.accessToken,
         Accept: "application/json",
         "Content-Type": "application/json"
-      },
-      body: {
-        limit: 50
       }
     };
   }
@@ -28,5 +25,15 @@ export class HttpService {
       ...options
     };
     return this.http.get(uri, options);
+  }
+
+  postTracksToPlaylist({
+    tracks,
+    playlistId
+  }: {
+    tracks: Array<any>;
+    playlistId: Number;
+  }): void {
+    const endpoint = environment.apiConfig.apiUrl + this.http.post();
   }
 }
