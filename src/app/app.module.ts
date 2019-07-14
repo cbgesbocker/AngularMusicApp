@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { MaterialModule } from "./material/material.module";
 import { HeaderComponent } from "./header/header.component";
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { LoggedOutComponent } from './logged-out/logged-out.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     HeroComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    LoggedOutComponent
   ],
   imports: [
     MatToolbarModule,

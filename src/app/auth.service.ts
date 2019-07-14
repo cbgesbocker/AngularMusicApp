@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-@Injectable({ providedIn: 'root' })
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { environment } from "src/environments/environment";
+@Injectable({ providedIn: "root" })
 export class AuthService {
   loggedIn = false;
-  accessToken = '';
+  accessToken = "";
 
   constructor(private router: Router) {}
 
@@ -15,16 +15,21 @@ export class AuthService {
     );
 
     apiAccountsUrl.searchParams.set(
-      'scope',
+      "scope",
       encodeURIComponent(environment.apiConfig.scope)
     );
-    apiAccountsUrl.searchParams.set('response_type', 'token');
+    apiAccountsUrl.searchParams.set("response_type", "token");
     apiAccountsUrl.searchParams.set(
-      'client_id',
+      "client_id",
       environment.apiConfig.client_id
     );
-    apiAccountsUrl.searchParams.set('redirect_uri', environment.redirect_uri);
+    apiAccountsUrl.searchParams.set("redirect_uri", environment.redirect_uri);
 
     window.location.replace(apiAccountsUrl.href);
+  }
+
+  logout() {
+    this.loggedIn = false;
+    this.accessToken = "";
   }
 }

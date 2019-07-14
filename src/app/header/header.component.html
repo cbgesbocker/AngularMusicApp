@@ -1,5 +1,18 @@
 <mat-toolbar role="header" color="primary">
   <a routerLink="/">Spotify-Ng-App</a>
   <div class="flex-1 flex"></div>
-  <a class="no-underline" routerLink="admin" routerLinkActive="active">Sign In</a>
+  <a
+    *ngIf="!authService.loggedIn"
+    class="no-underline"
+    routerLink="/admin"
+    routerLinkActive="active"
+    >Sign in</a
+  >
+  <a
+    *ngIf="authService.loggedIn"
+    class="ml-5 no-underline"
+    routerLink="logout"
+    routerLinkActive="active"
+    >Sign out</a
+  >
 </mat-toolbar>
