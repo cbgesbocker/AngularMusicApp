@@ -15,7 +15,7 @@ export const SlideInOutAnimation = [
     state(
       "in",
       style({
-        "max-height": "500px",
+        "max-height": "100000px",
         opacity: "1",
         visibility: "visible"
       })

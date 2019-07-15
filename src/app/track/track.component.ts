@@ -14,6 +14,15 @@ export class TrackComponent {
 
   selectTrack(): void {
     this.selected = !this.selected;
-    this.tracksService.addTrack(this.track);
+
+    const search = this.tracksService.selectedTracks.find(item => {
+      return item.track.id === this.track.track.id;
+    });
+
+    if (search === undefined && this.selected) {
+      this.tracksService.addTrack(this.track);
+    } else {
+      this.tracksService.removeTrack(this.track);
+    }
   }
 }

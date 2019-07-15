@@ -14,6 +14,7 @@ import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.compo
 import { LoggedOutComponent } from "./logged-out/logged-out.component";
 import { TrackComponent } from "./track/track.component";
 import { PlaylistComponent } from "./playlist/playlist.component";
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PlaylistComponent } from "./playlist/playlist.component";
     AdminDashboardComponent,
     LoggedOutComponent,
     TrackComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    ModalComponent
   ],
   imports: [
     MatToolbarModule,

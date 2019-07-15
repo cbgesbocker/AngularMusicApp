@@ -19,7 +19,6 @@ export class TracksService {
         }
       })
       .subscribe((data: Tracks) => {
-        debugger;
         this.trackData = data;
       });
   }
@@ -27,4 +26,12 @@ export class TracksService {
   addTrack(track): void {
     this.selectedTracks.unshift(track);
   }
+
+  removeTrack(track): void {
+    this.selectedTracks = this.selectedTracks.filter(
+      item => item.track.id !== track.track.id
+    );
+  }
+
+  postTracks() {}
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { PlaylistsService } from "../playlists.service";
 
 @Component({
   selector: "app-playlist",
@@ -7,8 +8,11 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class PlaylistComponent implements OnInit {
   @Input() playlist;
-
+  @Input() activeClass = false;
+  selected = false;
   constructor() {}
 
   ngOnInit() {}
+
+  addTracksToPlaylist() {}
 }

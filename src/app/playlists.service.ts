@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 
 import { environment } from "src/environments/environment";
@@ -9,6 +9,7 @@ import { environment } from "src/environments/environment";
 export class PlaylistsService {
   myPlaylistsEndpoint = environment.apiConfig.endpoints.playlists;
   playlistData;
+  selectedPlaylist;
 
   constructor(private httpClient: HttpService) {
     this.httpClient
