@@ -1,8 +1,9 @@
 import { Injectable, OnInit } from "@angular/core";
 import { HttpService } from "./http.service";
 import { environment } from "src/environments/environment";
-import { Tracks } from "./tracks";
+import { Tracks } from "./interface.trackList";
 import { TrackItem } from "./interface.track";
+import { TrackList } from "./interface.trackList";
 
 @Injectable({
   providedIn: "root"
@@ -10,6 +11,7 @@ import { TrackItem } from "./interface.track";
 export class TracksService {
   private myTracksEndpoint = environment.apiConfig.endpoints.tracks;
   private selectedTracks: Array<string> = [];
+  private currentTrackList: TrackList = {};
 
   constructor(private httpClient: HttpService) {}
 
@@ -19,7 +21,7 @@ export class TracksService {
    *
    * @return void
    */
-  initializeTrackData() {
+  initializeTrackList() {
     this.httpClient
       .getApiRequestSet(this.myTracksEndpoint, {
         params: {
@@ -27,7 +29,7 @@ export class TracksService {
         }
       })
       .subscribe((data: Tracks) => {
-        this.trackData = data;
+        this.currentTrackList = data;
       });
   }
 

@@ -1,12 +1,14 @@
 import { Action } from "@ngrx/store";
+import * as trackListActions from "./track-list.actions";
 
 const initialState = {
-  trackList: []
+  currentTrackList: [],
+  cachedTracks: []
 };
 
 export function trackListReducer(state = initialState, action: Action) {
   switch (action.type) {
-    case "SET_TRACK_LIST":
+    case trackListActions.SET_CURRENT_TRACK_LIST:
       return {
         ...initialState,
         trackList: action.payload

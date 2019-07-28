@@ -3,8 +3,8 @@ import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
 @Injectable({ providedIn: "root" })
 export class AuthService {
-  loggedIn = false;
-  accessToken = "";
+  static loggedIn = false;
+  public static accessToken = "";
 
   constructor(private router: Router) {}
 

@@ -1,4 +1,4 @@
-export interface Tracks {
+export interface TrackList {
   href: String;
   items: object[];
   limit: Number;
