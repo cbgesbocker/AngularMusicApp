@@ -22,4 +22,8 @@ export class PlaylistsService {
         this.playlistData = data;
       });
   }
+
+  postSelectedTracksToSelectedPlaylist(tracks, playlistId) {
+    this.httpClient.postTracksToPlaylist(tracks, playlistId);
+  }
 }

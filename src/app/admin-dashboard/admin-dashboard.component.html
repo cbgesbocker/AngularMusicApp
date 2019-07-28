@@ -6,7 +6,12 @@
     <div class=" text-right">
       <button
         *ngIf="playlistService.selectedPlaylist; else elseBlock"
-        (click)="toggleShowDiv()"
+        (click)="
+          playlistService.fpostSelectedTracksToSelectedPlaylist(
+            trackService.selectedTracks,
+            playlistService.selectedPlaylist.id
+          )
+        "
         class="relative outline-none bg-red-600 text-white uppercase py-3 px-5"
       >
         Are you sure you want to add
@@ -49,6 +54,7 @@
           class="w-full"
           *ngFor="let item of trackService.trackData.items"
           [track]="item"
+          [selected]="trackService.selectedTracks.indexOf()"
         ></app-track>
       </div>
     </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { TracksService } from "../tracks.service";
+import { TrackItem } from "../interface.track";
 
 @Component({
   selector: "app-track",
@@ -7,22 +8,8 @@ import { TracksService } from "../tracks.service";
   styleUrls: ["./track.component.scss"]
 })
 export class TrackComponent {
-  @Input() track;
-  selected = false;
+  @Input() track: TrackItem;
+  @Input() selected: boolean;
 
   constructor(private tracksService: TracksService) {}
-
-  selectTrack(): void {
-    this.selected = !this.selected;
-
-    const search = this.tracksService.selectedTracks.find(item => {
-      return item.track.id === this.track.track.id;
-    });
-
-    if (search === undefined && this.selected) {
-      this.tracksService.addTrack(this.track);
-    } else {
-      this.tracksService.removeTrack(this.track);
-    }
-  }
 }

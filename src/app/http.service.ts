@@ -27,13 +27,15 @@ export class HttpService {
     return this.http.get(uri, options);
   }
 
-  postTracksToPlaylist({
-    tracks,
-    playlistId
-  }: {
-    tracks: Array<any>;
-    playlistId: Number;
-  }): void {
-    // const endpoint = environment.apiConfig.apiUrl + this.http.post();
+  postTracksToPlaylist(tracks, playlistId: number): void {
+    const endpoint =
+      environment.apiConfig.apiUrl +
+      "/v1/users/playlists/" +
+      playlistId +
+      "/tracks";
+
+    const mappedUris = tracks.map(track => track.track.uri);
+    debugger;
+    this.http.post(endpoint, { uris: mappedUris });
   }
 }
