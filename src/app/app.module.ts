@@ -15,6 +15,7 @@ import { LoggedOutComponent } from "./logged-out/logged-out.component";
 import { TrackComponent } from "./track/track.component";
 import { PlaylistComponent } from "./playlist/playlist.component";
 import { ModalComponent } from './modal/modal.component';
+import { TrackListComponent } from './track-list/track-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ModalComponent } from './modal/modal.component';
     LoggedOutComponent,
     TrackComponent,
     PlaylistComponent,
-    ModalComponent
+    ModalComponent,
+    TrackListComponent
   ],
   imports: [
     MatToolbarModule,

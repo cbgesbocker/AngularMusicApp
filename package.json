@@ -26,6 +26,7 @@
     "angular-builders": "^1.0.0",
     "hammerjs": "^2.0.8",
     "js-cookie": "^2.2.0",
+    "ngrx": "^2.0.1",
     "rxjs": "~6.4.0",
     "tailwindcss-border-gradients": "^2.0.1",
     "tailwindcss-transforms": "^2.1.0",

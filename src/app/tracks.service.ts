@@ -9,10 +9,17 @@ import { TrackItem } from "./interface.track";
 })
 export class TracksService {
   private myTracksEndpoint = environment.apiConfig.endpoints.tracks;
-  private trackData: object;
   private selectedTracks: Array<string> = [];
 
-  constructor(private httpClient: HttpService) {
+  constructor(private httpClient: HttpService) {}
+
+  /**
+   * initializeTrackData()
+   * Fetch tracks and store in obj data
+   *
+   * @return void
+   */
+  initializeTrackData() {
     this.httpClient
       .getApiRequestSet(this.myTracksEndpoint, {
         params: {
