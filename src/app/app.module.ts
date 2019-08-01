@@ -14,8 +14,10 @@ import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.compo
 import { LoggedOutComponent } from "./logged-out/logged-out.component";
 import { TrackComponent } from "./track/track.component";
 import { PlaylistComponent } from "./playlist/playlist.component";
-import { ModalComponent } from './modal/modal.component';
-import { TrackListComponent } from './track-list/track-list.component';
+import { ModalComponent } from "./modal/modal.component";
+import { TrackListComponent } from "./track-list/track-list.component";
+import { StoreModule } from "@ngrx/store";
+import { trackListReducer } from "./track-list/store/track-list.reducer";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { TrackListComponent } from './track-list/track-list.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({ trackList: trackListReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

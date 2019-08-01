@@ -1,12 +1,15 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { commonEnvironment } from './environment.common';
+import { commonEnvironment } from "./environment.common";
 
 export const environment = {
   production: false,
-  redirect_uri: 'http://localhost:4200/admin',
-  ...commonEnvironment
+  ...commonEnvironment,
+  apiConfig: {
+    ...commonEnvironment.apiConfig,
+    redirect_uri: "http://localhost:4200/admin"
+  }
 };
 
 /*

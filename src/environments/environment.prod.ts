@@ -1,6 +1,9 @@
-import { commonEnvironment } from './environment.common'
+import { commonEnvironment } from "./environment.common";
 
 export const environment = {
   production: true,
-  ...commonEnvironment
+  apiConfig: {
+    ...commonEnvironment.apiConfig,
+    redirect_uri: ""
+  }
 };

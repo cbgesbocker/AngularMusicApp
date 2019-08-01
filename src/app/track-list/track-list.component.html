@@ -1,6 +1,6 @@
 <app-track
   class="w-full"
-  *ngFor="let item of trackService.trackData.items"
+  *ngFor="let item of trackService.currentTrackList.items"
   [track]="item"
-  [selected]="trackService.selectedTracks.indexOf()"
+  [selected]=""
 ></app-track>

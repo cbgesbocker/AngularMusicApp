@@ -1,35 +1,27 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
+import { ApiEndpointsService } from "./api-endpoints.service";
+
 @Injectable({ providedIn: "root" })
 export class AuthService {
   static loggedIn = false;
-  public static accessToken = "";
+  static accessToken = "";
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private apiEndpointsService: ApiEndpointsService
+  ) {}
 
   login() {
-    const apiAccountsUrl = new URL(
-      environment.apiConfig.apiAccountsUrl +
-        environment.apiConfig.endpoints.auth
+    const endpoint = this.apiEndpointsService.getBuiltEndpoint(
+      ApiEndpointsService.endpointsNamespace.auth
     );
-
-    apiAccountsUrl.searchParams.set(
-      "scope",
-      encodeURIComponent(environment.apiConfig.scope)
-    );
-    apiAccountsUrl.searchParams.set("response_type", "token");
-    apiAccountsUrl.searchParams.set(
-      "client_id",
-      environment.apiConfig.client_id
-    );
-    apiAccountsUrl.searchParams.set("redirect_uri", environment.redirect_uri);
-
-    window.location.replace(apiAccountsUrl.href);
+    window.location.replace(endpoint.href);
   }
 
   logout() {
-    this.loggedIn = false;
-    this.accessToken = "";
+    AuthService.loggedIn = false;
+    AuthService.accessToken = "";
   }
 }

@@ -7,7 +7,7 @@ import { environment } from "src/environments/environment";
   providedIn: "root"
 })
 export class PlaylistsService {
-  myPlaylistsEndpoint = environment.apiConfig.endpoints.playlists;
+  myPlaylistsEndpoint = environment.apiConfig.endpoints.myPlaylists;
   playlistData;
   selectedPlaylist;
 

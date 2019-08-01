@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import { HttpService } from "./http.service";
 import { environment } from "src/environments/environment";
-import { Tracks } from "./interface.trackList";
 import { TrackItem } from "./interface.track";
 import { TrackList } from "./interface.trackList";
 
@@ -9,9 +8,9 @@ import { TrackList } from "./interface.trackList";
   providedIn: "root"
 })
 export class TracksService {
-  private myTracksEndpoint = environment.apiConfig.endpoints.tracks;
+  private myTracksEndpoint = environment.apiConfig.endpoints.myTracks;
   private selectedTracks: Array<string> = [];
-  private currentTrackList: TrackList = {};
+  currentTrackList: TrackList;
 
   constructor(private httpClient: HttpService) {}
 
@@ -28,7 +27,7 @@ export class TracksService {
           limit: 50
         }
       })
-      .subscribe((data: Tracks) => {
+      .subscribe((data: TrackList) => {
         this.currentTrackList = data;
       });
   }

@@ -2,17 +2,19 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 
 export const validEndpoints = environment.apiConfig.endpoints;
+import { authorizeEndpointUrlParams } from "./model.authorization";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable({ providedIn: "root" })
 export class ApiEndpointsService {
-  apiUrl = environment.apiConfig.apiUrl;
+  // api url
+  static apiUrl = environment.apiConfig.apiUrl;
 
-  // authorization url
-  apiAccountAuthUrl = new URL(
-    environment.apiConfig.apiAccountsUrl + environment.apiConfig.endpoints.auth
-  ).searchParams.set("scope", encodeURIComponent(environment.apiConfig.scope));
+  static endpointsNamespace = {
+    auth: "auth",
+    myTracks: "myTracks",
+    myPlaylists: "myPlaylists",
+    playlistTracks: "playlistTracks"
+  };
 
   constructor() {}
 
@@ -20,19 +22,52 @@ export class ApiEndpointsService {
    * @param endpoint
    * @param urlParam
    */
-  getBuiltEndpoint(endpoint: string, urlParam: string = "") {
+  getBuiltEndpoint(endpoint: string, urlParam: string = ""): URL {
+    let apiUrl: URL;
+    let urlString: string;
+
     switch (endpoint) {
-      case validEndpoints.playlistTracks:
-        return (
-          this.apiUrl +
-          environment.apiConfig.endpoints.playlistTracks +
-          urlParam +
-          "/tracks"
+      case ApiEndpointsService.endpointsNamespace.playlistTracks:
+        apiUrl = new URL(
+          ApiEndpointsService.apiUrl +
+            environment.apiConfig.endpoints.playlistTracks +
+            urlParam +
+            "/tracks"
         );
-      case validEndpoints.myTracks:
-        return this.apiUrl + validEndpoints.myTracks;
+        break;
+      case ApiEndpointsService.endpointsNamespace.auth:
+        urlString =
+          environment.apiConfig.apiAuthAccountsUrl +
+          environment.apiConfig.endpoints.auth;
+        const apiAuthAccountsUrl = ApiEndpointsService.buildUrl(
+          new URL(urlString),
+          authorizeEndpointUrlParams
+        );
+        apiUrl = apiAuthAccountsUrl;
+        break;
+      case ApiEndpointsService.endpointsNamespace.myTracks:
+        urlString = ApiEndpointsService.apiUrl + validEndpoints.myTracks;
+        apiUrl = new URL(urlString);
+        break;
       default:
-        throw new Error("no valid endpoint found");
+        apiUrl = new URL("");
+        break;
     }
+    return apiUrl;
+  }
+
+  /**
+   * @param url
+   * @param params
+   */
+  static buildUrl(
+    url: URL,
+    params: Array<{ key: string; value: string }>
+  ): URL {
+    for (var key in params) {
+      const config = params[key];
+      url.searchParams.set(config.key, config.value);
+    }
+    return url;
   }
 }

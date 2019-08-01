@@ -1,6 +1,6 @@
 export const commonEnvironment = {
   apiConfig: {
-    apiAccountsUrl: "https://accounts.spotify.com/",
+    apiAuthAccountsUrl: "https://accounts.spotify.com/",
     apiUrl: "https://api.spotify.com/",
     endpoints: {
       auth: "authorize",
@@ -10,6 +10,7 @@ export const commonEnvironment = {
     },
     client_id: "0fbb7876d007469dad343674a6571a68",
     client_secret: "7048a96599cf49cebbdb6e86147cbd0a",
-    scope: "user-library-read"
+    scope: "user-library-read",
+    response_type: "token"
   }
 };

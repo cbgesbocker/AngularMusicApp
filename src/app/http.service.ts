@@ -3,12 +3,12 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { AuthService } from "./auth.service";
 import { ApiEndpointsService, validEndpoints } from "./api-endpoints.service";
+import { Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class HttpService {
   config = environment.apiConfig;
   headers = {
-    Authorization: "Bearer " + AuthService.accessToken,
     Accept: "application/json",
     "Content-Type": "application/json"
   };
@@ -22,18 +22,18 @@ export class HttpService {
    *
    * @param endpoint
    * @param options
-   *
-   * @return Observable
    */
   getApiRequestSet(endpoint: string, options: object = {}) {
-    const endpoint = this.apiEndpoints.getBuiltEndpoint(
-      validEndpoints[endpoint]
+    const apiEndpoint = this.apiEndpoints.getBuiltEndpoint(
+      ApiEndpointsService.endpointsNamespace[endpoint]
     );
-    options = {
-      ...this.headers,
+
+    debugger;
+
+    return this.http.get(apiEndpoint.href, {
+      headers: { ...this.headers },
       ...options
-    };
-    return this.http.get(uri, options);
+    });
   }
 
   /**
@@ -50,6 +50,14 @@ export class HttpService {
     );
 
     const mappedUris = tracks.map(track => track.track.uri);
-    this.http.post(endpoint, { uris: mappedUris });
+    this.http.post(endpoint.href, { uris: mappedUris });
+  }
+
+  /** */
+  getHeaders() {
+    return {
+      ...this.headers,
+      Authorization: "Bearer " + AuthService.accessToken
+    };
   }
 }
