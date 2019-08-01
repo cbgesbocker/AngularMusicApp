@@ -5,23 +5,37 @@ import { ApiEndpointsService } from "./api-endpoints.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
-  static loggedIn = false;
-  static accessToken = "";
+  private loggedIn = false;
+  private accessToken = "";
 
   constructor(
     private router: Router,
     private apiEndpointsService: ApiEndpointsService
   ) {}
 
-  login() {
-    const endpoint = this.apiEndpointsService.getBuiltEndpoint(
-      ApiEndpointsService.endpointsNamespace.auth
-    );
-    window.location.replace(endpoint.href);
+  /**
+   * Redirect user to spotify.accounts/authorize
+   * to get valid token
+   */
+  login(): void {
+    const endpoint = this.apiEndpointsService.getAuthenticationEndpoint();
+    window.location.replace(endpoint);
   }
 
-  logout() {
-    AuthService.loggedIn = false;
-    AuthService.accessToken = "";
+  logout(): void {
+    this.loggedIn = false;
+    this.accessToken = "";
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+
+  setAccessToken(token: string): void {
+    this.accessToken = token;
+  }
+
+  setLoggedIn(state: boolean): void {
+    this.loggedIn = state;
   }
 }

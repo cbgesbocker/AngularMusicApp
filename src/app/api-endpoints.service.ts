@@ -8,53 +8,24 @@ import { authorizeEndpointUrlParams } from "./model.authorization";
 export class ApiEndpointsService {
   // api url
   static apiUrl = environment.apiConfig.apiUrl;
+  static endpoints = environment.apiConfig.endpoints;
 
-  static endpointsNamespace = {
-    auth: "auth",
-    myTracks: "myTracks",
-    myPlaylists: "myPlaylists",
-    playlistTracks: "playlistTracks"
-  };
+  // authentication base endpoint (no query params)
+  private authenticationEndpoint =
+    environment.apiConfig.apiAuthAccountsUrl +
+    environment.apiConfig.endpoints.auth;
+
+  // my tracks
+  private myTracksEndpoint = new URL(
+    ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myTracks
+  );
+
+  // my playlists
+  private myPlaylistsEndpoint = new URL(
+    ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myPlaylists
+  );
 
   constructor() {}
-
-  /**
-   * @param endpoint
-   * @param urlParam
-   */
-  getBuiltEndpoint(endpoint: string, urlParam: string = ""): URL {
-    let apiUrl: URL;
-    let urlString: string;
-
-    switch (endpoint) {
-      case ApiEndpointsService.endpointsNamespace.playlistTracks:
-        apiUrl = new URL(
-          ApiEndpointsService.apiUrl +
-            environment.apiConfig.endpoints.playlistTracks +
-            urlParam +
-            "/tracks"
-        );
-        break;
-      case ApiEndpointsService.endpointsNamespace.auth:
-        urlString =
-          environment.apiConfig.apiAuthAccountsUrl +
-          environment.apiConfig.endpoints.auth;
-        const apiAuthAccountsUrl = ApiEndpointsService.buildUrl(
-          new URL(urlString),
-          authorizeEndpointUrlParams
-        );
-        apiUrl = apiAuthAccountsUrl;
-        break;
-      case ApiEndpointsService.endpointsNamespace.myTracks:
-        urlString = ApiEndpointsService.apiUrl + validEndpoints.myTracks;
-        apiUrl = new URL(urlString);
-        break;
-      default:
-        apiUrl = new URL("");
-        break;
-    }
-    return apiUrl;
-  }
 
   /**
    * @param url
@@ -69,5 +40,32 @@ export class ApiEndpointsService {
       url.searchParams.set(config.key, config.value);
     }
     return url;
+  }
+
+  /**
+   * @param playlistId
+   */
+  getPlaylistTracksEndpoint(playlistId: number): string {
+    return new URL(
+      ApiEndpointsService.apiUrl +
+        ApiEndpointsService.endpoints.playlistTracks +
+        playlistId +
+        "/tracks"
+    ).href;
+  }
+
+  getAuthenticationEndpoint(): string {
+    return ApiEndpointsService.buildUrl(
+      new URL(this.authenticationEndpoint),
+      authorizeEndpointUrlParams
+    ).href;
+  }
+
+  getMyTracksEndpoint(): string {
+    return this.myTracksEndpoint.href;
+  }
+
+  getMyPlaylistsEndpoint(): string {
+    return this.myPlaylistsEndpoint.href;
   }
 }

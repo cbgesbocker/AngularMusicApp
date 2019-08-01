@@ -20,23 +20,12 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {}
 
-  toggleShowDiv() {
+  toggleShowDiv(): void {
     this.animationState = this.animationState === "out" ? "in" : "out";
   }
 
-  handlePlaylistSelection(playlist) {
+  handlePlaylistSelection(playlist): void {
     this.showPlaylistConfirmationDialog = true;
     this.playlistService.selectedPlaylist = playlist;
   }
-
-  // getModalConfig() {
-  //   return {
-  //     open: this.showPlaylistConfirmationDialog,
-  //     title:
-  //       "Are you sure you would like to add " +
-  //       this.trackService.selectedTracks.length +
-  //       "tracks to " +
-  //       this.playlistService.selectedPlaylist.name
-  //   };
-  // }
 }

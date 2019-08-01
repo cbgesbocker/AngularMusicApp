@@ -24,13 +24,7 @@ export class HttpService {
    * @param options
    */
   getApiRequestSet(endpoint: string, options: object = {}) {
-    const apiEndpoint = this.apiEndpoints.getBuiltEndpoint(
-      ApiEndpointsService.endpointsNamespace[endpoint]
-    );
-
-    debugger;
-
-    return this.http.get(apiEndpoint.href, {
+    return this.http.get(endpoint, {
       headers: { ...this.headers },
       ...options
     });
@@ -44,12 +38,9 @@ export class HttpService {
    * @return void
    */
   postTracksToPlaylist(tracks, playlistId: number): void {
-    const endpoint = this.apiEndpoints.getBuiltEndpoint(
-      validEndpoints.playlistTracks,
-      String(playlistId)
-    );
-
+    const endpoint = this.apiEndpoints.getPlaylistTracksEndpoint(playlistId);
     const mappedUris = tracks.map(track => track.track.uri);
+
     this.http.post(endpoint.href, { uris: mappedUris });
   }
 

@@ -2,18 +2,22 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 
 import { environment } from "src/environments/environment";
+import { ApiEndpointsService } from "./api-endpoints.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class PlaylistsService {
-  myPlaylistsEndpoint = environment.apiConfig.endpoints.myPlaylists;
-  playlistData;
-  selectedPlaylist;
+  playlistData = {};
+  selectedPlaylist = {};
 
-  constructor(private httpClient: HttpService) {
+  constructor(
+    private httpClient: HttpService,
+    private apiEndpointsService: ApiEndpointsService
+  ) {
+    const myPlaylistEndpoint = this.apiEndpointsService.getMyPlaylistsEndpoint();
     this.httpClient
-      .getApiRequestSet(this.myPlaylistsEndpoint, {
+      .getApiRequestSet(myPlaylistEndpoint, {
         params: {
           limit: 50
         }
@@ -23,7 +27,10 @@ export class PlaylistsService {
       });
   }
 
-  postSelectedTracksToSelectedPlaylist(tracks, playlistId) {
+  /**
+   * Add the tracks that are currently selected to the playlist ID
+   */
+  postSelectedTracksToSelectedPlaylist(tracks, playlistId): void {
     this.httpClient.postTracksToPlaylist(tracks, playlistId);
   }
 }
