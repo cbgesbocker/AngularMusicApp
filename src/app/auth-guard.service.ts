@@ -14,7 +14,6 @@ export class AuthGuardService implements CanActivate {
   ) {}
 
   /**
-   *
    * @param route
    * Auth Guard for /admin
    */
@@ -41,7 +40,7 @@ export class AuthGuardService implements CanActivate {
    * Check if a valid response is returned from the API
    * to validate the token
    */
-  async isValidToken(): boolean {
+  async isValidToken(): Promise<boolean> {
     try {
       await this.http
         .getApiRequestSet(this.apiEndpointService.getMyTracksEndpoint())
