@@ -3,34 +3,23 @@ import { HttpService } from "./http.service";
 import { environment } from "src/environments/environment";
 import { TrackItem } from "./interface.track";
 import { TrackList } from "./interface.trackList";
+import { ApiEndpointsService } from "./api-endpoints.service";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class TracksService {
-  private myTracksEndpoint = environment.apiConfig.endpoints.myTracks;
   private selectedTracks: Array<string> = [];
-  currentTrackList: TrackList;
 
-  constructor(private httpClient: HttpService) {}
+  currentTrackList: Observable<{ trackList: TrackList }>;
 
-  /**
-   * initializeTrackData()
-   * Fetch tracks and store in obj data
-   *
-   * @return void
-   */
-  initializeTrackList() {
-    this.httpClient
-      .getApiRequestSet(this.myTracksEndpoint, {
-        params: {
-          limit: 50
-        }
-      })
-      .subscribe((data: TrackList) => {
-        this.currentTrackList = data;
-      });
-  }
+  constructor(
+    private httpClient: HttpService,
+    private apiEndpointsService: ApiEndpointsService,
+    private store: Store<{ trackList: { tracks: TrackItem[] } }>
+  ) {}
 
   /**
    * toggleSelectedTrack()

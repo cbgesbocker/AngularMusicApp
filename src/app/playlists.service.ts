@@ -17,12 +17,12 @@ export class PlaylistsService {
   ) {
     const myPlaylistEndpoint = this.apiEndpointsService.getMyPlaylistsEndpoint();
     this.httpClient
-      .getApiRequestSet(myPlaylistEndpoint, {
+      .getApiRequest(myPlaylistEndpoint, {
         params: {
           limit: 50
         }
       })
-      .subscribe(data => {
+      .then(data => {
         this.playlistData = data;
       });
   }

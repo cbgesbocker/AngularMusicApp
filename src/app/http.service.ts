@@ -1,54 +1,54 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+
 import { environment } from "src/environments/environment";
-import { AuthService } from "./auth.service";
-import { ApiEndpointsService, validEndpoints } from "./api-endpoints.service";
-import { Observable } from "rxjs";
+import { ApiEndpointsService } from "./api-endpoints.service";
+import { AuthService } from "./auth/auth.service";
 
 @Injectable({ providedIn: "root" })
-export class HttpService {
-  config = environment.apiConfig;
-  headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json"
-  };
-
+export class HttpService extends ApiEndpointsService {
   constructor(
-    private apiEndpoints: ApiEndpointsService,
-    private http: HttpClient
-  ) {}
-
-  /**
-   *
-   * @param endpoint
-   * @param options
-   */
-  getApiRequestSet(endpoint: string, options: object = {}) {
-    return this.http.get(endpoint, {
-      headers: { ...this.headers },
-      ...options
-    });
+    private http: HttpClient,
+    private authService: AuthService,
+    /** Network config */
+    private config = environment.apiConfig,
+    private defaultHeaders = {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    private headers = {}
+  ) {
+    super();
+    this.headers = { headers: this.getDefaultHeaders() };
   }
 
-  /**
-   *
-   * @param tracks
-   * @param playlistId
-   *
-   * @return void
-   */
+  async getApiRequest(endpoint: string, options: object = {}): Promise<any> {
+    const request = await this.http
+      .get(endpoint, { ...this.headers, ...options })
+      .toPromise();
+    return request;
+  }
+
+  async getMyTracks(): Promise<object> {
+    try {
+      const apiRequest = await this.getApiRequest(this.getMyTracksEndpoint());
+      return apiRequest;
+    } catch (e) {
+      return e;
+    }
+  }
+
   postTracksToPlaylist(tracks, playlistId: number): void {
-    const endpoint = this.apiEndpoints.getPlaylistTracksEndpoint(playlistId);
+    const endpoint = this.getPlaylistTracksEndpoint(playlistId);
     const mappedUris = tracks.map(track => track.track.uri);
 
-    this.http.post(endpoint.href, { uris: mappedUris });
+    this.http.post(endpoint, { uris: mappedUris });
   }
 
-  /** */
-  getHeaders() {
+  getDefaultHeaders(): Object {
     return {
-      ...this.headers,
-      Authorization: "Bearer " + AuthService.accessToken
+      ...this.defaultHeaders,
+      Authorization: "Bearer " + this.authService.getAccessToken()
     };
   }
 }

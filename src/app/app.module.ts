@@ -18,6 +18,7 @@ import { ModalComponent } from "./modal/modal.component";
 import { TrackListComponent } from "./track-list/track-list.component";
 import { StoreModule } from "@ngrx/store";
 import { trackListReducer } from "./track-list/store/track-list.reducer";
+import { authReducer } from "./auth/store/auth.reducer";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,10 @@ import { trackListReducer } from "./track-list/store/track-list.reducer";
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    StoreModule.forRoot({ trackList: trackListReducer })
+    StoreModule.forRoot({
+      trackList: trackListReducer,
+      authState: authReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../auth.service";
+import { HttpService } from "../http.service";
 
 @Component({
   selector: "app-logged-out",
@@ -7,9 +7,9 @@ import { AuthService } from "../auth.service";
   styleUrls: ["./logged-out.component.scss"]
 })
 export class LoggedOutComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private http: HttpService) {}
 
   ngOnInit() {
-    this.authService.logout();
+    this.http.logout();
   }
 }

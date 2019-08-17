@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
 
+import { environment } from "src/environments/environment";
 export const validEndpoints = environment.apiConfig.endpoints;
 import { authorizeEndpointUrlParams } from "./model.authorization";
 
