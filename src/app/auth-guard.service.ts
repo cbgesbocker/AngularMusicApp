@@ -1,13 +1,18 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot } from "@angular/router";
-
-import { HttpService } from "./http.service";
-import { ApiEndpointsService } from "./api-endpoints.service";
 import { AuthService } from "./auth/auth.service";
+import { Store } from "@ngrx/store";
 
 @Injectable({ providedIn: "root" })
 export class AuthGuardService implements CanActivate {
-  constructor(private authService: AuthService) {}
+  private isLoggedIn;
+
+  constructor(
+    private authService: AuthService,
+    private store: Store<{ isLoggedIn: boolean }>
+  ) {
+    this.store.select("");
+  }
 
   /**
    * @param route
