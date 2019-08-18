@@ -17,9 +17,7 @@ import { PlaylistComponent } from "./playlist/playlist.component";
 import { ModalComponent } from "./modal/modal.component";
 import { TrackListComponent } from "./track-list/track-list.component";
 import { StoreModule } from "@ngrx/store";
-import { trackListReducer } from "./track-list/store/track-list.reducer";
-import { authReducer } from "./auth/store/auth.reducer";
-
+import * as appStore from "./store/store.reducer";
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,10 +38,7 @@ import { authReducer } from "./auth/store/auth.reducer";
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    StoreModule.forRoot({
-      trackList: trackListReducer,
-      authState: authReducer
-    })
+    StoreModule.forRoot(appStore.appReducer)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,16 +2,17 @@ import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot } from "@angular/router";
 import { AuthService } from "./auth/auth.service";
 import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class AuthGuardService implements CanActivate {
-  private isLoggedIn;
+  private isLoggedIn: Observable<boolean>;
 
   constructor(
     private authService: AuthService,
     private store: Store<{ isLoggedIn: boolean }>
   ) {
-    this.store.select("");
+    this.isLoggedIn = this.store.select("authState");
   }
 
   /**
@@ -19,7 +20,15 @@ export class AuthGuardService implements CanActivate {
    * Auth Guard for /admin
    */
   canActivate(route: ActivatedRouteSnapshot): boolean {
+    // if already logged in, return true
+    if (this.isLoggedIn) {
+      return true;
+    }
+
+    // force redirect
     this.authService.authenticate(route);
-    return this.authService.isLoggedIn();
+
+    // return logged in state
+    return this.isLoggedIn;
   }
 }

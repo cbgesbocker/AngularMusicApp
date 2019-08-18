@@ -21,3 +21,5 @@ export class SetStateValidity implements Action {
 
   constructor(public payload: boolean) {}
 }
+
+export type AuthActions = SetAuth | SetClientState | SetStateValidity;

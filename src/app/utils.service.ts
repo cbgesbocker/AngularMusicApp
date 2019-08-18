@@ -1,5 +1,11 @@
 import { ActivatedRouteSnapshot } from "@angular/router";
 
+/**
+ * @class
+ * @UtilsService
+ *
+ * Functional helpers
+ */
 export default class UtilsService {
   static getFragmentVar({
     route,
@@ -15,12 +21,12 @@ export default class UtilsService {
     return "";
   }
 
-  static getGeneratdRandomString(length: number = 50) {
-    var result = "";
-    var characters =
+  static getGeneratedRandomString(length: number = 50) {
+    let result = "";
+    const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;

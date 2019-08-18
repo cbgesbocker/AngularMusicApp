@@ -1,12 +1,23 @@
 import * as AuthActions from "./auth.actions";
 
+export interface State {
+  authToken: string;
+  clientState: string;
+  isLoggedIn: boolean;
+  isValidState: boolean;
+}
+
 const initialState = {
   authToken: "",
   clientState: "",
+  isLoggedIn: false,
   isValidState: false
 };
 
-export function authReducer(state = initialState, action: any) {
+export function authReducer(
+  state = initialState,
+  action: AuthActions.AuthActions
+) {
   switch (action.type) {
     case AuthActions.SET_AUTH_TOKEN:
       return {

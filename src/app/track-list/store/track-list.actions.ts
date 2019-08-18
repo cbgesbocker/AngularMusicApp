@@ -7,5 +7,3 @@ export class SetTracks implements Action {
   readonly type = SET_CURRENT_TRACK_LIST;
   payload: TrackList;
 }
-
-export const;
