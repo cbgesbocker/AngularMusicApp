@@ -6,13 +6,15 @@ import { Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class AuthGuardService implements CanActivate {
-  private isLoggedIn: Observable<boolean>;
+  private isLoggedIn: boolean;
 
   constructor(
     private authService: AuthService,
     private store: Store<{ isLoggedIn: boolean }>
   ) {
-    this.isLoggedIn = this.store.select("authState");
+    this.store.select("authState").subscribe(data => {
+      this.isLoggedIn = data.isLoggedIn;
+    });
   }
 
   /**

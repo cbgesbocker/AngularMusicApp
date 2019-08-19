@@ -1,6 +1,5 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
-import { environment } from "src/environments/environment";
 import { TrackItem } from "./interface.track";
 import { TrackList } from "./interface.trackList";
 import { ApiEndpointsService } from "./api-endpoints.service";
@@ -10,7 +9,7 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
-export class TracksService {
+export class TracksService extends ApiEndpointsService {
   private selectedTracks: Array<string> = [];
 
   currentTrackList: Observable<{ trackList: TrackList }>;
@@ -19,7 +18,11 @@ export class TracksService {
     private httpClient: HttpService,
     private apiEndpointsService: ApiEndpointsService,
     private store: Store<{ trackList: { tracks: TrackItem[] } }>
-  ) {}
+  ) {
+    super();
+  }
+
+  initializeTrackList(): void {}
 
   /**
    * toggleSelectedTrack()

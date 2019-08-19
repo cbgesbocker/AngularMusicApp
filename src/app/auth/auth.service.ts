@@ -12,21 +12,30 @@ import * as AuthActions from "./store/auth.actions";
   providedIn: "root"
 })
 export class AuthService extends ApiEndpointsService {
-  private loggedIn: Observable<boolean>;
-  private clientState: Observable<string>;
+  private isLoggedIn: boolean = false;
+  private clientState: string = "";
 
-  constructor(private store: Store<{ isLoggedIn: boolean }>) {
+  constructor(
+    private store: Store<{
+      isLoggedIn: boolean;
+      clientState: string;
+    }>
+  ) {
     // inherit all methods from ApiEndpointsService
     super();
 
+    this.store.select("authState").subscribe(data => {
+      this.isLoggedIn = data.isLoggedIn;
+      this.clientState = data.clientState;
+      const isValidState = this.clientState === data.clientState;
+      this.store.dispatch(new AuthActions.SetStateValidity(isValidState));
+    });
+
+    debugger;
     // Set client state variable for request origin verification
     this.store.dispatch(
       new AuthActions.SetClientState(UtilsService.getGeneratedRandomString())
     );
-
-    // Setup ngrx observables
-    this.loggedIn = this.store.select("authState");
-    this.clientState = this.store.select("clientState");
   }
 
   /**
@@ -55,11 +64,6 @@ export class AuthService extends ApiEndpointsService {
       tokenID: "state"
     });
 
-    this.clientState.subscribe(clientState => {
-      const isValidState = clientState === returnedState;
-      this.store.dispatch(new AuthActions.SetStateValidity(isValidState));
-    });
-
     const accessToken = UtilsService.getFragmentVar({
       route,
       tokenID: "access_token"
@@ -72,7 +76,9 @@ export class AuthService extends ApiEndpointsService {
   }
 
   login(): void {
-    const endpoint = this.getAuthenticationEndpoint();
+    const endpoint = this.getAuthenticationUrl();
     window.location.replace(endpoint);
   }
+
+  logout(): void {}
 }

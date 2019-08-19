@@ -42,10 +42,7 @@ export class ApiEndpointsService {
     return url;
   }
 
-  /**
-   * @param playlistId
-   */
-  getPlaylistTracksEndpoint(playlistId: number): string {
+  getPlaylistTracksUrl(playlistId: number): string {
     return new URL(
       ApiEndpointsService.apiUrl +
         ApiEndpointsService.endpoints.playlistTracks +
@@ -54,18 +51,18 @@ export class ApiEndpointsService {
     ).href;
   }
 
-  getAuthenticationEndpoint(): string {
+  getAuthenticationUrl(): string {
     return ApiEndpointsService.buildUrl(
       new URL(this.authenticationEndpoint),
       authorizeEndpointUrlParams
     ).href;
   }
 
-  getMyTracksEndpoint(): string {
+  getMyTracksUrl(): string {
     return this.myTracksEndpoint.href;
   }
 
-  getMyPlaylistsEndpoint(): string {
+  getMyPlaylistsUrl(): string {
     return this.myPlaylistsEndpoint.href;
   }
 }
