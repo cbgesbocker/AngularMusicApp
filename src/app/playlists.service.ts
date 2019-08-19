@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 
-import { environment } from "src/environments/environment";
 import { ApiEndpointsService } from "./api-endpoints.service";
 
 @Injectable({
@@ -17,7 +16,6 @@ export class PlaylistsService extends ApiEndpointsService {
 
   populatePlaylistData(): void {
     const myPlaylistEndpoint = this.getMyPlaylistsUrl();
-
     this.httpClient
       .getApiRequest(myPlaylistEndpoint, {
         params: {
