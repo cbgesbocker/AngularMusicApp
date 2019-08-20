@@ -18,7 +18,9 @@ export class AdminDashboardComponent implements OnInit {
   showPlaylistConfirmationDialog = false;
   animationState = "out";
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.trackService.initializeTrackList();
+  }
 
   toggleShowDiv(): void {
     this.animationState = this.animationState === "out" ? "in" : "out";

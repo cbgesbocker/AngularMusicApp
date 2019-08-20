@@ -1,28 +1,43 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { HttpService } from "./http.service";
 import { TrackItem } from "./interface.track";
-import { TrackList } from "./interface.trackList";
-import { ApiEndpointsService } from "./api-endpoints.service";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+
+import { ApiEndpointsService } from "./api-endpoints.service";
+import * as TrackActions from "./track-list/store/track-list.actions";
+import { TrackList } from "./interface.trackList";
+import { Observable, Subscription } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
-export class TracksService extends ApiEndpointsService {
+export class TracksService extends ApiEndpointsService implements OnDestroy {
   private selectedTracks: Array<string> = [];
 
-  currentTrackList: Observable<{ trackList: TrackList }>;
+  private currentTrackList: TrackItem[];
+  private subscription: Subscription;
 
   constructor(
     private httpClient: HttpService,
-    private apiEndpointsService: ApiEndpointsService,
     private store: Store<{ trackList: { tracks: TrackItem[] } }>
   ) {
     super();
+
+    // Subscribe to
+    this.subscription = this.store.select("trackList").subscribe(data => {
+      this.currentTrackList = data.tracks;
+    });
   }
 
-  initializeTrackList(): void {}
+  initializeTrackList(): void {
+    this.httpClient.getMyTracks().then((trackList: TrackList) => {
+      this.store.dispatch(new TrackActions.SetTracks(trackList));
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   /**
    * toggleSelectedTrack()

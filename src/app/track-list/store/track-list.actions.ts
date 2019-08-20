@@ -5,5 +5,5 @@ export const SET_CURRENT_TRACK_LIST = "SET_CURRENT_TRACK_LIST";
 
 export class SetTracks implements Action {
   readonly type = SET_CURRENT_TRACK_LIST;
-  payload: TrackList;
+  constructor(public payload: TrackList) {}
 }

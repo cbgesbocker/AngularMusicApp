@@ -8,9 +8,12 @@ import { Observable } from "rxjs";
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit {
-  private isLoggedIn: Observable<boolean>;
-  constructor(private store: Store<{ isLoggedIn: boolean }>) {
-    this.isLoggedIn = this.store.select("authState");
+  private isLoggedIn: boolean;
+
+  constructor(private store: Store<{ authState: { isLoggedIn: boolean } }>) {
+    this.store.select("authState").subscribe(data => {
+      this.isLoggedIn = data.isLoggedIn;
+    });
   }
 
   ngOnInit() {}

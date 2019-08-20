@@ -14,6 +14,7 @@ export class PlaylistsService extends ApiEndpointsService {
     super();
   }
 
+  
   populatePlaylistData(): void {
     const myPlaylistEndpoint = this.getMyPlaylistsUrl();
     this.httpClient

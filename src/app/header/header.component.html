@@ -2,7 +2,7 @@
   <a routerLink="/">Spotify Web App</a>
   <div class="flex-1 flex"></div>
   <a
-    *ngIf="isLoggedIn"
+    *ngIf="!isLoggedIn"
     class="no-underline"
     routerLink="/admin"
     routerLinkActive="active"
