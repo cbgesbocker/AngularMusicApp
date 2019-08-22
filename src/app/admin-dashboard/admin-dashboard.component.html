@@ -15,8 +15,8 @@
         class="relative outline-none bg-red-600 text-white uppercase py-3 px-5"
       >
         Are you sure you want to add
-        {{ trackService.selectedTracks.length }} to
-        {{ playlistService.selectedPlaylist.name }}?
+        <!-- {{ trackService.selectedTracks.length }} to -->
+        <!-- {{ playlistService.selectedPlaylist.name }}? -->
       </button>
       <ng-template #elseBlock>
         <button
@@ -24,7 +24,7 @@
           class="relative outline-none bg-blue-600 text-white uppercase py-3 px-5"
           [disabled]="trackService.selectedTracks.length === 0"
         >
-          Add {{ trackService.selectedTracks.length }} to Playlist
+          <!-- Add {{ trackService.selectedTracks.length }} to Playlist -->
         </button>
       </ng-template>
     </div>

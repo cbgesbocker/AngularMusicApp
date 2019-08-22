@@ -1,41 +1,43 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { ApiEndpointsService } from "../api-endpoints.service";
 import { Store } from "@ngrx/store";
 
 import { ActivatedRouteSnapshot, ActivationEnd } from "@angular/router";
 import UtilsService from "../utils.service";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
 import * as AuthActions from "./store/auth.actions";
 
 @Injectable({
   providedIn: "root"
 })
-export class AuthService extends ApiEndpointsService {
+export class AuthService extends ApiEndpointsService implements OnDestroy {
+  private authState;
   private isLoggedIn: boolean = false;
   private clientState: string = "";
+  private subscription: Subscription;
 
   constructor(
     private store: Store<{
-      isLoggedIn: boolean;
-      clientState: string;
+      authState: {};
     }>
   ) {
     // inherit all methods from ApiEndpointsService
     super();
 
-    this.store.select("authState").subscribe(data => {
-      this.isLoggedIn = data.isLoggedIn;
-      this.clientState = data.clientState;
-      const isValidState = this.clientState === data.clientState;
-      this.store.dispatch(new AuthActions.SetStateValidity(isValidState));
+    this.subscription = this.store.select("authState").subscribe(authState => {
+      this.authState = authState;
+      console.log(this.authState);
     });
 
-    debugger;
-    // Set client state variable for request origin verification
+    // // Set client state variable for request origin verification
     this.store.dispatch(
       new AuthActions.SetClientState(UtilsService.getGeneratedRandomString())
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   /**

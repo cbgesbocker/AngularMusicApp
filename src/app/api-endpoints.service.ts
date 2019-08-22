@@ -6,6 +6,8 @@ import { authorizeEndpointUrlParams } from "./model.authorization";
 
 @Injectable({ providedIn: "root" })
 export class ApiEndpointsService {
+  constructor() {}
+
   // api url
   static apiUrl = environment.apiConfig.apiUrl;
   static endpoints = environment.apiConfig.endpoints;
@@ -24,8 +26,6 @@ export class ApiEndpointsService {
   private myPlaylistsEndpoint = new URL(
     ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myPlaylists
   );
-
-  constructor() {}
 
   /**
    * @param url
