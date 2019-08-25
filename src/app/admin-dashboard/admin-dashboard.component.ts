@@ -19,7 +19,9 @@ export class AdminDashboardComponent implements OnInit {
   animationState = "out";
 
   ngOnInit() {
-    this.trackService.initializeTrackList();
+    this.trackService.initializeTrackType(
+      this.trackService.trackTypes.myRecentTracks
+    );
   }
 
   toggleShowDiv(): void {

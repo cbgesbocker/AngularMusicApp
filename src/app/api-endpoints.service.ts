@@ -5,10 +5,16 @@ export const validEndpoints = environment.apiConfig.endpoints;
 import { authorizeEndpointUrlParams } from "./model.authorization";
 import UtilsService from "./utils.service";
 import { Store } from "@ngrx/store";
+import { state } from "@angular/animations";
 
 @Injectable({ providedIn: "root" })
 export class ApiEndpointsService {
-  constructor() {}
+  private clientState: string;
+  constructor(private store: Store<{ authState: { clientState: string } }>) {
+    this.store.select("authState").subscribe(authState => {
+      this.clientState = authState.clientState;
+    });
+  }
 
   // api url
   static apiUrl = environment.apiConfig.apiUrl;
@@ -29,21 +35,6 @@ export class ApiEndpointsService {
     ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myPlaylists
   );
 
-  /**
-   * @param url
-   * @param params
-   */
-  static buildUrl(
-    url: URL,
-    params: Array<{ key: string; value: string }>
-  ): URL {
-    for (var key in params) {
-      const config = params[key];
-      url.searchParams.set(config.key, config.value);
-    }
-    return url;
-  }
-
   getPlaylistTracksUrl(playlistId: number): string {
     return new URL(
       ApiEndpointsService.apiUrl +
@@ -53,14 +44,11 @@ export class ApiEndpointsService {
     ).href;
   }
 
-  getAuthenticationUrl(
-    additionalArgs: Array<{ key: string; value: string }>
-  ): string {
-    const params = [...authorizeEndpointUrlParams, ...additionalArgs];
-    return ApiEndpointsService.buildUrl(
-      new URL(this.authenticationEndpoint),
-      params
-    ).href;
+  getAuthenticationUrl(): string {
+    return UtilsService.buildUrl(new URL(this.authenticationEndpoint), [
+      ...authorizeEndpointUrlParams,
+      { key: "state", value: this.clientState }
+    ]).href;
   }
 
   getMyTracksUrl(): string {

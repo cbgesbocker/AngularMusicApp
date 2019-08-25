@@ -1,14 +1,16 @@
 import { Action } from "@ngrx/store";
 import * as TrackListActions from "./track-list.actions";
+import { TrackList } from "src/app/interface.trackList";
+import { TrackItem } from "src/app/interface.track";
 
 export interface State {
-  currentTrackList: Array<object>;
+  myRecentTracks: TrackItem[];
   cachedTracks: Array<object>;
 }
 
 const initialState = {
-  currentTrackList: [],
-  cachedTracks: []
+  myRecentTracks: null,
+  cachedTracks: null
 };
 
 export function trackListReducer(
@@ -17,9 +19,10 @@ export function trackListReducer(
 ) {
   switch (action.type) {
     case TrackListActions.SET_CURRENT_TRACK_LIST:
+      debugger;
       return {
         ...initialState,
-        trackList: action.payload
+        myRecentTracks: action.payload
       };
     default:
       return state;

@@ -6,17 +6,17 @@ import { ApiEndpointsService } from "./api-endpoints.service";
 @Injectable({
   providedIn: "root"
 })
-export class PlaylistsService extends ApiEndpointsService {
+export class PlaylistsService {
   playlistData = {};
   selectedPlaylist = {};
 
-  constructor(private httpClient: HttpService) {
-    super();
-  }
+  constructor(
+    private httpClient: HttpService,
+    private endpointsService: ApiEndpointsService
+  ) {}
 
-  
   populatePlaylistData(): void {
-    const myPlaylistEndpoint = this.getMyPlaylistsUrl();
+    const myPlaylistEndpoint = this.endpointsService.getMyPlaylistsUrl();
     this.httpClient
       .getApiRequest(myPlaylistEndpoint, {
         params: {

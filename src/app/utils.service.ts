@@ -17,6 +17,7 @@ export default class UtilsService {
     const fragment = route.fragment;
     if (fragment && fragment.includes(tokenID)) {
       const value = fragment.slice(fragment.indexOf(tokenID)).split("=")[1];
+      debugger;
       return value;
     }
     return "";
@@ -31,5 +32,20 @@ export default class UtilsService {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+  }
+
+  /**
+   * @param url
+   * @param params
+   */
+  static buildUrl(
+    url: URL,
+    params: Array<{ key: string; value: string }>
+  ): URL {
+    for (var key in params) {
+      const config = params[key];
+      url.searchParams.set(config.key, config.value);
+    }
+    return url;
   }
 }

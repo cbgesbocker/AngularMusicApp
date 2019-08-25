@@ -11,32 +11,37 @@ import { Observable, Subscription } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
-export class TracksService extends ApiEndpointsService implements OnDestroy {
-  private selectedTracks: Array<string> = [];
+export class TracksService {
+  readonly trackTypes = {
+    myRecentTracks: "MY_RECENT_TRACKS"
+  };
 
-  private currentTrackList: TrackItem[];
-  private subscription: Subscription;
+  private selectedTracks: string[];
+  private tracks: Observable<{ myRecentTracks: TrackItem[] }>;
 
   constructor(
     private httpClient: HttpService,
-    private store: Store<{ trackList: { tracks: TrackItem[] } }>
+    private endpointsService: ApiEndpointsService,
+    private store: Store<{ tracks: { myRecentTracks: TrackItem[] } }>
   ) {
-    super();
-
-    // Subscribe to
-    this.subscription = this.store.select("trackList").subscribe(data => {
-      this.currentTrackList = data.tracks;
-    });
+    this.tracks = this.store.select("tracks");
   }
 
-  initializeTrackList(): void {
-    this.httpClient.getMyTracks().then((trackList: TrackList) => {
+  initializeTrackType(trackType: string): void {
+    this.getMyRecentTracks().then((trackList: TrackList) => {
       this.store.dispatch(new TrackActions.SetTracks(trackList));
     });
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  async getMyRecentTracks(): Promise<object> {
+    try {
+      const apiRequest = await this.httpClient.getApiRequest(
+        this.endpointsService.getMyTracksUrl()
+      );
+      return apiRequest;
+    } catch (e) {
+      return e;
+    }
   }
 
   /**

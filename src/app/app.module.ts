@@ -18,6 +18,7 @@ import { ModalComponent } from "./modal/modal.component";
 import { TrackListComponent } from "./track-list/track-list.component";
 import { StoreModule } from "@ngrx/store";
 import * as appStore from "./store/store.reducer";
+import { MyRecentTracksComponent } from './my-recent-tracks/my-recent-tracks.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import * as appStore from "./store/store.reducer";
     TrackComponent,
     PlaylistComponent,
     ModalComponent,
-    TrackListComponent
+    TrackListComponent,
+    MyRecentTracksComponent
   ],
   imports: [
     MatToolbarModule,

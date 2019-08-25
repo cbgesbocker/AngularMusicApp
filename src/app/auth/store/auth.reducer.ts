@@ -3,16 +3,14 @@ import { AuthService } from "../auth.service";
 import UtilsService from "src/app/utils.service";
 
 export interface State {
-  authToken: string;
+  accessToken: string;
   clientState: string;
   isValidState: boolean;
 }
 
 const initialState = {
-  authToken: "",
-  clientState:
-    localStorage.getItem(AuthService.CLIENT_STATE_KEY) ||
-    UtilsService.getGeneratedRandomString(),
+  accessToken: "",
+  clientState: "",
   isValidState: false
 };
 
@@ -24,7 +22,7 @@ export function authReducer(
     case AuthActions.SET_AUTH_TOKEN:
       return {
         ...state,
-        authToken: action.payload
+        accessToken: action.payload
       };
     case AuthActions.SET_CLIENT_STATE:
       debugger;

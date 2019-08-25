@@ -1,5 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-import { TracksService } from "../tracks.service";
+import { Component, Input } from "@angular/core";
 import { TrackItem } from "../interface.track";
 
 @Component({
@@ -7,10 +6,6 @@ import { TrackItem } from "../interface.track";
   templateUrl: "./track-list.component.html",
   styleUrls: ["./track-list.component.scss"]
 })
-export class TrackListComponent implements OnInit {
-  constructor(private trackService: TracksService) {
-    this.trackService.initializeTrackList();
-  }
-
-  ngOnInit() {}
+export class TrackListComponent {
+  @Input() trackList: TrackItem[];
 }

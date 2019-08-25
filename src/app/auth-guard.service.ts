@@ -11,7 +11,14 @@ import UtilsService from "./utils.service";
 export class AuthGuardService implements CanActivate {
   private isLoggedIn: boolean;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private store: Store<{ authState: { isValidState: boolean } }>
+  ) {
+    this.store.select("authState").subscribe(authState => {
+      this.isLoggedIn = authState.isValidState;
+    });
+  }
 
   /**
    * @param route
@@ -22,6 +29,8 @@ export class AuthGuardService implements CanActivate {
     if (this.isLoggedIn) {
       return true;
     }
+
+    this.authService.populateStoreClientState();
 
     // force redirect
     this.authService.authenticate(route);

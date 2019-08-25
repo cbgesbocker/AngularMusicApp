@@ -7,14 +7,13 @@ import { AuthService } from "./auth/auth.service";
 import { Store } from "@ngrx/store";
 
 @Injectable({ providedIn: "root" })
-export class HttpService extends ApiEndpointsService {
+export class HttpService {
   /** Network config */
-  private config = environment.apiConfig;
-  private defaultHeaders = {
+  private readonly defaultHeaders = {
     Accept: "application/json",
     "Content-Type": "application/json"
   };
-  private headers = {};
+
   private accessToken = "";
 
   constructor(
@@ -23,39 +22,31 @@ export class HttpService extends ApiEndpointsService {
       authState: {
         accessToken: string;
       };
-    }>
+    }>,
+    private endpointsService: ApiEndpointsService
   ) {
-    super();
-    this.headers = { headers: this.getDefaultHeaders() };
     this.store.select("authState").subscribe(data => {
       this.accessToken = data.accessToken;
     });
   }
 
   async getApiRequest(endpoint: string, options: object = {}): Promise<any> {
+    const headers = this.getDefaultHeaders();
+    debugger;
     const request = await this.http
-      .get(endpoint, { ...this.headers, ...options })
+      .get(endpoint, { headers, ...options })
       .toPromise();
     return request;
   }
 
-  async getMyTracks(): Promise<object> {
-    try {
-      const apiRequest = await this.getApiRequest(this.getMyTracksUrl());
-      return apiRequest;
-    } catch (e) {
-      return e;
-    }
-  }
-
   postTracksToPlaylist(tracks, playlistId: number): void {
-    const endpoint = this.getPlaylistTracksUrl(playlistId);
+    const endpoint = this.endpointsService.getPlaylistTracksUrl(playlistId);
     const mappedUris = tracks.map(track => track.track.uri);
 
     this.http.post(endpoint, { uris: mappedUris });
   }
 
-  getDefaultHeaders(): Object {
+  getDefaultHeaders() {
     return {
       ...this.defaultHeaders,
       Authorization: "Bearer " + this.accessToken

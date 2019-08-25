@@ -11,8 +11,10 @@ import * as AuthActions from "./store/auth.actions";
 @Injectable({
   providedIn: "root"
 })
-export class AuthService extends ApiEndpointsService implements OnDestroy {
-  public static readonly CLIENT_STATE_KEY = "clientState";
+export class AuthService implements OnDestroy {
+  readonly localStorageCacheKeys = {
+    clientState: "clientState"
+  };
 
   private clientState: string = "";
   private subscription: Subscription;
@@ -20,18 +22,25 @@ export class AuthService extends ApiEndpointsService implements OnDestroy {
   constructor(
     private store: Store<{
       authState: { clientState: string };
-    }>
+    }>,
+    private endpointsService: ApiEndpointsService
   ) {
-    // inherit all methods from ApiEndpointsService
-    super();
-
-    this.subscription = this.store.select("authState").subscribe(authState => {
+    this.store.select("authState").subscribe(authState => {
       this.clientState = authState.clientState;
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  populateStoreClientState(): void {
+    const stateToUse =
+      localStorage.getItem(this.localStorageCacheKeys.clientState) ||
+      UtilsService.getGeneratedRandomString();
+
+    this.store.dispatch(new AuthActions.SetClientState(stateToUse));
+    localStorage.setItem(this.localStorageCacheKeys.clientState, stateToUse);
   }
 
   /**
@@ -39,13 +48,12 @@ export class AuthService extends ApiEndpointsService implements OnDestroy {
    * to get valid token if not logged in
    */
   authenticate(route: ActivatedRouteSnapshot): void {
+    const error = UtilsService.getFragmentVar({
+      route,
+      tokenID: "error"
+    });
     // if error, bail early
-    if (
-      UtilsService.getFragmentVar({
-        route,
-        tokenID: "error"
-      })
-    ) {
+    if (error) {
       return;
     }
 
@@ -54,35 +62,32 @@ export class AuthService extends ApiEndpointsService implements OnDestroy {
       route,
       tokenID: "state"
     });
-    debugger;
 
-    if (returnedState === this.clientState) {
-      this.store.dispatch(
-        new AuthActions.SetAuth(
-          UtilsService.getFragmentVar({
-            route,
-            tokenID: "access_token"
-          })
-        )
-      );
-
-      this.store.dispatch(new AuthActions.SetStateValidity(true));
+    if (returnedState && returnedState === this.clientState) {
+      const accessToken = UtilsService.getFragmentVar({
+        route,
+        tokenID: "access_token"
+      });
+      this.login(accessToken);
       return;
     }
 
     // If user is not logged in, try to
-    this.login();
+    this.redirectToSpotifyLogin();
   }
 
-  login(): void {
-    const endpoint = this.getAuthenticationUrl([
-      {
-        key: "state",
-        value: this.clientState
-      }
-    ]);
+  redirectToSpotifyLogin(): void {
+    const endpoint = this.endpointsService.getAuthenticationUrl();
     window.location.replace(endpoint);
   }
 
-  logout(): void {}
+  login(accessToken: string): void {
+    this.store.dispatch(new AuthActions.SetAuth(accessToken));
+    this.store.dispatch(new AuthActions.SetStateValidity(true));
+  }
+
+  logout(): void {
+    this.store.dispatch(new AuthActions.SetStateValidity(false));
+    this.store.dispatch(new AuthActions.SetAuth(""));
+  }
 }
