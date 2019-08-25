@@ -20,9 +20,5 @@ export const authorizeEndpointUrlParams = [
   {
     key: "response_type",
     value: encodeURIComponent(environment.apiConfig.response_type)
-  },
-  {
-    key: "state",
-    value: ""
   }
 ];

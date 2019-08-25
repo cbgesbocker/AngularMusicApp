@@ -1,16 +1,18 @@
 import * as AuthActions from "./auth.actions";
+import { AuthService } from "../auth.service";
+import UtilsService from "src/app/utils.service";
 
 export interface State {
   authToken: string;
   clientState: string;
-  isLoggedIn: boolean;
   isValidState: boolean;
 }
 
 const initialState = {
   authToken: "",
-  clientState: "",
-  isLoggedIn: false,
+  clientState:
+    localStorage.getItem(AuthService.CLIENT_STATE_KEY) ||
+    UtilsService.getGeneratedRandomString(),
   isValidState: false
 };
 
@@ -25,6 +27,7 @@ export function authReducer(
         authToken: action.payload
       };
     case AuthActions.SET_CLIENT_STATE:
+      debugger;
       return {
         ...state,
         clientState: action.payload

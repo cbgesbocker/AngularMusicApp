@@ -14,9 +14,10 @@ export default class UtilsService {
     route: ActivatedRouteSnapshot;
     tokenID: string;
   }): string {
-    if (route.fragment && route.fragment.includes(tokenID)) {
-      const token = route.fragment.split("=")[1];
-      return token;
+    const fragment = route.fragment;
+    if (fragment && fragment.includes(tokenID)) {
+      const value = fragment.slice(fragment.indexOf(tokenID)).split("=")[1];
+      return value;
     }
     return "";
   }

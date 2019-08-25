@@ -12,28 +12,22 @@ import * as AuthActions from "./store/auth.actions";
   providedIn: "root"
 })
 export class AuthService extends ApiEndpointsService implements OnDestroy {
-  private authState;
-  private isLoggedIn: boolean = false;
+  public static readonly CLIENT_STATE_KEY = "clientState";
+
   private clientState: string = "";
   private subscription: Subscription;
 
   constructor(
     private store: Store<{
-      authState: {};
+      authState: { clientState: string };
     }>
   ) {
     // inherit all methods from ApiEndpointsService
     super();
 
     this.subscription = this.store.select("authState").subscribe(authState => {
-      this.authState = authState;
-      console.log(this.authState);
+      this.clientState = authState.clientState;
     });
-
-    // // Set client state variable for request origin verification
-    this.store.dispatch(
-      new AuthActions.SetClientState(UtilsService.getGeneratedRandomString())
-    );
   }
 
   ngOnDestroy() {
@@ -45,11 +39,6 @@ export class AuthService extends ApiEndpointsService implements OnDestroy {
    * to get valid token if not logged in
    */
   authenticate(route: ActivatedRouteSnapshot): void {
-    // if authenticated, bail early
-    if (this.isLoggedIn) {
-      return;
-    }
-
     // if error, bail early
     if (
       UtilsService.getFragmentVar({
@@ -65,20 +54,33 @@ export class AuthService extends ApiEndpointsService implements OnDestroy {
       route,
       tokenID: "state"
     });
+    debugger;
 
-    const accessToken = UtilsService.getFragmentVar({
-      route,
-      tokenID: "access_token"
-    });
+    if (returnedState === this.clientState) {
+      this.store.dispatch(
+        new AuthActions.SetAuth(
+          UtilsService.getFragmentVar({
+            route,
+            tokenID: "access_token"
+          })
+        )
+      );
 
-    this.store.dispatch(new AuthActions.SetAuth(accessToken));
+      this.store.dispatch(new AuthActions.SetStateValidity(true));
+      return;
+    }
 
     // If user is not logged in, try to
     this.login();
   }
 
   login(): void {
-    const endpoint = this.getAuthenticationUrl();
+    const endpoint = this.getAuthenticationUrl([
+      {
+        key: "state",
+        value: this.clientState
+      }
+    ]);
     window.location.replace(endpoint);
   }
 

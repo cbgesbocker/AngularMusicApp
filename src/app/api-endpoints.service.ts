@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 export const validEndpoints = environment.apiConfig.endpoints;
 import { authorizeEndpointUrlParams } from "./model.authorization";
+import UtilsService from "./utils.service";
+import { Store } from "@ngrx/store";
 
 @Injectable({ providedIn: "root" })
 export class ApiEndpointsService {
@@ -51,10 +53,13 @@ export class ApiEndpointsService {
     ).href;
   }
 
-  getAuthenticationUrl(): string {
+  getAuthenticationUrl(
+    additionalArgs: Array<{ key: string; value: string }>
+  ): string {
+    const params = [...authorizeEndpointUrlParams, ...additionalArgs];
     return ApiEndpointsService.buildUrl(
       new URL(this.authenticationEndpoint),
-      authorizeEndpointUrlParams
+      params
     ).href;
   }
 

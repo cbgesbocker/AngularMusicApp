@@ -4,18 +4,14 @@ import { AuthService } from "./auth/auth.service";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
+import * as AuthActions from "./auth/store/auth.actions";
+import UtilsService from "./utils.service";
+
 @Injectable({ providedIn: "root" })
 export class AuthGuardService implements CanActivate {
   private isLoggedIn: boolean;
 
-  constructor(
-    private authService: AuthService,
-    private store: Store<{ isLoggedIn: boolean }>
-  ) {
-    this.store.select("authState").subscribe(data => {
-      this.isLoggedIn = data.isLoggedIn;
-    });
-  }
+  constructor(private authService: AuthService) {}
 
   /**
    * @param route
