@@ -1,1 +1,6 @@
-<app-track-list [trackList]="myRecentTracks"></app-track-list>
+<h2 class="text-2xl mt-6">
+  Recently Played Tracks
+</h2>
+<app-track-list
+  [trackList]="(tracks$ | async).myRecentTracks.items"
+></app-track-list>

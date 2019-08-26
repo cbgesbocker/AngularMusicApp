@@ -13,6 +13,4 @@ export class PlaylistComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-  addTracksToPlaylist() {}
 }

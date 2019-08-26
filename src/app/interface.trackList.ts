@@ -1,9 +1,9 @@
 export interface TrackList {
-  href: String;
+  href: string;
   items: object[];
-  limit: Number;
-  next: String;
-  offset: Number;
+  limit: number;
+  next: string;
+  offset: number;
   previous: any;
-  total: Number;
+  total: number;
 }

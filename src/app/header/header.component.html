@@ -1,16 +1,30 @@
-<mat-toolbar role="header" color="primary">
-  <a routerLink="/">Spotify Web App</a>
+<mat-toolbar role="header" class="shadow-header" color="primary">
+  <a routerLink="/" class="logo tracking-wider">MusicApp</a>
   <div class="flex-1 flex"></div>
   <a
     *ngIf="!isLoggedIn"
-    class="no-underline"
+    class="no-underline text-base px-4 py-1 tracking-wide"
     routerLink="/admin"
     routerLinkActive="active"
     >Sign in</a
   >
   <a
     *ngIf="isLoggedIn"
-    class="ml-5 no-underline"
+    class="ml-4 text-normal no-underline text-base px-3 py-1 tracking-wide"
+    routerLink="admin/recently-played"
+    routerLinkActive="active"
+    >Recently Played</a
+  >
+  <a
+    *ngIf="isLoggedIn"
+    class="ml-4 no-underline text-base px-3 py-1 tracking-wide"
+    routerLink="admin/playlists"
+    routerLinkActive="active"
+    >Playlists</a
+  >
+  <a
+    *ngIf="isLoggedIn"
+    class="ml-4 no-underline text-base px-3 py-1 tracking-wide"
     routerLink="logout"
     routerLinkActive="active"
     >Sign out</a

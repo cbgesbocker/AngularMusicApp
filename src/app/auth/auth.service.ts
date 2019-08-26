@@ -63,22 +63,26 @@ export class AuthService implements OnDestroy {
       tokenID: "state"
     });
 
+    let href = "";
     if (returnedState && returnedState === this.clientState) {
       const accessToken = UtilsService.getFragmentVar({
         route,
         tokenID: "access_token"
       });
+      // set login state
       this.login(accessToken);
+      // do not redirect
       return;
+    } else if (returnedState && returnedState !== this.clientState) {
+      // if state doesn't match redirect to home
+      href = window.location.host;
+    } else {
+      // redirect to spotify auth url
+      href = this.endpointsService.getAuthenticationUrl();
     }
 
     // If user is not logged in, try to
-    this.redirectToSpotifyLogin();
-  }
-
-  redirectToSpotifyLogin(): void {
-    const endpoint = this.endpointsService.getAuthenticationUrl();
-    window.location.replace(endpoint);
+    UtilsService.redirectTo(href);
   }
 
   login(accessToken: string): void {

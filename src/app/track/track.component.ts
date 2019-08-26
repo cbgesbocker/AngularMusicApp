@@ -10,6 +10,7 @@ import { TrackItem } from "../interface.track";
 export class TrackComponent {
   @Input() track: TrackItem;
   @Input() selected: boolean;
+  @Input() class: string;
 
   constructor(private tracksService: TracksService) {}
 }

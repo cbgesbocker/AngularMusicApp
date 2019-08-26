@@ -8,7 +8,7 @@ export const environment = {
   ...commonEnvironment,
   apiConfig: {
     ...commonEnvironment.apiConfig,
-    redirect_uri: "http://localhost:4200/admin"
+    redirect_uri: "http://localhost:4200/admin/recently-played"
   }
 };
 

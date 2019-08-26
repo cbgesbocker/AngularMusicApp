@@ -1,9 +1,7 @@
-import * as AuthActions from "./auth.actions";
-import { AuthService } from "../auth.service";
 import UtilsService from "src/app/utils.service";
 
 export interface State {
-  accessToken: string;
+  myPlaylists: Playlist[];
   clientState: string;
   isValidState: boolean;
 }

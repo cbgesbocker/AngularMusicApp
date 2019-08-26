@@ -30,6 +30,11 @@ export class ApiEndpointsService {
     ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myTracks
   );
 
+  // my tracks
+  private myProfileEndpoint = new URL(
+    ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myProfile
+  );
+
   // my playlists
   private myPlaylistsEndpoint = new URL(
     ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myPlaylists
@@ -57,5 +62,9 @@ export class ApiEndpointsService {
 
   getMyPlaylistsUrl(): string {
     return this.myPlaylistsEndpoint.href;
+  }
+
+  getMyProfileUrl(): string {
+    return this.myProfileEndpoint.href;
   }
 }

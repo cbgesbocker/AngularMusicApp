@@ -17,7 +17,7 @@ export default class UtilsService {
     const fragment = route.fragment;
     if (fragment && fragment.includes(tokenID)) {
       const value = fragment.slice(fragment.indexOf(tokenID)).split("=")[1];
-      debugger;
+
       return value;
     }
     return "";
@@ -34,10 +34,6 @@ export default class UtilsService {
     return result;
   }
 
-  /**
-   * @param url
-   * @param params
-   */
   static buildUrl(
     url: URL,
     params: Array<{ key: string; value: string }>
@@ -47,5 +43,9 @@ export default class UtilsService {
       url.searchParams.set(config.key, config.value);
     }
     return url;
+  }
+
+  static redirectTo(href: string): void {
+    window.location.replace(href);
   }
 }

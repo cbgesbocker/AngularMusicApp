@@ -1,0 +1,14 @@
+<section class="my-8">
+  <div class="container w-5/6 mx-auto">
+    <h1 class="text-4xl font-extrabold  text-mat-header">
+      <ng-content></ng-content>
+    </h1>
+  </div>
+  <div class="container mx-auto my-8">
+    <div class="w-5/6 mx-auto">
+      <div class=" flex flex-wrap flex-col">
+        <ng-content select=".data-section"></ng-content>
+      </div>
+    </div>
+  </div>
+</section>

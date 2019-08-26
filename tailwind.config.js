@@ -17,13 +17,18 @@ module.exports = {
       "2": "2px",
       "4": "4px"
     },
+
     extend: {
-      colors: {
-        cyan: "#9cdbff"
-      },
       spacing: {
         "96": "24rem",
         "128": "32rem"
+      },
+      colors: {
+        "mat-primary": "#3f51b5",
+        "mat-primary-dark": "#334192"
+      },
+      boxShadow: {
+        header: "0 3px 3px rgba(0,0,0,.3)"
       }
     }
   },
@@ -35,6 +40,6 @@ module.exports = {
   plugins: [
     require("tailwindcss-transforms"),
     require("tailwindcss-transitions"),
-    require("tailwindcss-border-gradients"),
-  ],
+    require("tailwindcss-border-gradients")
+  ]
 };

@@ -19,7 +19,6 @@ export function trackListReducer(
 ) {
   switch (action.type) {
     case TrackListActions.SET_CURRENT_TRACK_LIST:
-      debugger;
       return {
         ...initialState,
         myRecentTracks: action.payload

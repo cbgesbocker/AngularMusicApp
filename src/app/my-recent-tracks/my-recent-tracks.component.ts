@@ -11,14 +11,13 @@ import { TrackList } from "../interface.trackList";
   styleUrls: ["./my-recent-tracks.component.scss"]
 })
 export class MyRecentTracksComponent implements OnInit {
-  private myRecentTracks: TrackList[];
+  private tracks$: Observable<{ myRecentTracks: TrackList[] }>;
+
   constructor(
     private tracksService: TracksService,
     private store: Store<{ tracks: { myRecentTracks: TrackList[] } }>
   ) {
-    this.store.select("tracks").subscribe(tracks => {
-      this.myRecentTracks = tracks.myRecentTracks;
-    });
+    this.tracks$ = this.store.select("tracks");
   }
 
   ngOnInit() {

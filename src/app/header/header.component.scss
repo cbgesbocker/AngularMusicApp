@@ -2,3 +2,12 @@
   color: #fff;
 }
 
+a {
+  border-radius: 4px;
+  transform: all 0.5s linear;
+  text-transform: capitalize;
+}
+a:not(.logo):hover,
+a:not(.logo).active {
+  background: #334192;
+}

@@ -32,7 +32,7 @@ export class HttpService {
 
   async getApiRequest(endpoint: string, options: object = {}): Promise<any> {
     const headers = this.getDefaultHeaders();
-    debugger;
+
     const request = await this.http
       .get(endpoint, { headers, ...options })
       .toPromise();

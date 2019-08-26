@@ -4,6 +4,7 @@ export const commonEnvironment = {
     apiUrl: "https://api.spotify.com/",
     endpoints: {
       auth: "authorize",
+      myProfile: "v1/me",
       myTracks: "v1/me/tracks",
       myPlaylists: "v1/me/playlists",
       playlistTracks: "/v1/users/playlists/"
