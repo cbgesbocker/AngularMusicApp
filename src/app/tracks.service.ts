@@ -16,7 +16,7 @@ export class TracksService {
     myRecentTracks: "MY_RECENT_TRACKS"
   };
 
-  private selectedTrackItems: TrackItem[] = [];
+  public selectedTrackItems: TrackItem[] = [];
   private tracks: Observable<{ myRecentTracks: TrackItem[] }>;
 
   constructor(
