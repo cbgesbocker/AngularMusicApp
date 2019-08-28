@@ -2,7 +2,7 @@ import { TestBed } from "@angular/core/testing";
 
 import { ApiEndpointsService } from "./api-endpoints.service";
 
-fdescribe("ApiEndpointsService", () => {
+describe("ApiEndpointsService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it("should build a URL object with the params supplied", () => {

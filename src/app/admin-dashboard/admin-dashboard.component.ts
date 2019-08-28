@@ -6,6 +6,7 @@ import { PlaylistsService } from "../playlists.service";
 import { HttpService } from "../http.service";
 import { ApiEndpointsService } from "../api-endpoints.service";
 import { Playlist } from "../playlist";
+import { ActivatedRouteSnapshot } from "@angular/router";
 @Component({
   selector: "app-admin-dashboard",
   templateUrl: "./admin-dashboard.component.html",
@@ -13,7 +14,6 @@ import { Playlist } from "../playlist";
   animations: [SlideInOutAnimation]
 })
 export class AdminDashboardComponent implements OnInit {
-  private userDisplayName = "";
   constructor(
     private playlistService: PlaylistsService,
     private trackService: TracksService,
@@ -24,13 +24,7 @@ export class AdminDashboardComponent implements OnInit {
   showPlaylistConfirmationDialog = false;
   animationState = "out";
 
-  ngOnInit() {
-    this.http
-      .getApiRequest(this.endpointsService.getMyProfileUrl())
-      .then(data => {
-        this.userDisplayName = data.display_name;
-      });
-  }
+  ngOnInit() {}
 
   toggleShowDiv(): void {
     this.animationState = this.animationState === "out" ? "in" : "out";
