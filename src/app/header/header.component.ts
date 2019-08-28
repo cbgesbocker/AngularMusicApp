@@ -10,8 +10,8 @@ import { Observable } from "rxjs";
 export class HeaderComponent implements OnInit {
   private isLoggedIn: boolean;
 
-  constructor(private store: Store<{ authState: { isValidState: boolean } }>) {
-    this.store.select("authState").subscribe(data => {
+  constructor(private store: Store<{ auth: { isValidState: boolean } }>) {
+    this.store.select("auth").subscribe(data => {
       this.isLoggedIn = data.isValidState;
     });
   }

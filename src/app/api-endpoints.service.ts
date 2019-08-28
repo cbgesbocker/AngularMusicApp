@@ -10,9 +10,9 @@ import { state } from "@angular/animations";
 @Injectable({ providedIn: "root" })
 export class ApiEndpointsService {
   private clientState: string;
-  constructor(private store: Store<{ authState: { clientState: string } }>) {
-    this.store.select("authState").subscribe(authState => {
-      this.clientState = authState.clientState;
+  constructor(private store: Store<{ auth: { clientState: string } }>) {
+    this.store.select("auth").subscribe(auth => {
+      this.clientState = auth.clientState;
     });
   }
 
@@ -28,6 +28,11 @@ export class ApiEndpointsService {
   // my tracks
   private myTracksEndpoint = new URL(
     ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myTracks
+  );
+
+  // my tracks
+  private refreshTokenEndpoint = new URL(
+    ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.refreshToken
   );
 
   // my tracks
@@ -66,5 +71,9 @@ export class ApiEndpointsService {
 
   getMyProfileUrl(): string {
     return this.myProfileEndpoint.href;
+  }
+
+  getRefreshtokenUrl(): string {
+    return this.refreshTokenEndpoint.href;
   }
 }

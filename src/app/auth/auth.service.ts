@@ -7,6 +7,8 @@ import UtilsService from "../utils.service";
 import { Observable, Subscription } from "rxjs";
 
 import * as AuthActions from "./store/auth.actions";
+import { HttpService } from "../http.service";
+import { environment } from "src/environments/environment.prod";
 
 @Injectable({
   providedIn: "root"
@@ -21,12 +23,13 @@ export class AuthService implements OnDestroy {
 
   constructor(
     private store: Store<{
-      authState: { clientState: string };
+      auth: { clientState: string };
     }>,
-    private endpointsService: ApiEndpointsService
+    private endpointsService: ApiEndpointsService,
+    private http: HttpService
   ) {
-    this.store.select("authState").subscribe(authState => {
-      this.clientState = authState.clientState;
+    this.store.select("auth").subscribe(auth => {
+      this.clientState = auth.clientState;
     });
   }
 
@@ -38,6 +41,7 @@ export class AuthService implements OnDestroy {
     const stateToUse =
       localStorage.getItem(this.localStorageCacheKeys.clientState) ||
       UtilsService.getGeneratedRandomString();
+    debugger;
 
     this.store.dispatch(new AuthActions.SetClientState(stateToUse));
     localStorage.setItem(this.localStorageCacheKeys.clientState, stateToUse);
@@ -47,30 +51,14 @@ export class AuthService implements OnDestroy {
    * Redirect user to spotify.accounts/authorize
    * to get valid token if not logged in
    */
-  authenticate(route: ActivatedRouteSnapshot): void {
-    const error = UtilsService.getFragmentVar({
-      route,
-      tokenID: "error"
-    });
-    // if error, bail early
-    if (error) {
-      return;
-    }
-
-    // get state and validate
-    const returnedState = UtilsService.getFragmentVar({
-      route,
-      tokenID: "state"
-    });
-
+  authenticate(accessToken: string, returnedState: string): void {
     let href = "";
+    debugger;
     if (returnedState && returnedState === this.clientState) {
-      const accessToken = UtilsService.getFragmentVar({
-        route,
-        tokenID: "access_token"
-      });
       // set login state
       this.login(accessToken);
+      debugger;
+
       // do not redirect
       return;
     } else if (returnedState && returnedState !== this.clientState) {
@@ -80,9 +68,22 @@ export class AuthService implements OnDestroy {
       // redirect to spotify auth url
       href = this.endpointsService.getAuthenticationUrl();
     }
-
     // If user is not logged in, try to
     UtilsService.redirectTo(href);
+  }
+
+  async refreshToken(accessToken: string) {
+    this.http
+      .postApiRequest(this.endpointsService.getRefreshtokenUrl(), {
+        headers: {
+          ...this.http.getRefreshTokenHeaders()
+        },
+        grant_type: environment.apiConfig.grant_type,
+        refresh_token: accessToken
+      })
+      .then(data => {
+        debugger;
+      });
   }
 
   login(accessToken: string): void {

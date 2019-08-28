@@ -14,11 +14,14 @@ export default class UtilsService {
     route: ActivatedRouteSnapshot;
     tokenID: string;
   }): string {
-    const fragment = route.fragment;
-    if (fragment && fragment.includes(tokenID)) {
-      const value = fragment.slice(fragment.indexOf(tokenID)).split("=")[1];
-
-      return value;
+    const fragmentPieces = route.fragment && route.fragment.split("&");
+    if (fragmentPieces) {
+      for (let key in fragmentPieces) {
+        const fragmentKeyVal = fragmentPieces[key].split("=");
+        if (fragmentKeyVal.indexOf(tokenID) !== -1) {
+          return fragmentKeyVal[1];
+        }
+      }
     }
     return "";
   }

@@ -4,7 +4,7 @@
   "scripts": {
     "tailwind": "./node_modules/.bin/tailwind build ./tailwind-build.css -c ./tailwind.config.js -o ./src/styles.css",
     "ng": "ng",
-    "start": "yarn tailwind && ng serve",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

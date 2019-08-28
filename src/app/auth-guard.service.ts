@@ -13,10 +13,10 @@ export class AuthGuardService implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private store: Store<{ authState: { isValidState: boolean } }>
+    private store: Store<{ auth: { isValidState: boolean } }>
   ) {
-    this.store.select("authState").subscribe(authState => {
-      this.isLoggedIn = authState.isValidState;
+    this.store.select("auth").subscribe(auth => {
+      this.isLoggedIn = auth.isValidState;
     });
   }
 
@@ -30,11 +30,33 @@ export class AuthGuardService implements CanActivate {
       return true;
     }
 
+    // populate client state
     this.authService.populateStoreClientState();
 
-    // force redirect
-    this.authService.authenticate(route);
+    const error = UtilsService.getFragmentVar({
+      route,
+      tokenID: "error"
+    });
+    if (error) {
+      return false;
+    }
 
+    const accessToken = UtilsService.getFragmentVar({
+      route,
+      tokenID: "access_token"
+    });
+
+    const returnedState = UtilsService.getFragmentVar({
+      route,
+      tokenID: "state"
+    });
+
+    // if state is valid, and access token is provided,
+    // this function will log the user in and trigger
+    // auth store observables to update
+    this.authService.authenticate(accessToken, returnedState);
+
+    debugger;
     // return logged in state
     return this.isLoggedIn;
   }

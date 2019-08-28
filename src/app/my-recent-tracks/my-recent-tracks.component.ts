@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { TrackItem } from "../interface.track";
 import { Observable } from "rxjs";
 import { TracksService } from "../tracks.service";
 import { TrackList } from "../interface.trackList";

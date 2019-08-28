@@ -1,36 +1,29 @@
-import UtilsService from "src/app/utils.service";
+import { Playlist } from "src/app/playlist";
+
+import * as PlaylistActions from "./my-playlists.actions";
 
 export interface State {
-  myPlaylists: Playlist[];
-  clientState: string;
-  isValidState: boolean;
+  currentSet: Playlist[];
+  cachedSet: Playlist[];
 }
 
 const initialState = {
-  accessToken: "",
-  clientState: "",
-  isValidState: false
+  currentSet: undefined,
+  cachedSet: undefined
 };
 
-export function authReducer(
+export function playlistReducer(
   state = initialState,
-  action: AuthActions.AuthActions
+  action: PlaylistActions.PlaylistActions
 ) {
   switch (action.type) {
-    case AuthActions.SET_AUTH_TOKEN:
+    case PlaylistActions.UPDATE_PLAYLIST_SETS:
       return {
-        ...state,
-        accessToken: action.payload
-      };
-    case AuthActions.SET_CLIENT_STATE:
-      return {
-        ...state,
-        clientState: action.payload
-      };
-    case AuthActions.SET_STATE_VALIDITY:
-      return {
-        ...state,
-        isValidState: action.payload
+        currentSet: action.payload.playlistSet,
+        cachedSet: {
+          ...state.cachedSet,
+          [action.payload.queryKey]: action.payload.playlistSet
+        }
       };
     default:
       return state;

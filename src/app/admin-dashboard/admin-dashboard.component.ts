@@ -5,6 +5,7 @@ import { SlideInOutAnimation } from "../animations";
 import { PlaylistsService } from "../playlists.service";
 import { HttpService } from "../http.service";
 import { ApiEndpointsService } from "../api-endpoints.service";
+import { Playlist } from "../playlist";
 @Component({
   selector: "app-admin-dashboard",
   templateUrl: "./admin-dashboard.component.html",
@@ -35,7 +36,7 @@ export class AdminDashboardComponent implements OnInit {
     this.animationState = this.animationState === "out" ? "in" : "out";
   }
 
-  handlePlaylistSelection(playlist): void {
+  handlePlaylistSelection(playlist: Playlist): void {
     this.showPlaylistConfirmationDialog = true;
     this.playlistService.selectedPlaylist = playlist;
   }
