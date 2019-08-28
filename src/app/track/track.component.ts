@@ -12,7 +12,7 @@ export class TrackComponent implements OnInit {
   @Input() selected: boolean;
   @Input() class: string;
 
-  private trackImageUrl: string = "";
+  private trackImageUrl: string = "test";
 
   constructor(private tracksService: TracksService) {}
 
@@ -22,17 +22,11 @@ export class TrackComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.trackImageUrl = TrackComponent.getTrackImage(this.track);
+    this.trackImageUrl = this.getTrackImage(this.track, 1);
   }
 
-  static getTrackImage(trackItem: TrackItem, imageNumber: number = 0): string {
+  getTrackImage(trackItem: TrackItem, imageNumber: number = 0): string {
     const imageArray = trackItem.track.album.images;
-    debugger;
-
-    if (imageArray.length - 1 <= imageNumber) {
-      return imageArray[imageNumber];
-    } else {
-      return "";
-    }
+    return imageArray[imageNumber]["url"];
   }
 }
