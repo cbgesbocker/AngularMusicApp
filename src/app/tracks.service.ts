@@ -16,7 +16,7 @@ export class TracksService {
     myRecentTracks: "MY_RECENT_TRACKS"
   };
 
-  private selectedTracks: string[];
+  private selectedTrackItems: TrackItem[] = [];
   private tracks: Observable<{ myRecentTracks: TrackItem[] }>;
 
   constructor(
@@ -47,22 +47,18 @@ export class TracksService {
   /**
    * toggleSelectedTrack()
    * update list of selected track IDs when clicking on a track
-   *
-   * @param trackItem: TrackItem  @return void
    */
-  toggleSelectedTrack(trackItem: TrackItem): void {
-    // Look for track that was clicked on
-    const search = this.selectedTracks.find(id => {
-      return trackItem.track.id === id;
-    });
 
-    // If not in list, add it
-    if (search === undefined) {
-      this.selectedTracks = [...this.selectedTracks, trackItem.track.id];
+  toggleSelectedTrack(trackItem: TrackItem, selected: boolean): void {
+    if (selected) {
+      if (this.selectedTrackItems.length === 0) {
+        this.selectedTrackItems = [trackItem];
+      } else {
+        this.selectedTrackItems = [...this.selectedTrackItems, trackItem];
+      }
     } else {
-      // If in list, remove it
-      this.selectedTracks = this.selectedTracks.filter(
-        id => id !== trackItem.track.id
+      this.selectedTrackItems = this.selectedTrackItems.filter(
+        $trackItem => $trackItem.track.id !== trackItem.track.id
       );
     }
   }

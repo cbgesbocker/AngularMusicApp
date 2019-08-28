@@ -24,7 +24,6 @@ export class PlaylistsService {
         }
       })
       .then(data => {
-        debugger;
         this.playlistData = data;
       });
   }

@@ -1,12 +1,13 @@
 <div
   [class.bg-purple-100]="selected"
-  class="shadow border  border-gray-200 py-3 my-2 px-4"
+  class="shadow-md border m-5 border-gray-200 py-3  px-4"
 >
-  <div class="flex flex-col" (click)="toggleSelectedTrack(track)">
-    <span class="text-lg ">
+  <div [ngStyle]="{ 'background-image': 'url(' + trackImageUrl + ')' }"></div>
+  <div class="flex flex-col items-center" (click)="toggleSelected()">
+    <span class="text-sm ">
       {{ track.track.artists[0].name }}
     </span>
-    <span>
+    <span class="text-lg">
       {{ track.track.name }}
     </span>
   </div>

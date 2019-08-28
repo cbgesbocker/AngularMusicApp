@@ -56,7 +56,6 @@ export class AuthGuardService implements CanActivate {
     // auth store observables to update
     this.authService.authenticate(accessToken, returnedState);
 
-    debugger;
     // return logged in state
     return this.isLoggedIn;
   }

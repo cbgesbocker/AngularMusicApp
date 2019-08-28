@@ -41,7 +41,6 @@ export class AuthService implements OnDestroy {
     const stateToUse =
       localStorage.getItem(this.localStorageCacheKeys.clientState) ||
       UtilsService.getGeneratedRandomString();
-    debugger;
 
     this.store.dispatch(new AuthActions.SetClientState(stateToUse));
     localStorage.setItem(this.localStorageCacheKeys.clientState, stateToUse);
@@ -53,11 +52,9 @@ export class AuthService implements OnDestroy {
    */
   authenticate(accessToken: string, returnedState: string): void {
     let href = "";
-    debugger;
     if (returnedState && returnedState === this.clientState) {
       // set login state
       this.login(accessToken);
-      debugger;
 
       // do not redirect
       return;
@@ -81,9 +78,7 @@ export class AuthService implements OnDestroy {
         grant_type: environment.apiConfig.grant_type,
         refresh_token: accessToken
       })
-      .then(data => {
-        debugger;
-      });
+      .then(data => {});
   }
 
   login(accessToken: string): void {

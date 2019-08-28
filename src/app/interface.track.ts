@@ -4,7 +4,7 @@ export interface TrackItem {
 }
 
 interface Track {
-  album: object;
+  album: any;
   artists: Array<string>;
   available_markets: Array<string>;
   disc_number: number;
