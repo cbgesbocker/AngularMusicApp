@@ -19,8 +19,10 @@ import { TrackListComponent } from "./track-list/track-list.component";
 import { StoreModule } from "@ngrx/store";
 import * as appStore from "./store/store.reducer";
 import { MyRecentTracksComponent } from "./my-recent-tracks/my-recent-tracks.component";
-import { MyPlaylistsComponent } from "./my-playlists/my-playlists.component";
-import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
+import { DashboardLayoutComponent } from "./dashboard-layout/dashboard-layout.component";
+import { EffectsModule } from "@ngrx/effects";
+import { PlaylistEffects } from "./playlists/store/playlists.effects";
+import { PlaylistsComponent } from "./playlists/playlists.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +36,8 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
     ModalComponent,
     TrackListComponent,
     MyRecentTracksComponent,
-    MyPlaylistsComponent,
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    PlaylistsComponent
   ],
   imports: [
     MatToolbarModule,
@@ -43,6 +45,7 @@ import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.co
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    EffectsModule.forRoot([PlaylistEffects]),
     HttpClientModule,
     StoreModule.forRoot(appStore.appReducer)
   ],

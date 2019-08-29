@@ -1,16 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { PlaylistsService } from "../playlists.service";
+import { Component, Input } from "@angular/core";
+import { Store } from "@ngrx/store";
 
 @Component({
   selector: "app-playlist",
   templateUrl: "./playlist.component.html",
   styleUrls: ["./playlist.component.scss"]
 })
-export class PlaylistComponent implements OnInit {
+export class PlaylistComponent {
   @Input() playlist;
   @Input() activeClass = false;
   selected = false;
-  constructor() {}
-
-  ngOnInit() {}
+  constructor(private store: Store<any>) {}
 }

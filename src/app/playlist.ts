@@ -15,3 +15,13 @@ export interface Playlist {
   snapshot_id: string;
   tracks: TrackItem[];
 }
+
+export interface PlaylistSet {
+  href: string;
+  items: Playlist[];
+  limit: number;
+  next: any;
+  offset: number;
+  previous: any;
+  total: number;
+}

@@ -1,15 +1,32 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { PlaylistsService } from "../playlists.service";
-
+import * as PlaylistActions from "./store/playlists.actions";
+import { Playlist } from "../playlist";
+import { Subscription } from "rxjs";
 @Component({
   selector: "app-playlists",
   templateUrl: "./playlists.component.html",
   styleUrls: ["./playlists.component.scss"]
 })
-export class PlaylistsComponent implements OnInit {
-  constructor(private playlistService: PlaylistsService) {}
+export class PlaylistsComponent implements OnInit, OnDestroy {
+  private currentSet: Playlist[];
+  private sub: Subscription;
+  constructor(private playlistsService: PlaylistsService) {
+    this.sub = this.playlistsService.store
+      .select("playlists", "currentSet")
+      .subscribe((set: Playlist[]) => {
+        this.currentSet = set;
+      });
+  }
 
   ngOnInit() {
-    this.playlistService.populatePlaylistData();
+    if (!this.currentSet) {
+      this.playlistsService.populatePlaylistData(
+        new PlaylistActions.PopulateMyPlaylists()
+      );
+    }
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

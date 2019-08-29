@@ -5,7 +5,7 @@ import { AuthGuardService } from "./auth-guard.service";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { LoggedOutComponent } from "./logged-out/logged-out.component";
 import { MyRecentTracksComponent } from "./my-recent-tracks/my-recent-tracks.component";
-import { MyPlaylistsComponent } from "./my-playlists/my-playlists.component";
+import { PlaylistsComponent } from "./playlists/playlists.component";
 
 const routes: Routes = [
   { path: "", component: LoggedOutComponent },
@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: "playlists",
-        component: MyPlaylistsComponent
+        component: PlaylistsComponent
       }
     ]
   },

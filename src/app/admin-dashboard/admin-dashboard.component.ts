@@ -32,6 +32,6 @@ export class AdminDashboardComponent implements OnInit {
 
   handlePlaylistSelection(playlist: Playlist): void {
     this.showPlaylistConfirmationDialog = true;
-    this.playlistService.selectedPlaylist = playlist;
+    // this.playlistService.selectedPlaylist = playlist;
   }
 }

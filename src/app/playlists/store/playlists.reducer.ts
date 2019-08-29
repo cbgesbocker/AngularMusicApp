@@ -4,7 +4,7 @@ import * as PlaylistActions from "./playlists.actions";
 
 export interface State {
   currentSet: Playlist[];
-  cachedSet: Playlist[];
+  cachedSet: any;
 }
 
 const initialState = {

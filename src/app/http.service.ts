@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { ApiEndpointsService } from "./api-endpoints.service";
 import { AuthService } from "./auth/auth.service";
 import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class HttpService {
@@ -39,6 +40,14 @@ export class HttpService {
       .get(endpoint, { headers, ...options })
       .toPromise();
     return request;
+  }
+
+  getApiRequestObservable(
+    endpoint: string,
+    options: object = {}
+  ): Observable<any> {
+    const headers = this.getDefaultHeaders();
+    return this.http.get(endpoint, { headers, ...options });
   }
 
   async postApiRequest(endpoint: string, options: object = {}): Promise<any> {
