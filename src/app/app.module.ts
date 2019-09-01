@@ -23,6 +23,7 @@ import { DashboardLayoutComponent } from "./dashboard-layout/dashboard-layout.co
 import { EffectsModule } from "@ngrx/effects";
 import { PlaylistEffects } from "./playlists/store/playlists.effects";
 import { PlaylistsComponent } from "./playlists/playlists.component";
+import { LazyloadBgUrlDirective } from "./lazyloadbgurl.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { PlaylistsComponent } from "./playlists/playlists.component";
     TrackListComponent,
     MyRecentTracksComponent,
     DashboardLayoutComponent,
-    PlaylistsComponent
+    PlaylistsComponent,
+    LazyloadBgUrlDirective
   ],
   imports: [
     MatToolbarModule,

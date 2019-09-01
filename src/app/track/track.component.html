@@ -4,8 +4,8 @@
   class="shadow-lg border mx-5 my-3 border-gray-200 p-4 track-card"
 >
   <div
-    class="h-32 mb-3 w-full bg-cover bg-center mx-auto "
-    [ngStyle]="{ 'background-image': 'url(' + trackImageUrl + ')' }"
+    class="h-32 mb-3 w-full bg-cover bg-center mx-auto"
+    [appLazyloadBgUrl]="trackImageUrl | async"
   ></div>
   <div class="flex flex-col text-center items-center">
     <span class="text-sm ">
