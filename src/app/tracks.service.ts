@@ -24,6 +24,7 @@ export class TracksService {
     private endpointsService: ApiEndpointsService,
     private store: Store<{ tracks: { myRecentTracks: TrackItem[] } }>
   ) {
+    console.log(this.selectedTrackItems);
     this.tracks = this.store.select("tracks");
   }
 

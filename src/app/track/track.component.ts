@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  ChangeDetectionStrategy
-} from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { computed } from "mobx-angular";
 
 import { TracksService } from "../tracks.service";
