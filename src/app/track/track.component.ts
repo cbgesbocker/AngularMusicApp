@@ -32,6 +32,7 @@ export class TrackComponent {
   }
 
   toggleTrackSelection() {
+    this.selected = !this.selected;
     this.tracksService.updateTrackList(this.trackItem, this.selected);
   }
 }
