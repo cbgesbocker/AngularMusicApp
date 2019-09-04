@@ -17,16 +17,17 @@
   >
   <a
     *ngIf="isLoggedIn"
-    class="ml-4 no-underline text-base px-3 py-1 tracking-wide"
+    class="ml-4 no-underline text-base px-3 py-1 mr-4 tracking-wide"
     routerLink="admin/playlists"
     routerLinkActive="active"
     >Playlists</a
   >
+  <span *ngIf="isLoggedIn" class="text-white">|</span>
   <a
     *ngIf="isLoggedIn"
     class="ml-4 no-underline text-base px-3 py-1 tracking-wide"
     routerLink="logout"
     routerLinkActive="active"
-    >Sign out</a
-  >
+    >Sign out <i style="color: white" class="fa fa-angle-right"></i
+  ></a>
 </mat-toolbar>

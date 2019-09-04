@@ -29,6 +29,7 @@ import { PlaylistEffects } from "./playlists/store/playlists.effects";
 import { PlaylistsComponent } from "./playlists/playlists.component";
 import { LazyLoadImageDirective } from "./lazy-load-image.directive";
 import { TrackListEffects } from "./track-list/store/track-list.effects";
+import { WelcomeComponent } from "./welcome/welcome.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TrackListEffects } from "./track-list/store/track-list.effects";
     MyRecentTracksComponent,
     DashboardLayoutComponent,
     PlaylistsComponent,
-    LazyLoadImageDirective
+    LazyLoadImageDirective,
+    WelcomeComponent
   ],
   imports: [
     MatToolbarModule,

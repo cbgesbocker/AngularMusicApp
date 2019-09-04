@@ -6,9 +6,13 @@ import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.compo
 import { LoggedOutComponent } from "./logged-out/logged-out.component";
 import { MyRecentTracksComponent } from "./my-recent-tracks/my-recent-tracks.component";
 import { PlaylistsComponent } from "./playlists/playlists.component";
-
+import { WelcomeComponent } from "./welcome/welcome.component";
+import { LogoutGuardService } from "./logout-guard.service";
 const routes: Routes = [
-  { path: "", component: LoggedOutComponent },
+  {
+    path: "",
+    component: WelcomeComponent
+  },
   {
     path: "admin",
     canActivate: [AuthGuardService],
@@ -26,7 +30,8 @@ const routes: Routes = [
   },
   {
     path: "logout",
-    component: LoggedOutComponent
+    component: LoggedOutComponent,
+    canActivate: [LogoutGuardService]
   },
   { path: "**", component: PageNotFoundComponent }
 ];
