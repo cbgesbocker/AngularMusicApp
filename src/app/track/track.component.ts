@@ -1,26 +1,33 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy
+} from "@angular/core";
+import { computed } from "mobx-angular";
+
 import { TracksService } from "../tracks.service";
 import { TrackItem } from "../interface.track";
-import { Observable } from "rxjs";
-
-import { of } from "rxjs";
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: "app-track",
   templateUrl: "./track.component.html",
   styleUrls: ["./track.component.scss"]
 })
 export class TrackComponent {
-  @Input() track: TrackItem;
-  @Input() selected: boolean;
+  @Input() trackItem: TrackItem;
+  @Input() selected: boolean = false;
   @Input() class: string;
-  @Input() imageUrl: string;
-  private trackImageUrl: Observable<string>;
+  @Input() imageNumber: number = 1;
 
   constructor(private tracksService: TracksService) {}
 
-  toggleSelected() {
-    this.selected = !this.selected;
-    this.tracksService.toggleSelectedTrack(this.track, this.selected);
+  @computed get imageUrl() {
+    return this.trackItem.track.album.images[this.imageNumber].url;
+  }
+
+  @computed get backgroundStyle() {
+    return `url(${this.imageUrl})`;
   }
 }

@@ -45,7 +45,6 @@ export class TracksService {
   }
 
   /**
-   * toggleSelectedTrack()
    * update list of selected track IDs when clicking on a track
    */
 

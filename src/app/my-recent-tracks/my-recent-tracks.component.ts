@@ -12,7 +12,7 @@ import { ApiEndpointsService } from "../api-endpoints.service";
   styleUrls: ["./my-recent-tracks.component.scss"]
 })
 export class MyRecentTracksComponent implements OnInit {
-  private tracks$: Observable<{ myRecentTracks: TrackList[] }>;
+  private tracks$: Observable<TrackList[]>;
   private userDisplayName = "";
 
   constructor(
@@ -21,7 +21,7 @@ export class MyRecentTracksComponent implements OnInit {
     private http: HttpService,
     private endpointsService: ApiEndpointsService
   ) {
-    this.tracks$ = this.store.select("tracks");
+    this.tracks$ = this.store.select("tracks", "myRecentTracks");
   }
 
   ngOnInit() {

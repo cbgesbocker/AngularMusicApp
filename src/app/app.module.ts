@@ -1,14 +1,18 @@
 import { BrowserModule } from "@angular/platform-browser";
+
+// Modules
+import { MaterialModule } from "./material/material.module";
+import { MobxAngularModule } from "mobx-angular";
+import { AppRoutingModule } from "./app-routing.module";
 import { NgModule } from "@angular/core";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule } from "@angular/common/http";
 
-import { AppRoutingModule } from "./app-routing.module";
+// Components
 import { AppComponent } from "./app.component";
 import { HeroComponent } from "./hero/hero.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
-import { MaterialModule } from "./material/material.module";
 import { HeaderComponent } from "./header/header.component";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { LoggedOutComponent } from "./logged-out/logged-out.component";
@@ -23,7 +27,8 @@ import { DashboardLayoutComponent } from "./dashboard-layout/dashboard-layout.co
 import { EffectsModule } from "@ngrx/effects";
 import { PlaylistEffects } from "./playlists/store/playlists.effects";
 import { PlaylistsComponent } from "./playlists/playlists.component";
-import { LazyloadBgUrlDirective } from "./lazyloadbgurl.directive";
+import { LazyLoadImageDirective } from "./lazy-load-image.directive";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,11 +44,12 @@ import { LazyloadBgUrlDirective } from "./lazyloadbgurl.directive";
     MyRecentTracksComponent,
     DashboardLayoutComponent,
     PlaylistsComponent,
-    LazyloadBgUrlDirective
+    LazyLoadImageDirective
   ],
   imports: [
     MatToolbarModule,
     BrowserModule,
+    MobxAngularModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,

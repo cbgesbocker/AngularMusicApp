@@ -1,18 +1,18 @@
 <div
-  (click)="toggleSelected()"
   [class.bg-blue-100]="selected"
   class="shadow-lg border mx-5 my-3 border-gray-200 p-4 track-card"
+  (click)="selected = !selected"
 >
   <div
-    class="h-32 mb-3 w-full bg-cover bg-center mx-auto"
-    [appLazyloadBgUrl]="trackImageUrl | async"
+    class="h-32 mb-3 opacity-0 transition-bg w-full bg-cover bg-center mx-auto"
+    [appLazyLoadImage]="imageUrl"
   ></div>
   <div class="flex flex-col text-center items-center">
     <span class="text-sm ">
-      {{ track.track.artists[0].name }}
+      {{ trackItem.track.artists[0].name }}
     </span>
     <span class="text-lg">
-      {{ track.track.name }}
+      {{ trackItem.track.name }}
     </span>
   </div>
 </div>

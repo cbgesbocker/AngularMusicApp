@@ -11,5 +11,5 @@ Welcome {{ userDisplayName }}
 
 <app-track-list
   class="flex flex-row flex-wrap justify-center"
-  [trackList]="(tracks$ | async)?.myRecentTracks?.items"
+  [trackList]="(tracks$ | async)?.items"
 ></app-track-list>
