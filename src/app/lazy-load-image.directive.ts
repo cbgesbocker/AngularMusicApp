@@ -14,6 +14,8 @@ export class LazyLoadImageDirective implements OnInit {
 
   ngOnInit() {
     this.el.nativeElement.style.background = `url(${this.url})`;
-    this.el.nativeElement.classList.remove("opacity-0");
+    setTimeout(() => {
+      this.el.nativeElement.classList.remove("opacity-0");
+    }, 0.5 * Math.random() * 1000);
   }
 }
