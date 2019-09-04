@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { TrackItem } from "../interface.track";
+import { TracksService } from "../tracks.service";
 
 @Component({
   selector: "app-track-list",
@@ -9,5 +10,5 @@ import { TrackItem } from "../interface.track";
 export class TrackListComponent {
   @Input() trackList: TrackItem[];
 
-  constructor() {}
+  constructor(private tracksService: TracksService) {}
 }

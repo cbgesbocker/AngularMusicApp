@@ -28,6 +28,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { PlaylistEffects } from "./playlists/store/playlists.effects";
 import { PlaylistsComponent } from "./playlists/playlists.component";
 import { LazyLoadImageDirective } from "./lazy-load-image.directive";
+import { TrackListEffects } from "./track-list/store/track-list.effects";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { LazyLoadImageDirective } from "./lazy-load-image.directive";
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    EffectsModule.forRoot([PlaylistEffects]),
+    EffectsModule.forRoot([PlaylistEffects, TrackListEffects]),
     HttpClientModule,
     StoreModule.forRoot(appStore.appReducer)
   ],

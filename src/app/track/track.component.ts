@@ -30,4 +30,8 @@ export class TrackComponent {
   @computed get backgroundStyle() {
     return `url(${this.imageUrl})`;
   }
+
+  toggleTrackSelection() {
+    this.tracksService.updateTrackList(this.trackItem, this.selected);
+  }
 }

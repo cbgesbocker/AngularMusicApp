@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+
 import { TracksService } from "../tracks.service";
 import { TrackList } from "../interface.trackList";
 import { HttpService } from "../http.service";
 import { ApiEndpointsService } from "../api-endpoints.service";
+import * as TrackActions from "../track-list/store/track-list.actions";
 
 @Component({
   selector: "app-my-recent-tracks",
@@ -25,10 +27,7 @@ export class MyRecentTracksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tracksService.initializeTrackType(
-      this.tracksService.trackTypes.myRecentTracks
-    );
-
+    this.tracksService.initializeTrackType(new TrackActions.FetchTracks());
     this.http
       .getApiRequest(this.endpointsService.getMyProfileUrl())
       .then(data => {

@@ -18,7 +18,7 @@ export function trackListReducer(
   action: TrackListActions.SetTracks
 ) {
   switch (action.type) {
-    case TrackListActions.SET_CURRENT_TRACK_LIST:
+    case TrackListActions.SET_TRACKS:
       return {
         ...initialState,
         myRecentTracks: action.payload

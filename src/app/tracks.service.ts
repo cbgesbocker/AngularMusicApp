@@ -27,10 +27,18 @@ export class TracksService {
     this.tracks = this.store.select("tracks");
   }
 
-  initializeTrackType(trackType: string): void {
-    this.getMyRecentTracks().then((trackList: TrackList) => {
-      this.store.dispatch(new TrackActions.SetTracks(trackList));
-    });
+  initializeTrackType(trackAction: TrackActions.TrackActions): void {
+    this.store.dispatch(trackAction);
+  }
+
+  updateTrackList(trackItem: TrackItem, add: boolean) {
+    if (add) {
+      this.selectedTrackItems = [...this.selectedTrackItems, trackItem];
+    } else {
+      this.selectedTrackItems = this.selectedTrackItems.filter(
+        (item: TrackItem) => item.track.id !== trackItem.track.id
+      );
+    }
   }
 
   async getMyRecentTracks(): Promise<object> {
