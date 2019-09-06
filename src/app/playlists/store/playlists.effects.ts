@@ -12,7 +12,6 @@ export class PlaylistEffects {
   populateCurrentPlaylists = this.actions$.pipe(
     ofType(PlaylistActions.POPULATE_PLAYLIST_SETS),
     switchMap((playlistData: PlaylistActions.PopulateMyPlaylists) => {
-      debugger;
       const myPlaylistEndpoint = this.endpointsService.getMyPlaylistsUrl();
       return this.http
         .getApiRequestObservable(myPlaylistEndpoint, {
@@ -22,7 +21,6 @@ export class PlaylistEffects {
         })
         .pipe(
           map(resData => {
-            debugger;
             return new PlaylistActions.UpdatePlaylistSets({
               playlistSet: resData,
               queryKey: "my-playlists"

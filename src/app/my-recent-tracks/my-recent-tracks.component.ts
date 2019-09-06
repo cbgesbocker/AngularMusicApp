@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
 import { TracksService } from "../tracks.service";
 import { TrackList } from "../interface.trackList";
@@ -14,7 +14,8 @@ import * as TrackActions from "../track-list/store/track-list.actions";
   styleUrls: ["./my-recent-tracks.component.scss"]
 })
 export class MyRecentTracksComponent implements OnInit {
-  private tracks$: Observable<TrackList[]>;
+  private trackList: TrackList[];
+  private sub: Subscription;
   private userDisplayName = "";
 
   constructor(
@@ -23,15 +24,21 @@ export class MyRecentTracksComponent implements OnInit {
     private http: HttpService,
     private endpointsService: ApiEndpointsService
   ) {
-    this.tracks$ = this.store.select("tracks", "myRecentTracks");
+    this.store
+      .select("tracks", "myRecentTracks")
+      .subscribe((list: TrackList[]) => {
+        this.trackList = list;
+      });
   }
 
   ngOnInit() {
-    this.tracksService.initializeTrackType(new TrackActions.FetchTracks());
-    this.http
-      .getApiRequest(this.endpointsService.getMyProfileUrl())
-      .then(data => {
-        this.userDisplayName = data.display_name;
-      });
+    if (!this.trackList) {
+      this.tracksService.initializeTrackType(new TrackActions.FetchTracks());
+      this.http
+        .getApiRequest(this.endpointsService.getMyProfileUrl())
+        .then(data => {
+          this.userDisplayName = data.display_name;
+        });
+    }
   }
 }

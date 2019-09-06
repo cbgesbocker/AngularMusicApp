@@ -5,6 +5,7 @@ import { Directive, Input, ElementRef, OnInit } from "@angular/core";
 })
 export class LazyLoadImageDirective implements OnInit {
   @Input("appLazyLoadImage") url: string;
+  @Input("appLazyLoadWaitTime") waitTime: number = 100;
 
   el: ElementRef;
   constructor(el: ElementRef) {
@@ -13,8 +14,9 @@ export class LazyLoadImageDirective implements OnInit {
 
   ngOnInit() {
     this.el.nativeElement.style.backgroundImage = `url(${this.url})`;
+
     setTimeout(() => {
       this.el.nativeElement.classList.remove("opacity-0");
-    }, 0.5 * Math.random() * 1000);
+    }, this.waitTime);
   }
 }

@@ -1,3 +1,9 @@
 My Playlists
-<app-playlist *ngFor="let playlist of currentSet?.items" [playlist]="playlist">
-</app-playlist>
+<div class="flex flex-wrap my-5">
+  <app-playlist
+    *ngFor="let playlist of currentSet?.items"
+    class="w-1/4 px-4 my-3"
+    [playlist]="playlist"
+  >
+  </app-playlist>
+</div>

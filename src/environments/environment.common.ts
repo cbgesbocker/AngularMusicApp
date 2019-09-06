@@ -15,5 +15,8 @@ export const commonEnvironment = {
     scope: "user-library-read",
     response_type: "token",
     grant_type: "refresh_token"
+  },
+  styles: {
+    lazyLoadDelay: 60
   }
 };

@@ -8,7 +8,7 @@ export interface Playlist {
   external_urls: ExternalUrl;
   href: string;
   id: string;
-  images: Image;
+  images: Image[];
   name: string;
   owner: User;
   public: boolean | null;

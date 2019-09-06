@@ -13,11 +13,9 @@ export class TrackListEffects {
   populateMyTracks = this.actions$.pipe(
     ofType(TrackActions.FETCH_MY_TRACKS),
     switchMap(() => {
-      debugger;
       const myTracksUrl = this.endpointsService.getMyTracksUrl();
       return this.http.getApiRequestObservable(myTracksUrl).pipe(
         map(trackList => {
-          debugger;
           return new TrackActions.SetTracks(trackList);
         }),
         catchError(err => {

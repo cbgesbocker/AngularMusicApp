@@ -15,15 +15,12 @@ export class TrackComponent {
   @Input() selected: boolean = false;
   @Input() class: string;
   @Input() imageNumber: number = 1;
+  @Input("appLazyLoadWaitTime") waitTime = 100;
 
   constructor(private tracksService: TracksService) {}
 
   @computed get imageUrl() {
     return this.trackItem.track.album.images[this.imageNumber].url;
-  }
-
-  @computed get backgroundStyle() {
-    return `url(${this.imageUrl})`;
   }
 
   toggleTrackSelection() {

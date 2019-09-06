@@ -3,11 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 import { commonEnvironment } from "./environment.common";
 
+const { apiConfig } = commonEnvironment;
+
+// temp workaround
+delete commonEnvironment.apiConfig;
+
 export const environment = {
   production: false,
   ...commonEnvironment,
   apiConfig: {
-    ...commonEnvironment.apiConfig,
+    ...apiConfig,
     redirect_uri: "http://localhost:4200/admin/recently-played"
   }
 };
