@@ -24,3 +24,7 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 #content-wrapper {
   min-height: 80vh;
 }
+
+.transition-bg {
+  transition: all 0.2s ease-in;
+}
