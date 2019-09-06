@@ -1,5 +1,5 @@
 # Recordings of project
 
-## 10.14.19
+## 9.6.2019
 
-https://www.loom.com/share/5ea2a5fa3af347108e53a1b3d9d3437e
+https://www.loom.com/share/80dc2d29939d4262b6cd32955c227996
