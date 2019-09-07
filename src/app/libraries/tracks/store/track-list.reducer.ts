@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import * as TrackListActions from "./track-list.actions";
-import { TrackList } from "src/app/interface.trackList";
-import { TrackItem } from "src/app/interface.track";
+import { TrackList } from "src/app/libraries/track-list";
+import { TrackItem } from "src/app/libraries/track";
 
 export interface State {
   myRecentTracks: TrackItem[];

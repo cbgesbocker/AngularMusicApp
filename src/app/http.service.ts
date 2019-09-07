@@ -22,13 +22,13 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     private store: Store<{
-      auth: {
+      admin: {
         accessToken: string;
       };
     }>,
     private endpointsService: ApiEndpointsService
   ) {
-    this.store.select("auth").subscribe(data => {
+    this.store.select("admin").subscribe(data => {
       this.accessToken = data.accessToken;
     });
   }

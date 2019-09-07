@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Playlist } from "src/app/playlist";
+import { Playlist } from "src/app/libraries/playlist";
 
 @Component({
   selector: "app-playlist",

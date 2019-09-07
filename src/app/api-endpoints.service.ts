@@ -1,17 +1,18 @@
 import { Injectable } from "@angular/core";
 
-import { environment } from "src/environments/environment";
 export const validEndpoints = environment.apiConfig.endpoints;
-import { authorizeEndpointUrlParams } from "./model.authorization";
 import UtilsService from "./utils.service";
 import { Store } from "@ngrx/store";
-import { state } from "@angular/animations";
+import { authorizeEndpointUrlParams } from "./model.authorization";
+import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: "root" })
 export class ApiEndpointsService {
   private clientState: string;
-  constructor(private store: Store<{ auth: { clientState: string } }>) {
-    this.store.select("auth").subscribe(auth => {
+
+  constructor(private store: Store<{ admin: { clientState: string } }>) {
+    this.store.select("admin").subscribe(auth => {
+      debugger;
       this.clientState = auth.clientState;
     });
   }

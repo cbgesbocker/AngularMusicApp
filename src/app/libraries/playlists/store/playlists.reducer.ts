@@ -1,4 +1,4 @@
-import { Playlist } from "src/app/playlist";
+import { Playlist } from "src/app/libraries/playlist";
 
 import * as PlaylistActions from "./playlists.actions";
 

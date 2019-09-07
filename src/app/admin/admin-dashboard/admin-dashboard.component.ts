@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
-import { TracksService } from "../../tracks.service";
+import { TracksService } from "../../libraries/tracks/tracks.service";
 import { SlideInOutAnimation } from "../../animations";
-import { PlaylistsService } from "../../playlists.service";
+import { PlaylistsService } from "../../libraries/playlists/playlists.service";
 import { HttpService } from "../../http.service";
 import { ApiEndpointsService } from "../../api-endpoints.service";
-import { Playlist } from "../../playlist";
+import { Playlist } from "../../libraries/playlist";
 
 @Component({
   selector: "app-admin-dashboard",

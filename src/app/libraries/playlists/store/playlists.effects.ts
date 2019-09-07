@@ -13,23 +13,28 @@ export class PlaylistEffects {
     ofType(PlaylistActions.POPULATE_PLAYLIST_SETS),
     switchMap((playlistData: PlaylistActions.PopulateMyPlaylists) => {
       const myPlaylistEndpoint = this.endpointsService.getMyPlaylistsUrl();
-      return this.http
-        .getApiRequestObservable(myPlaylistEndpoint, {
-          params: {
-            limit: 50
-          }
-        })
-        .pipe(
-          map(resData => {
-            return new PlaylistActions.UpdatePlaylistSets({
-              playlistSet: resData,
-              queryKey: "my-playlists"
-            });
-          }),
-          catchError(err => {
-            return of();
+      return (
+        this.http
+          // get api request
+          .getApiRequestObservable(myPlaylistEndpoint, {
+            params: {
+              limit: 50
+            }
           })
-        );
+          .pipe(
+            map(resData => {
+              // return new action to set the data
+              return new PlaylistActions.UpdatePlaylistSets({
+                playlistSet: resData,
+                queryKey: "my-playlists"
+              });
+            }),
+            catchError(err => {
+              // always return observable
+              return of();
+            })
+          )
+      );
     })
   );
 

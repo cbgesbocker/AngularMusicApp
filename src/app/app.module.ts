@@ -5,15 +5,17 @@ import { HttpClientModule } from "@angular/common/http";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { NgModule } from "@angular/core";
 
-import { AdminModule } from "./admin/Admin.module";
+import { AdminModule } from "./admin/admin.module";
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { HeroComponent } from "./hero/hero.component";
-import { LazyLoadImageDirective } from "./lazy-load-image.directive";
-import { LibrariesModule } from "./libraries/libraries.module";
 import { MaterialModule } from "./material/material.module";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
+import { LoggedOutComponent } from "./logged-out/logged-out.component";
+import { GlobalModule } from "./global/global.module";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
 
 @NgModule({
   declarations: [
@@ -21,16 +23,18 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     HeroComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    LazyLoadImageDirective,
-    WelcomeComponent
+    WelcomeComponent,
+    LoggedOutComponent
   ],
   imports: [
+    EffectsModule.forRoot([]),
+    StoreModule.forRoot({}),
+    GlobalModule,
     AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
-    LibrariesModule,
     MatToolbarModule,
     MaterialModule
   ],

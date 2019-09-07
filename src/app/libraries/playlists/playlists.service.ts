@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpService } from "./http.service";
+import { HttpService } from "../../http.service";
 import { Store } from "@ngrx/store";
-import { Playlist } from "./playlist";
-import * as PlaylistActions from "./libraries/playlists/playlist-set/store/playlists.actions";
+import { Playlist } from "../playlist";
+import * as PlaylistActions from "./store/playlists.actions";
 
 @Injectable({
   providedIn: "root"

@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Playlist, PlaylistSet } from "src/app/playlist";
+import { Playlist, PlaylistSet } from "src/app/libraries/playlist";
 
 export const POPULATE_PLAYLIST_SETS = "[playlists] Populate Playlist Sets]";
 export const UPDATE_PLAYLIST_SETS = "[playlists] Update Playlist Sets]";

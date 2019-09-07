@@ -1,7 +1,7 @@
-import { Image } from "./image";
-import { User } from "./user";
-import { ExternalUrl } from "./external-url";
-import { TrackItem } from "./interface.track";
+import { Image } from "../image";
+import { User } from "../user";
+import { ExternalUrl } from "../external-url";
+import { TrackItem } from "./track";
 
 export interface Playlist {
   collaborative: boolean;

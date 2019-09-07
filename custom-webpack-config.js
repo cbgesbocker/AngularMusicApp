@@ -1,5 +1,3 @@
-// module.exports = {
-//   plugins: [
-//     require('tailwindcss'),
-//   ]
-// }
+module.exports = {
+  devtool: "cheap-eval-source-map"
+};

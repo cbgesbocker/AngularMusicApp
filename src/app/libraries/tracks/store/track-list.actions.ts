@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { TrackList } from "src/app/interface.trackList";
+import { TrackList } from "src/app/libraries/track-list";
 
 export const SET_TRACKS = "[track-list] SetTracks";
 export const FETCH_MY_TRACKS = "[track-list] FetchTracks";

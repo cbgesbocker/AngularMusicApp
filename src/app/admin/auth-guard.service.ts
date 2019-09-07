@@ -2,10 +2,8 @@ import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot } from "@angular/router";
 import { AuthService } from "./auth.service";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-
-import * as AuthActions from "./store/admin.actions";
 import UtilsService from "../utils.service";
+import jsCookie from "js-cookie";
 
 @Injectable({ providedIn: "root" })
 export class AuthGuardService implements CanActivate {
@@ -13,9 +11,9 @@ export class AuthGuardService implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private store: Store<{ auth: { isValidState: boolean } }>
+    private store: Store<{ admin: { isValidState: boolean } }>
   ) {
-    this.store.select("auth").subscribe(auth => {
+    this.store.select("admin").subscribe(auth => {
       this.isLoggedIn = auth.isValidState;
     });
   }
@@ -26,6 +24,7 @@ export class AuthGuardService implements CanActivate {
    */
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // if already logged in, return true
+    // / || jsCookie.get("accessToken")
     if (this.isLoggedIn) {
       return true;
     }

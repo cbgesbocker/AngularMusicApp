@@ -1,12 +1,11 @@
 import { Injectable, OnDestroy } from "@angular/core";
-import { HttpService } from "./http.service";
-import { TrackItem } from "./interface.track";
+import { HttpService } from "../../http.service";
+import { TrackItem } from "../track";
 import { Store } from "@ngrx/store";
 
-import { ApiEndpointsService } from "./api-endpoints.service";
-import * as TrackActions from "./libraries/tracks/store/track-list.actions";
-import { TrackList } from "./interface.trackList";
-import { Observable, Subscription } from "rxjs";
+import { ApiEndpointsService } from "../../api-endpoints.service";
+import * as TrackActions from "./store/track-list.actions";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -24,8 +23,7 @@ export class TracksService {
     private endpointsService: ApiEndpointsService,
     private store: Store<{ tracks: { myRecentTracks: TrackItem[] } }>
   ) {
-    console.log(this.selectedTrackItems);
-    this.tracks = this.store.select("tracks");
+    this.tracks = this.store.select("libraries", "tracks");
   }
 
   initializeTrackType(trackAction: TrackActions.TrackActions): void {

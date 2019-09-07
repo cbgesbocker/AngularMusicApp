@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 
-import { PlaylistsService } from "../../../playlists.service";
-import { Playlist } from "src/app/playlist";
+import { PlaylistsService } from "../playlists.service";
+import { Playlist } from "src/app/libraries/playlist";
 import * as PlaylistActions from "../store/playlists.actions";
 
 @Component({
@@ -16,7 +16,7 @@ export class PlaylistSetComponent implements OnInit, OnDestroy {
 
   constructor(private playlistsService: PlaylistsService) {
     this.sub = this.playlistsService.store
-      .select("playlists", "currentSet")
+      .select("libraries", "playlists", "currentSet")
       .subscribe((set: Playlist[]) => {
         this.currentSet = set;
       });

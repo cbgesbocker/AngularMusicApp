@@ -9,8 +9,8 @@ import { Store } from "@ngrx/store";
 export class HeaderComponent implements OnInit {
   private isLoggedIn: boolean;
 
-  constructor(private store: Store<{ auth: { isValidState: boolean } }>) {
-    this.store.select("auth").subscribe(data => {
+  constructor(private store: Store<{ admin: { isValidState: boolean } }>) {
+    this.store.select("admin").subscribe(data => {
       this.isLoggedIn = data.isValidState;
     });
   }

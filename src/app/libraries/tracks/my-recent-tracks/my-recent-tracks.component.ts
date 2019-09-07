@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 
-import { TracksService } from "../../../tracks.service";
-import { TrackList } from "../../../interface.trackList";
+import { TracksService } from "../tracks.service";
+import { TrackList } from "../../track-list";
 import { HttpService } from "../../../http.service";
 import { ApiEndpointsService } from "../../../api-endpoints.service";
 import * as TrackActions from "../store/track-list.actions";
@@ -25,7 +25,7 @@ export class MyRecentTracksComponent implements OnInit {
     private endpointsService: ApiEndpointsService
   ) {
     this.store
-      .select("tracks", "myRecentTracks")
+      .select("libraries", "tracks", "myRecentTracks")
       .subscribe((list: TrackList[]) => {
         this.trackList = list;
       });
