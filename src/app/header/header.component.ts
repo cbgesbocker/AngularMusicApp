@@ -16,12 +16,5 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  confirmSignout($event) {
-    if (confirm("Are you sure you want to sign out?")) {
-      $event.preventDefault();
-      UtilsService.redirectTo("/");
-    }
-  }
-
   ngOnInit() {}
 }
