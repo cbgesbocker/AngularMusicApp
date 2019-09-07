@@ -4,7 +4,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { AuthGuardService } from "./auth-guard.service";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { LoggedOutComponent } from "./logged-out/logged-out.component";
-import { MyRecentTracksComponent } from "./my-recent-tracks/my-recent-tracks.component";
+import { MyRecentTracksComponent } from "./tracks/my-recent-tracks/my-recent-tracks.component";
 import { PlaylistsComponent } from "./playlists/playlists.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { LogoutGuardService } from "./logout-guard.service";

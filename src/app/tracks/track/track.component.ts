@@ -1,8 +1,8 @@
 import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { computed } from "mobx-angular";
 
-import { TracksService } from "../tracks.service";
-import { TrackItem } from "../interface.track";
+import { TracksService } from "../../tracks.service";
+import { TrackItem } from "../../interface.track";
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

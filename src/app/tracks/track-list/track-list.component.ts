@@ -1,8 +1,8 @@
 import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 
-import { TracksService } from "../tracks.service";
+import { TracksService } from "../../tracks.service";
 import { computed } from "mobx-angular";
-import { TrackItem } from "../interface.track";
+import { TrackItem } from "../../interface.track";
 
 @Component({
   selector: "app-track-list",
