@@ -12,7 +12,6 @@ export class ApiEndpointsService {
 
   constructor(private store: Store<{ admin: { clientState: string } }>) {
     this.store.select("admin").subscribe(auth => {
-      debugger;
       this.clientState = auth.clientState;
     });
   }

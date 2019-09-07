@@ -12,6 +12,7 @@ import { LibrariesModule } from "../libraries/libraries.module";
 import { GlobalModule } from "../global/global.module";
 import { HttpClientModule } from "@angular/common/http";
 import { EffectsModule } from "@ngrx/effects";
+import { UserModule } from "../user/user.module";
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
     HttpClientModule,
     CommonModule,
     LibrariesModule,
+    UserModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature("admin", fromAdmin.reducer)
   ]
