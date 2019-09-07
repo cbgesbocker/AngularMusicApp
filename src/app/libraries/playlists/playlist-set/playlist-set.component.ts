@@ -1,21 +1,16 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectionStrategy
-} from "@angular/core";
-import { PlaylistsService } from "../playlists.service";
-import * as PlaylistActions from "./store/playlists.actions";
-import { Playlist } from "../playlist";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
-import { computed } from "mobx-angular";
+
+import { PlaylistsService } from "../../../playlists.service";
+import { Playlist } from "src/app/playlist";
+import * as PlaylistActions from "../store/playlists.actions";
 
 @Component({
-  selector: "app-playlists",
-  templateUrl: "./playlists.component.html",
-  styleUrls: ["./playlists.component.scss"]
+  selector: "app-playlist-set",
+  templateUrl: "./playlist-set.component.html",
+  styleUrls: ["./playlist-set.component.scss"]
 })
-export class PlaylistsComponent implements OnInit, OnDestroy {
+export class PlaylistSetComponent implements OnInit, OnDestroy {
   private currentSet: Playlist[];
   private sub: Subscription;
 

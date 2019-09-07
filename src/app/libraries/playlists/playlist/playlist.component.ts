@@ -1,7 +1,7 @@
-import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { Playlist } from "src/app/playlist";
 
-import { Playlist } from "../playlist";
 @Component({
   selector: "app-playlist",
   templateUrl: "./playlist.component.html",

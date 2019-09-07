@@ -4,17 +4,26 @@ import { HttpClientModule } from "@angular/common/http";
 import { EffectsModule } from "@ngrx/effects";
 import { MobxAngularModule } from "mobx-angular";
 
+import { StoreModule } from "@ngrx/store";
+
 import { TrackComponent } from "./tracks/track/track.component";
 import { TrackListComponent } from "./tracks/track-list/track-list.component";
-import { TrackListEffects } from "./tracks/track-list/store/track-list.effects";
+import { TrackListEffects } from "./tracks/store/track-list.effects";
 import { MyRecentTracksComponent } from "./tracks/my-recent-tracks/my-recent-tracks.component";
 import { TrackRoutingModule } from "./libraries-routing.module";
-import { PlaylistEffects } from "../playlists/store/playlists.effects";
-import { StoreModule } from "@ngrx/store";
 import * as fromLibraries from "./libraries.reducer";
+import { PlaylistSetComponent } from "./playlists/playlist-set/playlist-set.component";
+import { PlaylistComponent } from "./playlists/playlist/playlist.component";
+import { PlaylistEffects } from "./playlists/store/playlists.effects";
 
 @NgModule({
-  declarations: [TrackComponent, TrackListComponent, MyRecentTracksComponent],
+  declarations: [
+    PlaylistComponent,
+    PlaylistSetComponent,
+    TrackComponent,
+    TrackListComponent,
+    MyRecentTracksComponent
+  ],
   imports: [
     TrackRoutingModule,
     CommonModule,
@@ -24,4 +33,4 @@ import * as fromLibraries from "./libraries.reducer";
     StoreModule.forFeature("libraries", fromLibraries.reducer)
   ]
 })
-export class Libraries {}
+export class LibrariesModule {}

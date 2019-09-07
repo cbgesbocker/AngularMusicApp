@@ -6,7 +6,7 @@ import { TracksService } from "../../../tracks.service";
 import { TrackList } from "../../../interface.trackList";
 import { HttpService } from "../../../http.service";
 import { ApiEndpointsService } from "../../../api-endpoints.service";
-import * as TrackActions from "../track-list/store/track-list.actions";
+import * as TrackActions from "../store/track-list.actions";
 
 @Component({
   selector: "app-my-recent-tracks",

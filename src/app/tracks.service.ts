@@ -4,7 +4,7 @@ import { TrackItem } from "./interface.track";
 import { Store } from "@ngrx/store";
 
 import { ApiEndpointsService } from "./api-endpoints.service";
-import * as TrackActions from "./libraries/tracks/track-list/store/track-list.actions";
+import * as TrackActions from "./libraries/tracks/store/track-list.actions";
 import { TrackList } from "./interface.trackList";
 import { Observable, Subscription } from "rxjs";
 

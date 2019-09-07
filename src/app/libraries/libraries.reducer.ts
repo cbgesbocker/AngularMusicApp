@@ -1,5 +1,6 @@
-import * as fromTrackList from "../libraries/tracks/track-list/store/track-list.reducer";
-import * as fromPlaylists from "../playlists/store/playlists.reducer";
+import * as fromTrackList from "./tracks/store/track-list.reducer";
+import * as fromPlaylists from "./playlists/playlist-set/store/playlists.reducer";
+
 import { ActionReducerMap } from "@ngrx/store";
 
 export interface LibrariesState {
