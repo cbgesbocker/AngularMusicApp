@@ -6,7 +6,7 @@ import { ActivatedRouteSnapshot, ActivationEnd } from "@angular/router";
 import UtilsService from "../utils.service";
 import { Observable, Subscription } from "rxjs";
 
-import * as AuthActions from "./store/auth.actions";
+import * as AuthActions from "./store/admin.actions";
 import { HttpService } from "../http.service";
 import { environment } from "src/environments/environment.prod";
 

@@ -1,29 +1,26 @@
-import { BrowserModule } from "@angular/platform-browser";
-
-// Modules
-import { MaterialModule } from "./material/material.module";
 import { AppRoutingModule } from "./app-routing.module";
-import { NgModule } from "@angular/core";
-import { MatToolbarModule } from "@angular/material/toolbar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientModule } from "@angular/common/http";
-
-// Components
-import { AppComponent } from "./app.component";
-import { HeroComponent } from "./hero/hero.component";
-import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
-import { HeaderComponent } from "./header/header.component";
-import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
-import { LoggedOutComponent } from "./logged-out/logged-out.component";
-import { PlaylistComponent } from "./playlist/playlist.component";
-import { ModalComponent } from "./modal/modal.component";
-import { StoreModule } from "@ngrx/store";
-import * as appStore from "./store/store.reducer";
+import { BrowserModule } from "@angular/platform-browser";
 import { EffectsModule } from "@ngrx/effects";
-import { PlaylistEffects } from "./playlists/store/playlists.effects";
-import { PlaylistsComponent } from "./playlists/playlists.component";
+import { HttpClientModule } from "@angular/common/http";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { NgModule } from "@angular/core";
+import { StoreModule } from "@ngrx/store";
+
+import * as appStore from "./store/store.reducer";
+import { AppComponent } from "./app.component";
+import { HeaderComponent } from "./header/header.component";
+import { HeroComponent } from "./hero/hero.component";
 import { LazyLoadImageDirective } from "./lazy-load-image.directive";
+import { LoggedOutComponent } from "./logged-out/logged-out.component";
+import { MaterialModule } from "./material/material.module";
+import { ModalComponent } from "./modal/modal.component";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { PlaylistComponent } from "./playlist/playlist.component";
+import { PlaylistEffects } from "./playlists/store/playlists.effects";
 import { WelcomeComponent } from "./welcome/welcome.component";
+import { PlaylistsComponent } from "./playlists/playlists.component";
+import { AdminModule } from "./admin/Admin.module";
 
 @NgModule({
   declarations: [
@@ -31,22 +28,16 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     HeroComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    AdminDashboardComponent,
-    LoggedOutComponent,
-    PlaylistComponent,
-    ModalComponent,
-    DashboardLayoutComponent,
-    PlaylistsComponent,
     LazyLoadImageDirective,
     WelcomeComponent
   ],
   imports: [
+    AdminModule,
     MatToolbarModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    EffectsModule.forRoot([PlaylistEffects]),
     HttpClientModule,
     StoreModule.forRoot(appStore.appReducer)
   ],

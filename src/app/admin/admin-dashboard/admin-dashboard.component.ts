@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 
-import { TracksService } from "../tracks.service";
-import { SlideInOutAnimation } from "../animations";
-import { PlaylistsService } from "../playlists.service";
-import { HttpService } from "../http.service";
-import { ApiEndpointsService } from "../api-endpoints.service";
-import { Playlist } from "../playlist";
-import { ActivatedRouteSnapshot } from "@angular/router";
+import { TracksService } from "../../tracks.service";
+import { SlideInOutAnimation } from "../../animations";
+import { PlaylistsService } from "../../playlists.service";
+import { HttpService } from "../../http.service";
+import { ApiEndpointsService } from "../../api-endpoints.service";
+import { Playlist } from "../../playlist";
+
 @Component({
   selector: "app-admin-dashboard",
   templateUrl: "./admin-dashboard.component.html",

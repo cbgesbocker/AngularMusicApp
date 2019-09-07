@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from "src/environments/environment";
 import { ApiEndpointsService } from "./api-endpoints.service";
-import { AuthService } from "./auth/auth.service";
+import { AuthService } from "./admin/auth.service";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 

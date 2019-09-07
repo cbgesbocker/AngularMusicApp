@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpService } from "../http.service";
-import { AuthService } from "../auth/auth.service";
+import { AuthService } from "../admin/auth.service";
 
 @Component({
   selector: "app-logged-out",

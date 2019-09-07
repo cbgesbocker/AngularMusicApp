@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { MyRecentTracksComponent } from "./my-recent-tracks/my-recent-tracks.component";
+import { MyRecentTracksComponent } from "./tracks/my-recent-tracks/my-recent-tracks.component";
 import { PlaylistsComponent } from "../playlists/playlists.component";
 
-const routes: Routes = [
+export const libraryRoutes: Routes = [
   {
     path: "recently-played",
     component: MyRecentTracksComponent

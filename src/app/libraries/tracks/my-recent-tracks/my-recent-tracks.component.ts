@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
 
-import { TracksService } from "../../tracks.service";
-import { TrackList } from "../../interface.trackList";
-import { HttpService } from "../../http.service";
-import { ApiEndpointsService } from "../../api-endpoints.service";
+import { TracksService } from "../../../tracks.service";
+import { TrackList } from "../../../interface.trackList";
+import { HttpService } from "../../../http.service";
+import { ApiEndpointsService } from "../../../api-endpoints.service";
 import * as TrackActions from "../track-list/store/track-list.actions";
 
 @Component({

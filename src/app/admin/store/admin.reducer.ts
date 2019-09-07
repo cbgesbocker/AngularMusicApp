@@ -1,4 +1,4 @@
-import * as AuthActions from "./auth.actions";
+import * as AuthActions from "./admin.actions";
 
 export interface State {
   accessToken: string;
@@ -12,10 +12,7 @@ const initialState = {
   isValidState: false
 };
 
-export function authReducer(
-  state = initialState,
-  action: AuthActions.AuthActions
-) {
+export function reducer(state = initialState, action: AuthActions.AuthActions) {
   switch (action.type) {
     case AuthActions.SET_AUTH_TOKEN:
       return {
