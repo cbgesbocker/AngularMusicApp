@@ -90,6 +90,5 @@ export class AuthService implements OnDestroy {
   logout(): void {
     this.store.dispatch(new AuthActions.SetStateValidity(false));
     this.store.dispatch(new AuthActions.SetAuth(""));
-    window.location.href = "/";
   }
 }

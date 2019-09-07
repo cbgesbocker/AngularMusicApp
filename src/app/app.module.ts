@@ -12,7 +12,6 @@ import { HeroComponent } from "./hero/hero.component";
 import { MaterialModule } from "./material/material.module";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
-import { LoggedOutComponent } from "./logged-out/logged-out.component";
 import { GlobalModule } from "./global/global.module";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
@@ -23,8 +22,7 @@ import { StoreModule } from "@ngrx/store";
     HeroComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    WelcomeComponent,
-    LoggedOutComponent
+    WelcomeComponent
   ],
   imports: [
     EffectsModule.forRoot([]),

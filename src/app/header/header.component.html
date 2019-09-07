@@ -24,6 +24,7 @@
   >
   <span *ngIf="isLoggedIn" class="text-white">|</span>
   <a
+    (click)="confirmSignout($event)"
     *ngIf="isLoggedIn"
     class="ml-4 no-underline text-base px-3 py-1 tracking-wide"
     routerLink="admin/logout"
