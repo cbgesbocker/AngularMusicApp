@@ -11,16 +11,9 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class TracksService {
-  readonly trackTypes = {
-    myRecentTracks: "MY_RECENT_TRACKS"
-  };
-
   public selectedTrackItems: TrackItem[] = [];
-  private tracks: Observable<{ myRecentTracks: TrackItem[] }>;
 
   constructor(
-    private httpClient: HttpService,
-    private endpointsService: ApiEndpointsService,
     private store: Store<{
       libraries: { tracks: { myRecentTracks: TrackItem[] } };
     }>
@@ -34,10 +27,6 @@ export class TracksService {
     return this.store.select("libraries", "tracks", key);
   }
 
-  initializeTrackType(trackAction: TrackActions.TrackActions): void {
-    this.store.dispatch(trackAction);
-  }
-
   updateTrackList(trackItem: TrackItem, add: boolean) {
     if (add) {
       this.selectedTrackItems = [...this.selectedTrackItems, trackItem];
@@ -45,17 +34,6 @@ export class TracksService {
       this.selectedTrackItems = this.selectedTrackItems.filter(
         (item: TrackItem) => item.track.id !== trackItem.track.id
       );
-    }
-  }
-
-  async getMyRecentTracks(): Promise<object> {
-    try {
-      const apiRequest = await this.httpClient.getApiRequest(
-        this.endpointsService.getMyTracksUrl()
-      );
-      return apiRequest;
-    } catch (e) {
-      return e;
     }
   }
 

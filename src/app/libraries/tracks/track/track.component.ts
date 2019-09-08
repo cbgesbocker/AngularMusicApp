@@ -1,4 +1,9 @@
-import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  OnDestroy
+} from "@angular/core";
 import { computed } from "mobx-angular";
 
 import { TracksService } from "../tracks.service";
@@ -10,7 +15,7 @@ import { TrackItem } from "../../track";
   templateUrl: "./track.component.html",
   styleUrls: ["./track.component.scss"]
 })
-export class TrackComponent {
+export class TrackComponent implements OnDestroy {
   @Input() trackItem: TrackItem;
   @Input() selected: boolean = false;
   @Input() class: string;
@@ -21,6 +26,10 @@ export class TrackComponent {
 
   @computed get imageUrl() {
     return this.trackItem.track.album.images[this.imageNumber].url;
+  }
+
+  ngOnDestroy() {
+    this.tracksService.selectedTrackItems = [];
   }
 
   toggleTrackSelection() {
