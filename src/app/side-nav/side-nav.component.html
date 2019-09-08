@@ -1,0 +1,7 @@
+<div class="absolute left-0 top-0 pin-x py-4 px-2">
+  <ul>
+    <li *ngFor="let playlist of (playlists$ | async)?.items">
+      {{ playlist.name }}
+    </li>
+  </ul>
+</div>

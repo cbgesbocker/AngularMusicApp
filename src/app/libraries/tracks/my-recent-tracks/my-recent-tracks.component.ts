@@ -16,7 +16,7 @@ import { UsersService } from "src/app/user/users.service";
   styleUrls: ["./my-recent-tracks.component.scss"]
 })
 export class MyRecentTracksComponent implements OnInit {
-  private trackList: TrackList[];
+  private trackList$: Observable<TrackList[]>;
   private user$: Observable<User>;
 
   constructor(
@@ -24,22 +24,14 @@ export class MyRecentTracksComponent implements OnInit {
     private store: Store<{
       tracks: { myRecentTracks: TrackList[] };
     }>,
-    private http: HttpService,
-    private endpointsService: ApiEndpointsService,
     private usersService: UsersService
-  ) {
-    this.store
-      .select("libraries", "tracks", "myRecentTracks")
-      .subscribe((list: TrackList[]) => {
-        this.trackList = list;
-      });
-    this.usersService.fetchMyProfile();
-    this.user$ = this.usersService.currentUser$;
-  }
+  ) {}
 
   ngOnInit() {
-    if (!this.trackList) {
-      this.tracksService.initializeTrackType(new TrackActions.FetchTracks());
-    }
+    this.tracksService.fetchMyRecentTracks();
+    this.trackList$ = this.tracksService.getFeatureStoreObservable(
+      "myRecentTracks"
+    );
+    this.user$ = this.usersService.getFeatureStoreObservable("userSignedIn");
   }
 }

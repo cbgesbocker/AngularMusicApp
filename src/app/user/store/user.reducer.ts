@@ -1,11 +1,11 @@
 import * as UserActions from "./user.actions";
 import { User } from "src/app/user";
 
-export interface State {
+export interface UserState {
   userSignedIn: User;
 }
 
-const initialState = {
+const initialState: UserState = {
   userSignedIn: undefined
 };
 

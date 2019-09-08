@@ -1,22 +1,34 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "../../http.service";
 import { Store } from "@ngrx/store";
-import { Playlist } from "../playlist";
+import { Playlist, PlaylistSet } from "../playlist";
 import * as PlaylistActions from "./store/playlists.actions";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class PlaylistsService {
+  private currentPlaylistSet$: Observable<PlaylistSet>;
+
   constructor(
     private httpClient: HttpService,
-    public store: Store<{
-      playlists: { currentSet: Playlist[]; cachedSet: any };
+    private store: Store<{
+      libraries: { playlists: { currentSet: Playlist[] } };
     }>
   ) {}
 
-  populatePlaylistData(actionInstance: PlaylistActions.PlaylistActions): void {
-    this.store.dispatch(actionInstance);
+  populateMyPlaylists() {
+    this.selectNgrxPlaylists();
+    this.store.dispatch(new PlaylistActions.PopulateMyPlaylists());
+  }
+
+  selectNgrxPlaylists() {
+    this.currentPlaylistSet$ = this.getFeatureStoreObservable("currentSet");
+  }
+
+  getFeatureStoreObservable(key: string): Observable<any> {
+    return this.store.select("libraries", "playlists", key);
   }
 
   /**

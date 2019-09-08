@@ -1,12 +1,12 @@
 import * as AuthActions from "./admin.actions";
 
-export interface State {
+export interface AdminState {
   accessToken: string;
   clientState: string;
   isValidState: boolean;
 }
 
-const initialState = {
+const initialState: AdminState = {
   accessToken: "",
   clientState: "",
   isValidState: false

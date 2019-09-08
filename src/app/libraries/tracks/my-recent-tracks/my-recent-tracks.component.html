@@ -9,5 +9,5 @@ Welcome {{ (user$ | async)?.display_name }}
 </div>
 <app-track-list
   class="flex flex-row flex-wrap justify-center"
-  [trackList]="trackList?.items"
+  [trackList]="(trackList$ | async)?.items"
 ></app-track-list>

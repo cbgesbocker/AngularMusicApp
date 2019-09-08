@@ -21,9 +21,17 @@ export class TracksService {
   constructor(
     private httpClient: HttpService,
     private endpointsService: ApiEndpointsService,
-    private store: Store<{ tracks: { myRecentTracks: TrackItem[] } }>
-  ) {
-    this.tracks = this.store.select("libraries", "tracks");
+    private store: Store<{
+      libraries: { tracks: { myRecentTracks: TrackItem[] } };
+    }>
+  ) {}
+
+  fetchMyRecentTracks() {
+    this.store.dispatch(new TrackActions.FetchTracks());
+  }
+
+  getFeatureStoreObservable(key: string): Observable<any> {
+    return this.store.select("libraries", "tracks", key);
   }
 
   initializeTrackType(trackAction: TrackActions.TrackActions): void {

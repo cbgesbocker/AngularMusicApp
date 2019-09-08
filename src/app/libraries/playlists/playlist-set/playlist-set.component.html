@@ -1,7 +1,7 @@
 My Playlists
 <div class="flex flex-wrap my-5">
   <app-playlist
-    *ngFor="let playlist of currentSet?.items"
+    *ngFor="let playlist of (playlists$ | async)?.items"
     class="w-1/4 px-4 my-3"
     [playlist]="playlist"
   >

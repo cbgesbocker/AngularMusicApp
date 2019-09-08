@@ -13,6 +13,7 @@ import { GlobalModule } from "../global/global.module";
 import { HttpClientModule } from "@angular/common/http";
 import { EffectsModule } from "@ngrx/effects";
 import { UserModule } from "../user/user.module";
+import { SideNavComponent } from "../side-nav/side-nav.component";
 
 const routes: Routes = [
   {
@@ -24,7 +25,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardLayoutComponent, AdminDashboardComponent],
+  declarations: [
+    SideNavComponent,
+    DashboardLayoutComponent,
+    AdminDashboardComponent
+  ],
   imports: [
     GlobalModule,
     HttpClientModule,
