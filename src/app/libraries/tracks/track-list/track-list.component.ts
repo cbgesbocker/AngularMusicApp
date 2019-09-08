@@ -1,7 +1,10 @@
-import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnDestroy
+} from "@angular/core";
 
 import { TracksService } from "../tracks.service";
-import { computed } from "mobx-angular";
 import { TrackItem } from "../../track";
 
 @Component({
@@ -9,8 +12,12 @@ import { TrackItem } from "../../track";
   templateUrl: "./track-list.component.html",
   styleUrls: ["./track-list.component.scss"]
 })
-export class TrackListComponent {
+export class TrackListComponent implements OnDestroy {
   @Input() trackList: TrackItem[];
 
   constructor(private tracksService: TracksService) {}
+
+  ngOnDestroy() {
+    this.tracksService.selectedTrackItems = [];
+  }
 }

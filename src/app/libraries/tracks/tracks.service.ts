@@ -27,8 +27,16 @@ export class TracksService {
     return this.store.select("libraries", "tracks", key);
   }
 
-  updateTrackList(trackItem: TrackItem, add: boolean) {
-    if (add) {
+  hasSelectedTrack(trackItem: TrackItem) {
+    return (
+      this.selectedTrackItems.find(
+        (t: TrackItem) => t.track.id === trackItem.track.id
+      ) !== undefined
+    );
+  }
+
+  updateTrackList(trackItem: TrackItem) {
+    if (!this.hasSelectedTrack(trackItem)) {
       this.selectedTrackItems = [...this.selectedTrackItems, trackItem];
     } else {
       this.selectedTrackItems = this.selectedTrackItems.filter(

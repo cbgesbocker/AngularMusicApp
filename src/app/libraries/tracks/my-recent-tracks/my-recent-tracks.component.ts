@@ -19,13 +19,7 @@ export class MyRecentTracksComponent implements OnInit {
   private trackList$: Observable<TrackList[]>;
   private user$: Observable<User>;
 
-  constructor(
-    private tracksService: TracksService,
-    private store: Store<{
-      tracks: { myRecentTracks: TrackList[] };
-    }>,
-    private usersService: UsersService
-  ) {}
+  constructor(private tracksService: TracksService) {}
 
   ngOnInit() {
     this.tracksService.fetchMyRecentTracks();
