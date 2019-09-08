@@ -5,11 +5,13 @@ import * as PlaylistActions from "./playlists.actions";
 export interface State {
   currentSet: Playlist[];
   cachedSet: any;
+  currentPlaylistSingle: Playlist;
 }
 
 const initialState = {
   currentSet: undefined,
-  cachedSet: undefined
+  cachedSet: undefined,
+  currentPlaylistSingle: undefined
 };
 
 export function playlistReducer(
@@ -19,6 +21,7 @@ export function playlistReducer(
   switch (action.type) {
     case PlaylistActions.UPDATE_PLAYLIST_SETS:
       return {
+        ...state,
         currentSet: action.payload.playlistSet,
         cachedSet: {
           ...state.cachedSet,
@@ -28,6 +31,11 @@ export function playlistReducer(
               }
             : {})
         }
+      };
+    case PlaylistActions.UPDATE_PLAYLIST_SINGLE:
+      return {
+        ...state,
+        currentPlaylistSingle: action.payload
       };
     default:
       return state;

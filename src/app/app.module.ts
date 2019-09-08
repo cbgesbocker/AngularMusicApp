@@ -15,6 +15,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
 import { GlobalModule } from "./global/global.module";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
+import { WelcomeDashboardComponent } from './welcome-dashboard/welcome-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { StoreModule } from "@ngrx/store";
     HeroComponent,
     PageNotFoundComponent,
     HeaderComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    WelcomeDashboardComponent
   ],
   imports: [
     EffectsModule.forRoot([]),

@@ -15,6 +15,11 @@ import { PlaylistEffects } from "./playlists/store/playlists.effects";
 
 import * as fromLibraries from "./libraries.reducer";
 import { GlobalModule } from "../global/global.module";
+import { RouterModule } from "@angular/router";
+import { PlaylistInfoComponent } from "../playlist-info/playlist-info.component";
+import { AdminDashboardComponent } from "../admin/admin-dashboard/admin-dashboard.component";
+import { DashboardLayoutComponent } from "../admin/dashboard-layout/dashboard-layout.component";
+import { SideNavComponent } from "../side-nav/side-nav.component";
 
 @NgModule({
   declarations: [
@@ -22,15 +27,20 @@ import { GlobalModule } from "../global/global.module";
     PlaylistSetComponent,
     TrackComponent,
     TrackListComponent,
-    MyRecentTracksComponent
+    MyRecentTracksComponent,
+    AdminDashboardComponent,
+    PlaylistInfoComponent,
+    DashboardLayoutComponent
   ],
   imports: [
     GlobalModule,
     CommonModule,
     HttpClientModule,
     MobxAngularModule,
+    RouterModule.forChild([]),
     EffectsModule.forFeature([TrackListEffects, PlaylistEffects]),
     StoreModule.forFeature("libraries", fromLibraries.reducer)
-  ]
+  ],
+  exports: [AdminDashboardComponent, DashboardLayoutComponent]
 })
 export class LibrariesModule {}

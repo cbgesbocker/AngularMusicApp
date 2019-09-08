@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 })
 export class PlaylistsService {
   private currentPlaylistSet$: Observable<PlaylistSet>;
-
+  private playlistSingle$: Observable<Playlist>;
   constructor(
     private httpClient: HttpService,
     private store: Store<{
@@ -18,13 +18,13 @@ export class PlaylistsService {
     }>
   ) {}
 
-  populateMyPlaylists() {
-    this.selectNgrxPlaylists();
-    this.store.dispatch(new PlaylistActions.PopulateMyPlaylists());
+  populatePlaylistSingle() {
+    this.playlistSingle$ = this.getFeatureStoreObservable("currentPlaylist");
   }
 
-  selectNgrxPlaylists() {
+  populateMyPlaylists() {
     this.currentPlaylistSet$ = this.getFeatureStoreObservable("currentSet");
+    this.store.dispatch(new PlaylistActions.PopulateMyPlaylists());
   }
 
   getFeatureStoreObservable(key: string): Observable<any> {

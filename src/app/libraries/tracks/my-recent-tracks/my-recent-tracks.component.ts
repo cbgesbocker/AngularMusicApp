@@ -32,6 +32,5 @@ export class MyRecentTracksComponent implements OnInit {
     this.trackList$ = this.tracksService.getFeatureStoreObservable(
       "myRecentTracks"
     );
-    this.user$ = this.usersService.getFeatureStoreObservable("userSignedIn");
   }
 }

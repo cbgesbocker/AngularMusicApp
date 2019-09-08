@@ -15,11 +15,12 @@ import { environment } from "src/environments/environment.prod";
   providedIn: "root"
 })
 export class AuthService implements OnDestroy {
-  readonly localStorageCacheKeys = {
-    clientState: "clientState"
+  readonly cookieKeys = {
+    clientState: "clientState",
+    accessToken: "accessToken"
   };
 
-  private clientState: string = "";
+  private clientState: string = jsCookie.get(this.cookieKeys.clientState) || "";
   private subscription: Subscription;
 
   constructor(
@@ -38,12 +39,18 @@ export class AuthService implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  isUserLoggedIn(): boolean {
+    const state = jsCookie.get(this.cookieKeys.clientState);
+    const accessToken = jsCookie.get(this.cookieKeys.accessToken);
+    return accessToken && state;
+  }
+
   populateStoreClientState(): void {
     const stateToUse =
-      localStorage.getItem(this.localStorageCacheKeys.clientState) ||
+      localStorage.getItem(this.cookieKeys.clientState) ||
       UtilsService.getGeneratedRandomString();
     this.store.dispatch(new AuthActions.SetClientState(stateToUse));
-    localStorage.setItem(this.localStorageCacheKeys.clientState, stateToUse);
+    localStorage.setItem(this.cookieKeys.clientState, stateToUse);
   }
 
   /**
@@ -54,6 +61,17 @@ export class AuthService implements OnDestroy {
     let href = "";
     if (returnedState && returnedState === this.clientState) {
       // set login state
+      this.setAuthCookies([
+        {
+          key: this.cookieKeys.accessToken,
+          value: accessToken
+        },
+        {
+          key: this.cookieKeys.clientState,
+          value: this.clientState
+        }
+      ]);
+
       this.login(accessToken);
 
       // do not redirect
@@ -81,8 +99,8 @@ export class AuthService implements OnDestroy {
       .then(data => {});
   }
 
-  login(accessToken: string): void {
-    jsCookie.set("accessToken", accessToken, { expires: 1 / 24 });
+  login(accessToken: string = jsCookie.get(this.cookieKeys.accessToken)): void {
+    jsCookie.set(this.cookieKeys.accessToken, accessToken, { expires: 1 / 24 });
     this.store.dispatch(new AuthActions.SetAuth(accessToken));
     this.store.dispatch(new AuthActions.SetStateValidity(true));
   }
@@ -90,5 +108,12 @@ export class AuthService implements OnDestroy {
   logout(): void {
     this.store.dispatch(new AuthActions.SetStateValidity(false));
     this.store.dispatch(new AuthActions.SetAuth(""));
+  }
+
+  setAuthCookies(cookies: { key: string; value: string }[]) {
+    for (var i in cookies) {
+      const config = cookies[i];
+      jsCookie.set(config.key, config.value);
+    }
   }
 }

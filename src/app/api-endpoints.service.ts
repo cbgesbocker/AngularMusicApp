@@ -47,10 +47,12 @@ export class ApiEndpointsService {
 
   getPlaylistTracksUrl(playlistId: number): string {
     return new URL(
-      ApiEndpointsService.apiUrl +
-        ApiEndpointsService.endpoints.playlistTracks +
-        playlistId +
-        "/tracks"
+      `
+      ${ApiEndpointsService.apiUrl}
+      ${ApiEndpointsService.endpoints.playlistTracks}
+      ${playlistId}
+      /playlists
+      `
     ).href;
   }
 

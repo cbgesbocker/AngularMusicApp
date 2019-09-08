@@ -24,8 +24,9 @@ export class AuthGuardService implements CanActivate {
    */
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // if already logged in, return true
-    // / || jsCookie.get("accessToken")
-    if (this.isLoggedIn) {
+    if (this.authService.isUserLoggedIn()) {
+      this.authService.login();
+
       return true;
     }
 

@@ -18,7 +18,7 @@ import { User } from "src/app/user";
 import { AppState } from "src/app/app-state";
 import { TrackItem } from "../../track";
 
-const getMyRecentTracks = (state: AppState): TrackItem[] | undefined => {
+const getMyRecentTracks = (state: AppState): TrackItem[] | null => {
   return state.libraries.tracks.myRecentTracks;
 };
 
@@ -29,11 +29,9 @@ export class TrackListEffects {
     ofType(TrackActions.FETCH_MY_TRACKS),
     withLatestFrom(this.store.select(getMyRecentTracks)),
     filter(([action, myRecentTracks]) => {
-      debugger;
       return !myRecentTracks;
     }),
     switchMap(() => {
-      debugger;
       const myTracksUrl = this.endpointsService.getMyTracksUrl();
       return this.http.getApiRequestObservable(myTracksUrl).pipe(
         map(trackList => {

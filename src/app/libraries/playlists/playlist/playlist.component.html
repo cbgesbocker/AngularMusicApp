@@ -1,10 +1,12 @@
-<div [class.bg-blue-100]="activeClass" class="px-4 pb-3 shadow-lg">
-  <div
-    class="h-32 mb-3 opacity-0 transition-bg w-full bg-cover bg-center mx-auto"
-    [appLazyLoadImage]="playlist.images[0].url"
-    [appLazyLoadWaitTime]="lazyLoadWaitTime"
-  ></div>
-  <div class="w-100 text-base text-black text-center">
-    {{ playlist.name }}
+<a [routerLink]="playlist.id">
+  <div [class.bg-blue-100]="activeClass" class="px-4 pb-3 shadow-lg">
+    <div
+      class="h-32 mb-3 opacity-0 transition-bg w-full bg-cover bg-center mx-auto"
+      [appLazyLoadImage]="playlist.images[0].url"
+      [appLazyLoadWaitTime]="lazyLoadWaitTime"
+    ></div>
+    <div class="w-100 text-base text-black text-center">
+      {{ playlist.name }}
+    </div>
   </div>
-</div>
+</a>

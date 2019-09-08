@@ -1,8 +1,5 @@
-Welcome {{ (user$ | async)?.display_name }}
-<div class="flex flex-row items-end justify-between">
-  <h2 class="text-2xl mt-6 mb-5">
-    Recently Liked Tracks
-  </h2>
+Recently Liked Tracks
+<div class="mt-4 self-end flex flex-row items-end justify-between">
   <p class="text-right text-base">
     {{ tracksService.selectedTrackItems.length }} items selected
   </p>

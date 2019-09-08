@@ -11,6 +11,14 @@
   <a
     *ngIf="isLoggedIn"
     class="ml-4 text-normal no-underline text-base px-3 py-1 tracking-wide"
+    routerLink="admin/"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="active"
+    >Dashboard</a
+  >
+  <a
+    *ngIf="isLoggedIn"
+    class="ml-4 text-normal no-underline text-base px-3 py-1 tracking-wide"
     routerLink="admin/recently-played"
     routerLinkActive="active"
     >Recently Liked</a

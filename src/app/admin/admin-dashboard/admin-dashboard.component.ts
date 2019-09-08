@@ -1,37 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
-import { TracksService } from "../../libraries/tracks/tracks.service";
-import { SlideInOutAnimation } from "../../animations";
-import { PlaylistsService } from "../../libraries/playlists/playlists.service";
-import { HttpService } from "../../http.service";
-import { ApiEndpointsService } from "../../api-endpoints.service";
-import { Playlist } from "../../libraries/playlist";
-
 @Component({
   selector: "app-admin-dashboard",
   templateUrl: "./admin-dashboard.component.html",
-  styleUrls: ["./admin-dashboard.component.scss"],
-  animations: [SlideInOutAnimation]
+  styleUrls: ["./admin-dashboard.component.scss"]
 })
-export class AdminDashboardComponent implements OnInit {
-  constructor(
-    private playlistService: PlaylistsService,
-    private trackService: TracksService,
-    private http: HttpService,
-    private endpointsService: ApiEndpointsService
-  ) {}
-
-  showPlaylistConfirmationDialog = false;
-  animationState = "out";
-
-  ngOnInit() {}
-
-  toggleShowDiv(): void {
-    this.animationState = this.animationState === "out" ? "in" : "out";
-  }
-
-  handlePlaylistSelection(playlist: Playlist): void {
-    this.showPlaylistConfirmationDialog = true;
-    // this.playlistService.selectedPlaylist = playlist;
-  }
-}
+export class AdminDashboardComponent {}
