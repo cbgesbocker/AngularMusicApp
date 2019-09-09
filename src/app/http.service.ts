@@ -59,7 +59,7 @@ export class HttpService {
     return request;
   }
 
-  postTracksToPlaylist(tracks, playlistId: number): void {
+  postTracksToPlaylist(tracks, playlistId: string): void {
     const endpoint = this.endpointsService.getPlaylistTracksUrl(playlistId);
     const mappedUris = tracks.map(track => track.track.uri);
 

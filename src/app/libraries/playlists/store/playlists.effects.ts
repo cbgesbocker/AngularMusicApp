@@ -16,6 +16,7 @@ import { HttpService } from "src/app/http.service";
 import { Playlist, PlaylistSet } from "../../playlist";
 
 import * as PlaylistSelectors from "./playlists.selectors";
+import { PlaylistCache } from "src/app/playlist-cache";
 
 @Injectable()
 export class PlaylistEffects {
@@ -57,40 +58,43 @@ export class PlaylistEffects {
   @Effect()
   populatePlaylistSingle = this.actions$.pipe(
     ofType(PlaylistActions.POPULATE_PLAYLIST_SINGLE),
-    withLatestFrom(this.store.select(PlaylistSelectors.getPlaylistSingle)),
-    filter(([action, currentPlaylistSingle]) => {
-      return !currentPlaylistSingle;
-    }),
-    switchMap(data => {
-      debugger;
-      return of();
-
-      // const myPlaylistEndpoint = this.endpointsService.getPlaylistTracksUrl(
-      //   data
-      // );
-      // return (
-      //   this.http
-      //     // get api request
-      //     .getApiRequestObservable(myPlaylistEndpoint, {
-      //       params: {
-      //         limit: 50
-      //       }
-      //     })
-      //     .pipe(
-      //       map((playlists: PlaylistSet) => {
-      //         // return new action to set the data
-      //         return new PlaylistActions.UpdatePlaylistSets({
-      //           playlistSet: playlists,
-      //           queryKey: "my-playlists"
-      //         });
-      //       }),
-      //       catchError(err => {
-      //         // always return observable
-      //         return of();
-      //       })
-      //     )
-      // );
-    })
+    withLatestFrom(this.store.select(PlaylistSelectors.getCachedPlaylists)),
+    filter(
+      ([action, cachedPlaylists]: [
+        PlaylistActions.PopulatePlaylistSingle,
+        PlaylistCache
+      ]) => {
+        const search = !cachedPlaylists.find(
+          playlist => playlist.id !== action.payload
+        );
+        return search === undefined;
+      }
+    ),
+    switchMap(
+      ([action, cachedPlaylists]: [
+        PlaylistActions.PopulatePlaylistSingle,
+        PlaylistCache
+      ]) => {
+        const playlistEndpoint = this.endpointsService.getPlaylistTracksUrl(
+          action.payload
+        );
+        return (
+          this.http
+            // get api request
+            .getApiRequestObservable(playlistEndpoint)
+            .pipe(
+              map((playlist: Playlist) => {
+                // return new action to set the data
+                return new PlaylistActions.UpdatePlaylistSingle(playlist);
+              }),
+              catchError(err => {
+                // always return observable
+                return of();
+              })
+            )
+        );
+      }
+    )
   );
 
   constructor(
@@ -98,7 +102,12 @@ export class PlaylistEffects {
     private endpointsService: ApiEndpointsService,
     private http: HttpService,
     private store: Store<{
-      libraries: { playlists: { currentSet: Playlist[] } };
+      libraries: {
+        playlists: {
+          cachedPlaylists: Playlist[];
+          currentSet: Playlist[];
+        };
+      };
     }>
   ) {}
 }

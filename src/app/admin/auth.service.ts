@@ -2,9 +2,8 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { ApiEndpointsService } from "../api-endpoints.service";
 import { Store } from "@ngrx/store";
 
-import { ActivatedRouteSnapshot, ActivationEnd } from "@angular/router";
 import UtilsService from "../utils.service";
-import { Observable, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 
 import jsCookie from "js-cookie";
 import * as AuthActions from "./store/admin.actions";
@@ -101,11 +100,15 @@ export class AuthService implements OnDestroy {
 
   login(accessToken: string = jsCookie.get(this.cookieKeys.accessToken)): void {
     jsCookie.set(this.cookieKeys.accessToken, accessToken, { expires: 1 / 24 });
+
     this.store.dispatch(new AuthActions.SetAuth(accessToken));
     this.store.dispatch(new AuthActions.SetStateValidity(true));
   }
 
   logout(): void {
+    jsCookie.set(this.cookieKeys.accessToken, "");
+    jsCookie.set(this.cookieKeys.clientState, "");
+
     this.store.dispatch(new AuthActions.SetStateValidity(false));
     this.store.dispatch(new AuthActions.SetAuth(""));
   }

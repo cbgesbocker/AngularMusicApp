@@ -19,7 +19,7 @@ import { RouterModule } from "@angular/router";
 import { PlaylistInfoComponent } from "../playlist-info/playlist-info.component";
 import { AdminDashboardComponent } from "../admin/admin-dashboard/admin-dashboard.component";
 import { DashboardLayoutComponent } from "../admin/dashboard-layout/dashboard-layout.component";
-import { SideNavComponent } from "../side-nav/side-nav.component";
+import { PlaylistDashboardComponent } from "../playlist-dashboard/playlist-dashboard.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { SideNavComponent } from "../side-nav/side-nav.component";
     MyRecentTracksComponent,
     AdminDashboardComponent,
     PlaylistInfoComponent,
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    PlaylistDashboardComponent
   ],
   imports: [
     GlobalModule,
@@ -41,6 +42,10 @@ import { SideNavComponent } from "../side-nav/side-nav.component";
     EffectsModule.forFeature([TrackListEffects, PlaylistEffects]),
     StoreModule.forFeature("libraries", fromLibraries.reducer)
   ],
-  exports: [AdminDashboardComponent, DashboardLayoutComponent]
+  exports: [
+    AdminDashboardComponent,
+    DashboardLayoutComponent,
+    PlaylistDashboardComponent
+  ]
 })
 export class LibrariesModule {}

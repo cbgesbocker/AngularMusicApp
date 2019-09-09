@@ -4,22 +4,41 @@ import { Store } from "@ngrx/store";
 import { Playlist, PlaylistSet } from "../playlist";
 import * as PlaylistActions from "./store/playlists.actions";
 import { Observable } from "rxjs";
+import { PlaylistCache } from "src/app/playlist-cache";
 
 @Injectable({
   providedIn: "root"
 })
 export class PlaylistsService {
+  private playlistCache: PlaylistCache = [];
   private currentPlaylistSet$: Observable<PlaylistSet>;
   private playlistSingle$: Observable<Playlist>;
   constructor(
     private httpClient: HttpService,
     private store: Store<{
-      libraries: { playlists: { currentSet: Playlist[] } };
+      libraries: {
+        playlists: { cachedPlaylists: Playlist[]; currentSet: Playlist[] };
+      };
     }>
-  ) {}
+  ) {
+    this.store
+      .select("libraries", "playlists", "cachedPlaylists")
+      .subscribe((cachedPlaylists: PlaylistCache) => {
+        this.playlistCache = cachedPlaylists;
+      });
+  }
 
-  populatePlaylistSingle() {
-    this.playlistSingle$ = this.getFeatureStoreObservable("currentPlaylist");
+  populatePlaylistSingle(id: string) {
+    const cachedPlaylist = this.playlistCache.find((playlist: Playlist) => {
+      return playlist.id === id;
+    });
+    if (!cachedPlaylist) {
+      this.store.dispatch(new PlaylistActions.PopulatePlaylistSingle(id));
+    } else {
+      this.store.dispatch(
+        new PlaylistActions.UpdatePlaylistSingle(cachedPlaylist)
+      );
+    }
   }
 
   populateMyPlaylists() {

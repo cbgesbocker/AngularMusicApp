@@ -6,7 +6,6 @@ import { Routes, RouterModule } from "@angular/router";
 import * as fromAdmin from "./store/admin.reducer";
 import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 import { AuthGuardService } from "./auth-guard.service";
-import { DashboardLayoutComponent } from "./dashboard-layout/dashboard-layout.component";
 import { libraryRoutes } from "../libraries/library-routes";
 import { LibrariesModule } from "../libraries/libraries.module";
 import { GlobalModule } from "../global/global.module";

@@ -1,2 +1,27 @@
-Playlist Details
-<div class="flex flex-wrap my-5"></div>
+<div class="flex flex-wrap my-5">
+  <a
+    class="text-base text-blue-700 hover:cursor-pointer"
+    routerLink="/admin/playlists"
+    ><i class="fa mr-2 fa-angle-left"></i>Back to Playlists</a
+  >
+</div>
+
+{{ playlist?.name }}<br />
+
+<div
+  class="w-100 mt-8 h-64 bg-contain bg-no-repeat bg-full"
+  [appLazyLoadImage]="(playlist?.images)[0].url"
+></div>
+<h3 class="text-lg">
+  Playlist Details
+</h3>
+
+<h3 class="mt-4 text-lg">Tracks</h3>
+<div class="flex flex-wrap">
+  <app-track
+    *ngFor="let track of playlist?.tracks?.items"
+    [trackItem]="track"
+    class="w-1/4"
+  >
+  </app-track>
+</div>

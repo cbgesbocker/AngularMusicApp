@@ -10,7 +10,6 @@ export class SetUserData implements Action {
 }
 
 export class PopulateUserData implements Action {
-  debugger;
   readonly type = POPULATE_USER_DATA;
 }
 

@@ -7,9 +7,6 @@ import { HttpService } from "src/app/http.service";
 import { User } from "src/app/user";
 
 import * as UserActions from "./user.actions";
-import { UserState } from "./user.reducer";
-import { Store } from "@ngrx/store";
-import { AppState } from "src/app/app-state";
 @Injectable()
 export class UserEffects {
   @Effect()

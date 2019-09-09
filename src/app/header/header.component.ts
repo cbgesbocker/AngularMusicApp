@@ -10,11 +10,10 @@ import UtilsService from "../utils.service";
 export class HeaderComponent implements OnInit {
   private isLoggedIn: boolean;
 
-  constructor(private store: Store<{ admin: { isValidState: boolean } }>) {
-    this.store.select("admin").subscribe(data => {
+  constructor(private store: Store<{ admin: { isValidState: boolean } }>) {}
+  ngOnInit() {
+    this.store.select("admin").subscribe((data: { isValidState: boolean }) => {
       this.isLoggedIn = data.isValidState;
     });
   }
-
-  ngOnInit() {}
 }

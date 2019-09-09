@@ -21,7 +21,7 @@ export class UpdatePlaylistSingle implements Action {
 
 export class PopulatePlaylistSingle implements Action {
   readonly type = POPULATE_PLAYLIST_SINGLE;
-  constructor(public payload: number) {}
+  constructor(public payload: string) {}
 }
 
 export type PlaylistActions =

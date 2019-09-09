@@ -6,12 +6,14 @@ export interface State {
   currentSet: Playlist[];
   cachedSet: any;
   currentPlaylistSingle: Playlist;
+  cachedPlaylists: Playlist[];
 }
 
 const initialState = {
   currentSet: undefined,
   cachedSet: undefined,
-  currentPlaylistSingle: undefined
+  currentPlaylistSingle: undefined,
+  cachedPlaylists: []
 };
 
 export function playlistReducer(
@@ -23,18 +25,15 @@ export function playlistReducer(
       return {
         ...state,
         currentSet: action.payload.playlistSet,
-        cachedSet: {
-          ...state.cachedSet,
-          ...(action.payload.queryKey
-            ? {
-                [action.payload.queryKey]: action.payload.playlistSet
-              }
-            : {})
-        }
+        cachedPlaylists: [
+          ...state.cachedPlaylists,
+          ...action.payload.playlistSet.items
+        ]
       };
     case PlaylistActions.UPDATE_PLAYLIST_SINGLE:
       return {
         ...state,
+        cachedPlaylists: [...state.cachedPlaylists, action.payload],
         currentPlaylistSingle: action.payload
       };
     default:

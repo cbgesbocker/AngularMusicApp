@@ -7,3 +7,7 @@ export const getCurrentPlaylistSet = (state: AppState) => {
 export const getPlaylistSingle = (state: AppState) => {
   return state.libraries.playlists.currentPlaylistSingle;
 };
+
+export const getCachedPlaylists = (state: AppState) => {
+  return state.libraries.playlists.cachedPlaylists;
+};

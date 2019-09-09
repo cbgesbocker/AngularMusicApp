@@ -15,7 +15,8 @@ import { WelcomeComponent } from "./welcome/welcome.component";
 import { GlobalModule } from "./global/global.module";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
-import { WelcomeDashboardComponent } from './welcome-dashboard/welcome-dashboard.component';
+import { WelcomeDashboardComponent } from "./welcome-dashboard/welcome-dashboard.component";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { WelcomeDashboardComponent } from './welcome-dashboard/welcome-dashboard
     AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    RouterModule.forChild([]),
     BrowserModule,
     HttpClientModule,
     MatToolbarModule,

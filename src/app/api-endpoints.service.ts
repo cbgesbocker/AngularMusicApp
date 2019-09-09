@@ -45,15 +45,11 @@ export class ApiEndpointsService {
     ApiEndpointsService.apiUrl + ApiEndpointsService.endpoints.myPlaylists
   );
 
-  getPlaylistTracksUrl(playlistId: number): string {
-    return new URL(
-      `
-      ${ApiEndpointsService.apiUrl}
-      ${ApiEndpointsService.endpoints.playlistTracks}
-      ${playlistId}
-      /playlists
-      `
+  getPlaylistTracksUrl(playlistId: string): string {
+    const url = new URL(
+      `${ApiEndpointsService.apiUrl}${ApiEndpointsService.endpoints.playlist}${playlistId}`
     ).href;
+    return url;
   }
 
   getAuthenticationUrl(): string {
