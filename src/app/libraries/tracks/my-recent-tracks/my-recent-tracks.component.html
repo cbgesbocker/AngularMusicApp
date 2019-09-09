@@ -1,10 +1,12 @@
 Recently Liked Tracks
-<div class="mt-4 self-end flex flex-row items-end justify-between">
+<!-- <div
+  class="mt-4 py-4 px-8 bg-gray-200 text-whte self-end flex flex-row items-end justify-between"
+>
   <p class="text-right text-base">
     {{ tracksService.selectedTrackItems.length }} items selected
   </p>
-</div>
+</div> -->
 <app-track-list
-  class="flex flex-row flex-wrap justify-center"
+  class="flex mt-6 flex-row flex-wrap justify-center"
   [trackList]="(trackList$ | async)?.items"
 ></app-track-list>

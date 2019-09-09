@@ -28,3 +28,11 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 .transition-bg {
   transition: all 0.2s ease-in;
 }
+
+a:hover {
+  cursor: pointer !important;
+}
+
+.flex-100 {
+  flex: 0 0 100%;
+}

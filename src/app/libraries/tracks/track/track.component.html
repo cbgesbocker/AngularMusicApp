@@ -1,18 +1,18 @@
 <div
   [class.bg-blue-100]="selected"
-  class="shadow-lg border mx-5 my-3 border-gray-200 p-4 track-card"
+  class="shadow border hover:shadow-md mx-5 my-2 border-gray-100 p-1 justify-start track-card flex-100 flex flex-row"
 >
   <div
-    class="h-32 mb-3 opacity-0 transition-bg w-full bg-cover bg-center mx-auto"
+    class="h-16 opacity-0 transition-bg w-16 bg-cover bg-center "
     [appLazyLoadImage]="imageUrl"
     [appLazyLoadWaitTime]="waitTime"
   ></div>
-  <div class="flex flex-col text-center items-center">
-    <span class="text-sm ">
-      {{ trackItem.track.artists[0].name }}
-    </span>
-    <span class="text-lg">
+  <div class="flex flex-row items-center">
+    <span class="text-base ml-8 font-bold">
       {{ trackItem.track.name }}
+    </span>
+    <span class="text-sm font-thin ml-4">
+      {{ trackItem.track.artists[0].name }}
     </span>
   </div>
 </div>

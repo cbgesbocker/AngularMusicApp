@@ -1,0 +1,18 @@
+<div
+  [class.bg-blue-100]="selected"
+  class="shadow-lg border mx-5 my-3 border-gray-200 p-4 track-card"
+>
+  <div
+    class="h-32 mb-3 opacity-0 transition-bg w-full bg-cover bg-center mx-auto"
+    [appLazyLoadImage]="imageUrl"
+    [appLazyLoadWaitTime]="waitTime"
+  ></div>
+  <div class="flex flex-col text-center items-center">
+    <span class="text-sm ">
+      {{ trackItem.track.artists[0].name }}
+    </span>
+    <span class="text-lg">
+      {{ trackItem.track.name }}
+    </span>
+  </div>
+</div>

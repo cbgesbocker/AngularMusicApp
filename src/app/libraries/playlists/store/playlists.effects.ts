@@ -25,7 +25,8 @@ export class PlaylistEffects {
     ofType(PlaylistActions.POPULATE_PLAYLIST_SETS),
     withLatestFrom(this.store.select(PlaylistSelectors.getCurrentPlaylistSet)),
     filter(([action, currentSet]) => {
-      debugger;
+      // if we have a current set,
+      // do not fetch from API
       return !currentSet;
     }),
     switchMap(() => {
