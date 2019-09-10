@@ -1,8 +1,8 @@
 <app-track
-  class="flex-100"
+  class="w-full"
   *ngFor="let trackItem of trackList"
   [trackItem]="trackItem"
   [appLazyLoadWaitTime]="waitTime"
   [selected]="tracksService.hasSelectedTrack(trackItem)"
-  (click)="tracksService.updateTrackList(trackItem)"
+  (click)="tracksService.updateCurrentTrack(trackItem)"
 ></app-track>

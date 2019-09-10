@@ -1,12 +1,16 @@
 Recently Liked Tracks
-<!-- <div
-  class="mt-4 py-4 px-8 bg-gray-200 text-whte self-end flex flex-row items-end justify-between"
->
-  <p class="text-right text-base">
-    {{ tracksService.selectedTrackItems.length }} items selected
-  </p>
-</div> -->
-<app-track-list
-  class="flex mt-6 flex-row flex-wrap justify-center"
-  [trackList]="(trackList$ | async)?.items"
-></app-track-list>
+
+<div class="flex">
+  <div class="w-8/12">
+    <app-track-list
+      class="flex mt-6 flex-row flex-wrap"
+      [trackList]="(trackList$ | async)?.items"
+    ></app-track-list>
+  </div>
+  <div class="w-4/12" *ngIf="tracksService.currentTrackItem">
+    <div class="sticky top-0 mt-6 flex flex-col items-center text-center">
+      <app-track-detail class="" [trackItem]="tracksService.currentTrackItem">
+      </app-track-detail>
+    </div>
+  </div>
+</div>

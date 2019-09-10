@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
 })
 export class TracksService {
   public selectedTrackItems: TrackItem[] = [];
-
+  public currentTrackItem: TrackItem;
   constructor(
     private store: Store<{
       libraries: { tracks: { myRecentTracks: TrackItem[] } };
@@ -61,6 +61,10 @@ export class TracksService {
         $trackItem => $trackItem.track.id !== trackItem.track.id
       );
     }
+  }
+
+  updateCurrentTrack(trackItem: TrackItem) {
+    this.currentTrackItem = trackItem;
   }
 
   postTracks() {}

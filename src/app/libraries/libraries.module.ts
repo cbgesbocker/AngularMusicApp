@@ -20,6 +20,7 @@ import { PlaylistInfoComponent } from "../playlist-info/playlist-info.component"
 import { AdminDashboardComponent } from "../admin/admin-dashboard/admin-dashboard.component";
 import { DashboardLayoutComponent } from "../admin/dashboard-layout/dashboard-layout.component";
 import { PlaylistDashboardComponent } from "../playlist-dashboard/playlist-dashboard.component";
+import { TrackDetailComponent } from "../track-detail/track-detail.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PlaylistDashboardComponent } from "../playlist-dashboard/playlist-dashb
     AdminDashboardComponent,
     PlaylistInfoComponent,
     DashboardLayoutComponent,
-    PlaylistDashboardComponent
+    PlaylistDashboardComponent,
+    TrackDetailComponent
   ],
   imports: [
     GlobalModule,

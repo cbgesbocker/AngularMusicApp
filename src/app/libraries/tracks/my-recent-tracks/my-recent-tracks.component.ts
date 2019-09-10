@@ -9,6 +9,7 @@ import { ApiEndpointsService } from "../../../api-endpoints.service";
 import * as TrackActions from "../store/track-list.actions";
 import { User } from "src/app/user";
 import { UsersService } from "src/app/user/users.service";
+import { TrackItem } from "../../track";
 
 @Component({
   selector: "app-my-recent-tracks",

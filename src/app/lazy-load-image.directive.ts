@@ -1,9 +1,17 @@
-import { Directive, Input, ElementRef, OnInit } from "@angular/core";
+import {
+  Directive,
+  Input,
+  ElementRef,
+  OnInit,
+  AfterViewInit,
+  OnChanges,
+  OnDestroy
+} from "@angular/core";
 
 @Directive({
   selector: "[appLazyLoadImage]"
 })
-export class LazyLoadImageDirective implements OnInit {
+export class LazyLoadImageDirective implements OnInit, OnChanges {
   @Input("appLazyLoadImage") url: string;
   @Input("appLazyLoadWaitTime") waitTime: number = 100;
 
@@ -12,7 +20,15 @@ export class LazyLoadImageDirective implements OnInit {
     this.el = el;
   }
 
+  ngOnChanges() {
+    this.loadImage();
+  }
+
   ngOnInit() {
+    this.loadImage();
+  }
+
+  private loadImage() {
     this.el.nativeElement.style.backgroundImage = `url(${this.url})`;
 
     setTimeout(() => {
