@@ -3,6 +3,6 @@
   *ngFor="let trackItem of trackList"
   [trackItem]="trackItem"
   [appLazyLoadWaitTime]="waitTime"
-  [selected]="tracksService.hasSelectedTrack(trackItem)"
+  [selected]="tracksService.isSelectedTrack(trackItem)"
   (click)="tracksService.updateCurrentTrack(trackItem)"
 ></app-track>

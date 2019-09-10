@@ -33,14 +33,16 @@ export class TrackListEffects {
     }),
     switchMap(() => {
       const myTracksUrl = this.endpointsService.getMyTracksUrl();
-      return this.http.getApiRequestObservable(myTracksUrl).pipe(
-        map(trackList => {
-          return new TrackActions.SetTracks(trackList);
-        }),
-        catchError(err => {
-          return of();
-        })
-      );
+      return this.http
+        .getApiRequestObservable(myTracksUrl, { params: { limit: 25 } })
+        .pipe(
+          map(trackList => {
+            return new TrackActions.SetTracks(trackList);
+          }),
+          catchError(err => {
+            return of();
+          })
+        );
     })
   );
 

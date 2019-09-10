@@ -1,0 +1,14 @@
+<div class="track-detail px-3" *ngIf="playlist">
+  <div
+    class="rounded-lg w-full h-64 bg-cover bg-center mx-auto mt-3"
+    [appLazyLoadImage]="playlist.images[0].url"
+  ></div>
+
+  <h4 class="text-xl mt-3 text-center">
+    {{ playlist.name }}
+  </h4>
+
+  <h5 class="text-lg font-normal text-center">
+    {{ playlist.tracks.total }} tracks <i class="fa fa-music"></i>
+  </h5>
+</div>

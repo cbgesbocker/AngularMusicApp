@@ -13,6 +13,8 @@ export class PlaylistsService {
   private playlistCache: PlaylistCache = [];
   private currentPlaylistSet$: Observable<PlaylistSet>;
   private playlistSingle$: Observable<Playlist>;
+  private selectedPlaylist: Playlist;
+
   constructor(
     private httpClient: HttpService,
     private store: Store<{
@@ -28,7 +30,7 @@ export class PlaylistsService {
       });
   }
 
-  populatePlaylistSingle(id: string) {
+  populatePlaylistSingle(id: string): void {
     const cachedPlaylist = this.playlistCache.find((playlist: Playlist) => {
       return playlist.id === id;
     });
@@ -39,6 +41,14 @@ export class PlaylistsService {
         new PlaylistActions.UpdatePlaylistSingle(cachedPlaylist)
       );
     }
+  }
+
+  selectPlaylist(playlist: Playlist): void {
+    this.selectedPlaylist = playlist;
+  }
+
+  isSelectedPlaylist(playlist: Playlist): boolean {
+    return this.selectedPlaylist && this.selectedPlaylist.id === playlist.id;
   }
 
   populateMyPlaylists() {

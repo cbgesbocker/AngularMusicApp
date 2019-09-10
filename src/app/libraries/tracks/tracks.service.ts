@@ -12,7 +12,7 @@ import { Observable } from "rxjs";
 })
 export class TracksService {
   public selectedTrackItems: TrackItem[] = [];
-  public currentTrackItem: TrackItem;
+  public selectedTrackItem: TrackItem;
   constructor(
     private store: Store<{
       libraries: { tracks: { myRecentTracks: TrackItem[] } };
@@ -27,7 +27,14 @@ export class TracksService {
     return this.store.select("libraries", "tracks", key);
   }
 
-  hasSelectedTrack(trackItem: TrackItem) {
+  isSelectedTrack(trackItem: TrackItem): boolean {
+    return (
+      this.selectedTrackItem &&
+      this.selectedTrackItem.track.id === trackItem.track.id
+    );
+  }
+
+  hasSelectedTrack(trackItem: TrackItem): boolean {
     return (
       this.selectedTrackItems.find(
         (t: TrackItem) => t.track.id === trackItem.track.id
@@ -64,7 +71,7 @@ export class TracksService {
   }
 
   updateCurrentTrack(trackItem: TrackItem) {
-    this.currentTrackItem = trackItem;
+    this.selectedTrackItem = trackItem;
   }
 
   postTracks() {}

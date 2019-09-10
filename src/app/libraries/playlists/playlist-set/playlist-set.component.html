@@ -1,9 +1,20 @@
 My Playlists
 <div class="flex flex-wrap my-5">
-  <app-playlist
-    *ngFor="let playlist of (playlists$ | async)?.items"
-    class="w-1/2 px-4 my-3"
-    [playlist]="playlist"
-  >
-  </app-playlist>
+  <div class="w-8/12">
+    <app-playlist
+      *ngFor="let playlist of (playlists$ | async)?.items"
+      class="w-full my-4"
+      [selected]="playlistsService.isSelectedPlaylist(playlist)"
+      [playlist]="playlist"
+      (click)="playlistsService.selectPlaylist(playlist)"
+    >
+    </app-playlist>
+  </div>
+  <div class="w-4/12">
+    <div class="w-full sticky top-1/6">
+      <app-playlist-detail
+        [playlist]="playlistsService.selectedPlaylist"
+      ></app-playlist-detail>
+    </div>
+  </div>
 </div>

@@ -21,6 +21,8 @@ import { AdminDashboardComponent } from "../admin/admin-dashboard/admin-dashboar
 import { DashboardLayoutComponent } from "../admin/dashboard-layout/dashboard-layout.component";
 import { PlaylistDashboardComponent } from "../playlist-dashboard/playlist-dashboard.component";
 import { TrackDetailComponent } from "../track-detail/track-detail.component";
+import { AudioComponent } from './audio/audio.component';
+import { PlaylistDetailComponent } from './playlist-detail/playlist-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { TrackDetailComponent } from "../track-detail/track-detail.component";
     PlaylistInfoComponent,
     DashboardLayoutComponent,
     PlaylistDashboardComponent,
-    TrackDetailComponent
+    TrackDetailComponent,
+    AudioComponent,
+    PlaylistDetailComponent
   ],
   imports: [
     GlobalModule,

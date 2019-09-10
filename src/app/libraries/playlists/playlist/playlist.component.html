@@ -1,13 +1,26 @@
-<a [routerLink]="['/admin/playlists', playlist.id]">
-  <div [class.bg-blue-100]="activeClass" class="px-4 pb-3 my-4 hover:shadow ">
-    <div
-      style="height: 24rem;"
-      class=" mb-3 opacity-0 transition-bg w-full bg-cover bg-center mx-auto"
-      [appLazyLoadImage]="playlist.images[0].url"
-      [appLazyLoadWaitTime]="lazyLoadWaitTime"
-    ></div>
-    <div class="w-100 py-3 mb-2 text-2xl text-black text-center">
-      {{ playlist.name }}
+<div
+  [class.bg-blue-100]="selected"
+  class="shadow border hover:shadow-md mx-5 my-3 border-gray-100 p-1 justify-start track-card flex-100 flex flex-row"
+>
+  <div
+    class="h-16 opacity-0 transition-bg w-16 bg-cover bg-center "
+    [appLazyLoadImage]="playlist.images[0].url"
+    [appLazyLoadWaitTime]="lazyLoadWaitTime"
+  ></div>
+  <div class="flex flex-1 pr-6 flex-row items-center justify-between">
+    <div class="flex">
+      <span class="text-base ml-8 font-bold">
+        {{ playlist.name }}
+      </span>
+      <span class="text-sm text-center font-thin ml-4">
+        {{ playlist.tracks.total }} <i class="fa fa-music"></i>
+      </span>
     </div>
+
+    <span
+      class="text-sm rounded-lg flex font-thin ml-4 p-2 transition-bg-quick hover:bg-gray-200"
+    >
+      <i class="fa fa-ellipsis-v fa-2x"></i>
+    </span>
   </div>
-</a>
+</div>

@@ -11,8 +11,7 @@ export class PlaylistComponent {
   @Input() playlist: Playlist;
   @Input() activeClass = false;
   @Input() lazyLoadWaitTime = 100;
-
-  selected = false;
+  @Input() selected = false;
 
   constructor(private store: Store<any>) {}
 }
