@@ -1,17 +1,15 @@
-<div
-  class="w-48 h-48 bg-cover bg-center mx-auto mt-3"
-  [appLazyLoadImage]="trackItem.track.album.images[0].url"
-></div>
+<div class="track-detail px-3">
+  <div
+    class="rounded-lg w-full h-64 bg-cover bg-center mx-auto mt-3"
+    [appLazyLoadImage]="trackItem.track.album.images[0].url"
+  ></div>
 
-<h4 class="text-xl mt-3 text-center">
-  {{ trackItem?.track?.name }}
-</h4>
+  <h4 class="text-xl mt-3 text-center">
+    {{ trackItem?.track?.name }}
+  </h4>
 
-<h5 class="text-lg font-normal">
-  {{ trackItem.track.artists[0].name }}
-</h5>
-
-<audio class="mt-4" controls>
-  <source [src]="trackItem.track.preview_url" type="audio/mp3" />
-  Your browser does not support the audio element.
-</audio>
+  <h5 class="text-lg font-normal">
+    {{ trackItem.track.artists[0].name }}
+  </h5>
+  <app-audio [src]="trackItem.track.preview_url"></app-audio>
+</div>

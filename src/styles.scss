@@ -29,10 +29,25 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
   transition: all 0.2s ease-in;
 }
 
+.transition-bg-quick {
+  transition: all 0.05s linear;
+}
+
 a:hover {
   cursor: pointer !important;
 }
 
 .flex-100 {
   flex: 0 0 100%;
+}
+
+.top-1\/4 {
+  top: 25%;
+}
+
+.top-1\/6 {
+  top: 12.5%;
+}
+.top-20-px {
+  top: 20px;
 }

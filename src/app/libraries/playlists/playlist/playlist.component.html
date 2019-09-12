@@ -12,15 +12,29 @@
       <span class="text-base ml-8 font-bold">
         {{ playlist.name }}
       </span>
-      <span class="text-sm text-center font-thin ml-4">
+      <span class="text-sm font-thin ml-4">
         {{ playlist.tracks.total }} <i class="fa fa-music"></i>
       </span>
     </div>
-
-    <span
-      class="text-sm rounded-lg flex font-thin ml-4 p-2 transition-bg-quick hover:bg-gray-200"
-    >
-      <i class="fa fa-ellipsis-v fa-2x"></i>
-    </span>
+    <div class="relative">
+      <span
+        (click)="toggleMenu($event)"
+        class="text-sm rounded-lg flex font-thin ml-4 p-2 transition-bg-quick hover:bg-gray-200"
+      >
+        <i class="fa fa-ellipsis-v fa-2x"></i>
+      </span>
+      <div
+        *ngIf="menuOpen"
+        class="absolute w-48 bg-gray-100 shadow top-20-px right-0 py-2"
+      >
+        <ul>
+          <li
+            class="py-2  px-2 font-sans font-thin text-base hover:bg-blue-100"
+          >
+            Add to other playlist
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
